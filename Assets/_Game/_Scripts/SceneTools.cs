@@ -14,7 +14,7 @@ public class SceneTools : MonoBehaviour
     public const float BURST_HEIGHT_SCALE = 1.5f;
 
     public const float NOISE_SCALE = .2f;
-    private const int SIDE_LENGTH = 100;
+    private const int SIDE_LENGTH = 22;
     private const int FPS_SAMPLE_COUNT = 20;
     public static SceneTools Instance;
 
