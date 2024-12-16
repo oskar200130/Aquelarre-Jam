@@ -120,6 +120,21 @@ public static class CubeHelpers
         return (pos, rot);
     }
 
+
+    public static (Vector3 pos, Quaternion rot) CalculatePosMouse(this Vector3 pos, float yOffset, float time, Vector3 mouse)
+    {
+        var t = Mathf.InverseLerp(yOffset, SceneTools.HEIGHT_SCALE + yOffset, pos.y);
+        var rot = Quaternion.Slerp(quaternion.identity, SceneTools.RotGoal, t);
+        pos.y = SceneTools.HEIGHT_SCALE * Mathf.PerlinNoise(pos.x * SceneTools.NOISE_SCALE + time, pos.z * SceneTools.NOISE_SCALE + time) + yOffset * SceneTools.DEPTH_OFFSET;
+
+        float distanceTOMouse = Vector3.Distance(pos, mouse);
+
+        if (distanceTOMouse < 10)
+            pos.y += 10 - distanceTOMouse;
+
+        return (pos, rot);
+    }
+
     public static (float3 pos, Quaternion rot) CalculatePosBurst(this float3 pos, float yOffset, float time)
     {
         var t = math.unlerp(yOffset, SceneTools.BURST_HEIGHT_SCALE + yOffset, pos.y);
