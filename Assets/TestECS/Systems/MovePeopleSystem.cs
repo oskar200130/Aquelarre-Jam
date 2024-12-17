@@ -3,28 +3,30 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 
 [BurstCompile]
 public partial struct MovePeopleSystem : ISystem
 {
+
+    public void OnEnable(ref SystemState state)
+    {
+        
+    }
+    
     public void OnUpdate(ref SystemState state)
     {
-        EntityManager entityMng = state.EntityManager;
+        new MovePersonJob{}.ScheduleParallel(state.Dependency).Complete();
+    }
+}
 
-        NativeArray<Entity> entities = entityMng.GetAllEntities(Allocator.Temp);
+[BurstCompile]
+public partial struct MovePersonJob : IJobEntity
+{
 
-        foreach (Entity entity in entities)
-        {
-            if (entityMng.HasComponent<MovePeopleComponent>(entity))
-            {
-                MovePeopleComponent move = entityMng.GetComponentData<MovePeopleComponent>(entity);
-                LocalTransform localTrf = entityMng.GetComponentData<LocalTransform>(entity);
-                if (localTrf.Position.x != move.destiny.x || localTrf.Position.y != move.destiny.y)
-                {
-                    localTrf.Position = move.destiny;
-                }
-                entityMng.SetComponentData(entity, localTrf);
-            }
-        }
+    [BurstCompile]
+    private void Execute(MoveAspect aspect)
+    {
+        aspect.Move();
     }
 }
