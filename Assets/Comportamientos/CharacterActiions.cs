@@ -7,12 +7,11 @@ public class CharacterActiions : MonoBehaviour
     public ClickDetector detector;
     public float distanceMarginActions = 10.0f;
 
-    public float speed = 5f; // Velocidad de movimiento
     private float currentSpeed = 0.0f;
 
     private Vector3 crowdPoint;
 
-    private enum charStates { IDLE, JUMP, POGO, ARRASTE }
+    private enum charStates { IDLE, JUMP, POGO, POGOEXIT, POGOEND, ARRASTE }
     private charStates estado = charStates.IDLE;
 
     public float jumpForce = 20 * 2;
@@ -20,7 +19,7 @@ public class CharacterActiions : MonoBehaviour
     
     public float velocity;
     public float distanceToMouseDown;
-
+    public float pogoForce;
     private void Start()
     {
         crowdPoint = transform.position; //cuandos e generen de verdad tal vez no se encuentren en este punto de referenceia,
@@ -31,7 +30,7 @@ public class CharacterActiions : MonoBehaviour
     void Update()
     {
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-        if (estado == charStates.IDLE)
+        if (estado == charStates.IDLE || estado == charStates.POGOEXIT)
         {
 
             if (detector.salto)
@@ -46,10 +45,14 @@ public class CharacterActiions : MonoBehaviour
             }
             else if (detector.pogo)
             {
-                if (Vector2.Distance(detector.screenMousePos, screenPos) < distanceMarginActions)
+                distanceToMouseDown = Vector2.Distance(detector.screenMousePos, screenPos);
+                if (distanceToMouseDown < distanceMarginActions)
                 {
                     //startPosition = transform.position;
                     //hacemos el pogo, añadiendo distancia segun el tiempo que lleve pulsado.
+
+                    estado = charStates.POGO;
+
                 }
             }
             else if (detector.arrastre)
@@ -58,7 +61,16 @@ public class CharacterActiions : MonoBehaviour
                 {
                     //startPosition = transform.position;
                     //hacemos el arrastre que este tocando
+                    estado = charStates.POGO;
+
                 }
+            }
+        }
+        if (estado == charStates.POGO)
+        {
+            if (detector.pogoEnd)
+            {
+                estado = charStates.POGOEND;
             }
         }
     }
@@ -86,10 +98,70 @@ public class CharacterActiions : MonoBehaviour
                 }
                 break;
             case charStates.POGO:
+
+                {
+                    //si en vez de screenPosWhen Down s eahce con solo POS, el Pogo seguira donde sea que se este formando, puede ser mñas natural
+                    Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+                    distanceToMouseDown = Vector2.Distance(detector.screenMousePos, screenPos);
+
+                    //fuerza de salto proporcional a la distancia del click
+                    pogoForce = Mathf.Abs((distanceMarginActions - distanceToMouseDown) / distanceMarginActions);
+                    velocity = jumpForce * pogoForce;
+
+                    Vector3 direccion = (crowdPoint - detector.worldMousePos).normalized * pogoForce;
+
+                    // The step size is equal to speed times frame time.
+                    float step = velocity * Time.deltaTime;
+
+                   
+
+
+                    if (distanceToMouseDown >= distanceMarginActions)
+                    {
+                        estado = charStates.POGOEXIT;
+                    }
+                    else
+                    {
+                        // Move our position a step closer to the target.
+                        transform.position = Vector3.MoveTowards(transform.position, transform.position + direccion, step);
+                    }
+                }
+                break;
+
+            case charStates.POGOEXIT:
+
+                {
+                    velocity = 20.0f;
+                    transform.position = Vector3.MoveTowards(transform.position, crowdPoint, velocity * Time.deltaTime);
+
+                    if (Vector3.Distance(transform.position, crowdPoint) <= 0.1f)
+                    {
+                        transform.position = crowdPoint;
+                        estado = charStates.IDLE;
+                    }
+                }
+                break;
+
+            case charStates.POGOEND:
+                {
+                    //no se como hacerle para que quede guay ajajajaja (joder vamos espesos a estas horas 0:16)
+                    velocity = Random.Range(20.0f,100.0f);
+                    transform.position = Vector3.MoveTowards(transform.position, crowdPoint, velocity * Time.deltaTime);
+
+                    if (Vector3.Distance(transform.position, crowdPoint) <= 0.1f)
+                    {
+                        transform.position = crowdPoint;
+                        estado = charStates.IDLE;
+                    }
+                }
                 break;
             case charStates.ARRASTE:
                 break;
             default:
+                //animacion de Idle, puede ser un up & down o una animación de sprite
+                {
+
+                }
                 break;
         }
 

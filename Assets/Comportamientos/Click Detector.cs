@@ -11,7 +11,7 @@ public class ClickDetector : MonoBehaviour
 
 
 
-    public bool salto, pogo, arrastre;
+    public bool salto, pogo, arrastre, pogoEnd;
 
 
 
@@ -38,6 +38,7 @@ public class ClickDetector : MonoBehaviour
 
             if (down)
             {
+                pogoEnd = false;
                 screenMousePosWhenDown = Input.mousePosition;
                 timeClickedDown = Time.time;
 
@@ -119,7 +120,10 @@ public class ClickDetector : MonoBehaviour
 
                     //TODO a lo mejor no queremos que se cancelle un pogo si movemos el raton, si no que una vez empezado nos da igual, seguramente sea mas satisfacctorio.
                     if (pogo)
+                    {
                         Debug.Log("Pogo cancelled");
+                        pogoEnd = true;    
+                    }
                     pogo = false;
                     if (!arrastre)
                     Debug.Log("Arrastre");
@@ -131,7 +135,10 @@ public class ClickDetector : MonoBehaviour
             {
 
                 if (pogo)
+                {
                     Debug.Log("Pogo ended");
+                    pogoEnd = true;
+                }
                 if (arrastre)
                     Debug.Log("Arrastre ended");
                 pogo = false;
