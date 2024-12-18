@@ -1,9 +1,5 @@
 using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
-using Unity.Transforms;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 
 [BurstCompile]
 public partial struct MovePeopleSystem : ISystem
@@ -13,7 +9,8 @@ public partial struct MovePeopleSystem : ISystem
     {
         
     }
-    
+
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         new MovePersonJob{}.ScheduleParallel(state.Dependency).Complete();
@@ -23,7 +20,6 @@ public partial struct MovePeopleSystem : ISystem
 [BurstCompile]
 public partial struct MovePersonJob : IJobEntity
 {
-
     [BurstCompile]
     private void Execute(MoveAspect aspect)
     {

@@ -1,5 +1,23 @@
 {
   "dependencies": {
+    "com.tonymax.nsprites": {
+      "version": "https://github.com/Antoshidza/NSprites.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.entities": "1.0.0-pre.65"
+      },
+      "hash": "f14f41149af6641dc02e994f712265fcd59f18b8"
+    },
+    "com.tonymax.nsprites.foundation": {
+      "version": "https://github.com/Antoshidza/NSprites-Foundation.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.entities": "1.0.0-pre.65"
+      },
+      "hash": "e5257fa47a94299366ee68d9ce11b751033ff35d"
+    },
     "com.unity.bindings.openimageio": {
       "version": "1.0.0",
       "depth": 1,

@@ -22,7 +22,7 @@ public partial class SpawnPublicSystem : SystemBase
         for (int i = 0; i < spawner.spawnNumberPeople; i++)
         {
             Entity newEntity = ecb.Instantiate(spawner.prefab);
-            ecb.AddComponent(newEntity, new MovePeopleComponent { destiny = new float3((i % spawner.spawnLengthNumber)*1.1f, (i / (int)spawner.spawnLengthNumber)*1.1f, 0) });
+            ecb.AddComponent(newEntity, new MovePeopleComponent { destiny = new float3((i % spawner.spawnLengthNumber)*1.1f, (i / (int)spawner.spawnLengthNumber)*1.1f, 0) });            
         }
         ecb.Playback(EntityManager);
     }
