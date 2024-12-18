@@ -19,7 +19,7 @@ public class CharacterActiions : MonoBehaviour
     public float gravity = -9.81f * 2;
     
     public float velocity;
-
+    public float distanceToMouseDown;
 
     private void Start()
     {
@@ -33,12 +33,15 @@ public class CharacterActiions : MonoBehaviour
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         if (estado == charStates.IDLE)
         {
+
             if (detector.salto)
             {
-                if (Vector2.Distance(detector.screenMousePosWhenDown, screenPos) < distanceMarginActions)
+                distanceToMouseDown = Vector2.Distance(detector.screenMousePosWhenDown, screenPos);
+                if (distanceToMouseDown < distanceMarginActions)
                 {
                     estado = charStates.JUMP;
-                    velocity = jumpForce;
+                    //fuerzad de salto proporcional a la distancia del click
+                    velocity = jumpForce * ((distanceMarginActions - distanceToMouseDown) / distanceMarginActions);
                 }
             }
             else if (detector.pogo)
