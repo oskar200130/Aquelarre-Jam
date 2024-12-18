@@ -30,10 +30,10 @@ public class ClickDetector : MonoBehaviour
     void Update()
     {
 
+        float t;
 
         if (timeClickedDown == 0.0f)
         {
-
             down = Input.GetMouseButtonDown(0);
 
             if (down)
@@ -44,10 +44,16 @@ public class ClickDetector : MonoBehaviour
                 //se puede restringir el objeto con el que colisiona, actualemte lo hago asi por pereza //TODO
                 Ray ray2 = Camera.main.ScreenPointToRay(screenMousePosWhenDown);
 
-                if (Physics.Raycast(ray2, out RaycastHit hitData2))
-                {
-                    worldMousePosWhenDown = hitData2.point;
-                }
+                // Calculate the intersection with the (x, 0, z) plane
+                t = -ray2.origin.y / ray2.direction.y;
+
+                worldMousePosWhenDown = ray2.origin + ray2.direction * t;
+
+                //en caso de que se quiera hacer con la intersecciñoin de un plano y no ocon el plano (x,y = 0, z)
+                //if (Physics.Raycast(ray2, out RaycastHit hitData2))
+                //{
+                //    worldMousePosWhenDown = hitData2.point;
+                //}
 
             }
         }
@@ -66,10 +72,16 @@ public class ClickDetector : MonoBehaviour
         //se puede restringir el objeto con el que colisiona, actualemte lo hago asi por pereza //TODO
         Ray ray = Camera.main.ScreenPointToRay(screenMousePos);
 
-        if (Physics.Raycast(ray, out RaycastHit hitData))
-        {
-            worldMousePos = hitData.point;
-        }
+        // Calculate the intersection with the (x, 0, z) plane
+        t = -ray.origin.y / ray.direction.y;
+
+        worldMousePos = ray.origin + ray.direction * t;
+
+        //por si se quiere hacer con collision de algun plano
+        //if (Physics.Raycast(ray, out RaycastHit hitData))
+        //{
+        //    worldMousePos = hitData.point;
+        //}
 
 
         //hayq ue pòner un limite de timepo, lo ahgop al final porque me amreo //TODO
