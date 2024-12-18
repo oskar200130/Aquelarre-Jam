@@ -287,6 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pogoMargin: 25
   timeMarginForActions: 0.6
+  canNotCancelPogo: 0
   salto: 0
   pogo: 0
   arrastre: 0
@@ -323,6 +324,7 @@ GameObject:
   - component: {fileID: 2050988193}
   - component: {fileID: 2050988192}
   - component: {fileID: 2050988191}
+  - component: {fileID: 2050988195}
   m_Layer: 0
   m_Name: personaje
   m_TagString: Untagged
@@ -420,6 +422,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &2050988195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050988190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e04e26b669173f45b0d434815df3142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detector: {fileID: 821444873}
+  distanceMarginActions: 30
+  speed: 30
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
