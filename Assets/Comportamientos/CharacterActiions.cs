@@ -38,13 +38,13 @@ public class CharacterActiions : MonoBehaviour
     //tan solo cambiar los nombres, Pos por WorldPos
     void Update()
     {
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 worldPos =/* Camera.main.WorldToScreenPoint(*/transform.position/*)*/;
         if (estado == charStates.IDLE || estado == charStates.POGOEXIT)
         {
 
             if (detector.salto)
             {
-                distanceToMouseDown = Vector2.Distance(detector.screenMousePosWhenDown, screenPos);
+                distanceToMouseDown = Vector3.Distance(detector.worldMousePosWhenDown, worldPos);
                 if (distanceToMouseDown < distanceMarginActions)
                 {
                     estado = charStates.JUMP;
@@ -54,7 +54,7 @@ public class CharacterActiions : MonoBehaviour
             }
             else if (detector.pogo)
             {
-                distanceToMouseDown = Vector2.Distance(detector.screenMousePos, screenPos);
+                distanceToMouseDown = Vector3.Distance(detector.worldMousePosWhenDown, worldPos);
                 if (distanceToMouseDown < distanceMarginActions)
                 {
                     //startPosition = transform.position;
@@ -66,7 +66,7 @@ public class CharacterActiions : MonoBehaviour
             }
             else if (detector.arrastre)
             {
-                if (Vector2.Distance(detector.screenMousePos, screenPos) < distanceMarginActions)
+                if (Vector3.Distance(detector.worldMousePos, worldPos) < distanceMarginActions)
                 {
                     //startPosition = transform.position;
                     //hacemos el arrastre que este tocando
@@ -118,11 +118,11 @@ public class CharacterActiions : MonoBehaviour
 
                 {
                     //si en vez de screenPosWhen Down s eahce con solo POS, el Pogo seguira donde sea que se este formando, puede ser mñas natural
-                    Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-                    distanceToMouseDown = Vector2.Distance(detector.screenMousePos, screenPos);
+                    Vector3 worldPos = /*Camera.main.WorldToScreenPoint(*/transform.position/*)*/;
+                    distanceToMouseDown = Vector3.Distance(detector.worldMousePosWhenDown, worldPos);
 
                     //fuerza de salto proporcional a la distancia del click
-                    pogoForce = Mathf.Abs((distanceMarginActions - distanceToMouseDown) / distanceMarginActions);
+                    pogoForce = (distanceMarginActions - distanceToMouseDown) / distanceMarginActions;
                     velocity = jumpForce * pogoForce;
 
                     Vector3 direccion = (crowdPoint - detector.worldMousePos).normalized * pogoForce;
@@ -174,6 +174,7 @@ public class CharacterActiions : MonoBehaviour
                 break;
             case charStates.ARRASTE:
                 {
+                    //aplicar gravedad y salto
                     velocity += gravity * (Time.deltaTime * 2);
                     transform.Translate(new Vector3(0, 0, velocity) * Time.deltaTime);
                     if (velocity <= 0)
@@ -187,7 +188,8 @@ public class CharacterActiions : MonoBehaviour
                         }
                     }
 
-                    distanceToMouseDown = Vector2.Distance(detector.screenMousePos, crowdPoint);
+                    //si se sale del rango de arrastre, devolver a Idle.
+                    distanceToMouseDown = Vector3.Distance(detector.worldMousePos, crowdPoint);
                     if (distanceToMouseDown >= distanceMarginActions)
                     {
                         if (crowdPoint.y >= transform.position.y)
