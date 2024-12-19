@@ -17,7 +17,7 @@ MonoBehaviour:
     x: 6
     y: 5
   FrameRange:
-    Offset: 14
+    Offset: 13
     Count: 7
   FrameDurations:
   - 0.1

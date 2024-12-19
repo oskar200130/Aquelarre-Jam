@@ -4,6 +4,7 @@ using Unity.Transforms;
 using Unity.Mathematics;
 using System.Diagnostics;
 using static UnityEngine.EventSystems.EventTrigger;
+using UnityEngine;
 
 [BurstCompile]
 public partial class SpawnPublicSystem : SystemBase
@@ -22,7 +23,8 @@ public partial class SpawnPublicSystem : SystemBase
         for (int i = 0; i < spawner.spawnNumberPeople; i++)
         {
             Entity newEntity = ecb.Instantiate(spawner.prefab);
-            ecb.AddComponent(newEntity, new MovePeopleComponent { destiny = new float3((i % spawner.spawnLengthNumber)*1.1f, (i / (int)spawner.spawnLengthNumber)*1.1f, 0) });            
+            ecb.AddComponent(newEntity, new MovePeopleComponent { destiny = new float3((i % spawner.spawnLengthNumber)*1.1f, (i / (int)spawner.spawnLengthNumber)*1.1f, 0) });
+            //ecb.AddComponent(newEntity, new ChangeAnimTag { nextAnim = Animator.StringToHash("Death") });
         }
         ecb.Playback(EntityManager);
     }
