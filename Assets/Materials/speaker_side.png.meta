@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7cc963a5419508f4790461623e4406b6
+guid: c1925f626d5278d4ba7ad198a5933fc5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3095477770946889694
-    second: dirt_texture_0
+      213: -3736398481494510882
+    second: speaker_side_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dirt_texture_0
+      name: speaker_side_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 6798
-        height: 4399
+        x: 1
+        y: 3
+        width: 19
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 228b79c2e57aa05d0800000000000000
-      internalID: -3095477770946889694
+      spriteID: ed2f53b9065a52cc0800000000000000
+      internalID: -3736398481494510882
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      dirt_texture_0: -3095477770946889694
+      speaker_side_0: -3736398481494510882
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
