@@ -29,7 +29,7 @@ public class Metronome : MonoBehaviour
 
     void OnPulse()
     {
-        Debug.Log($"Pulso {BeatManager._instance.current_beat + 1}/{BeatManager._instance.numerador}. Llamado desde BeatManager._instance.OnPulse");
+        //Debug.Log($"Pulso {BeatManager._instance.current_beat + 1}/{BeatManager._instance.numerador}. Llamado desde BeatManager._instance.OnPulse");
         if (BeatManager._instance.current_measure > 0)
         {
             audioSource.pitch = 1f; audioSource.PlayOneShot(beep);
@@ -38,7 +38,7 @@ public class Metronome : MonoBehaviour
 
     void OnMeasure()
     {
-        Debug.Log($"Compás N.{BeatManager._instance.current_measure}. Llamado desde BeatManager._instance.OnMeasure");
+        //Debug.Log($"Compás N.{BeatManager._instance.current_measure}. Llamado desde BeatManager._instance.OnMeasure");
         audioSource.pitch = 1.5f;
         audioSource.PlayOneShot(beep);
     }
