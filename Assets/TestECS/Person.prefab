@@ -41,12 +41,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6525301336776586959}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ffc8d8864da4f54a902f78a23a511aa, type: 3}
+  m_Script: {fileID: 11500000, guid: be769d94253e895418ce7434194ba34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationAuthoringModule:
     AnimationSet: {fileID: 11400000, guid: 45ab69ed20f46e148b4e47cfabe6ff6a, type: 2}
-    InitialAnimationIndex: 0
+    InitialAnimationIndex: 3
   RegisterSpriteData:
     SpriteRenderData:
       Material: {fileID: 2100000, guid: d84d30a8fe326be4f98378dcb774dabf, type: 2}

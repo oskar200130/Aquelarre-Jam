@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class ClickDetector : MonoBehaviour
 {
-   
+
     [Tooltip("Arbitary text message")]
     //Unidades de distacia, actualemten se comprueban unicamente con la pantalla (yo lo dejaria asi )
-    public float pogoMargin = 25.0f; 
+    public float pogoMargin = 25.0f;
     public float timeMarginForActions = 0.6f;
     public bool canNotCancelPogo = false;
 
@@ -25,6 +25,8 @@ public class ClickDetector : MonoBehaviour
     public Vector2 screenMousePos;
 
     float timeClickedDown = 0.0f;
+    SCORE clickDownLastScore = SCORE.NONE;
+    SCORE clickUpLastScore = SCORE.NONE;
 
     // Update once per frame
     void Update()
@@ -35,9 +37,13 @@ public class ClickDetector : MonoBehaviour
         if (timeClickedDown == 0.0f)
         {
             down = Input.GetMouseButtonDown(0);
-
             if (down)
             {
+                clickDownLastScore = BeatManager._instance.evaluateClick(Time.time);
+
+                //en lugar de hacer un debug, este valor se debe utilizar cuando sea necesario para evaluar segun se necesite saber si se acerto un clickDown o un clickUp. Depende de la accion
+                //Debug.Log($"ClickDown: { clickDownLastScore } !!");
+
                 pogoEnd = false;
                 screenMousePosWhenDown = Input.mousePosition;
                 timeClickedDown = Time.time;
@@ -63,6 +69,9 @@ public class ClickDetector : MonoBehaviour
         if (up)
         {
             timeClickedDown = 0.0f;
+            //clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+            //en lugar de hacer un debug, este valor se debe utilizar cuando sea necesario para evaluar segun se necesite saber si se acerto un clickDown o un clickUp. Depende de la accion
+            //Debug.Log($"ClickUp: {clickUpLastScore} !!");
         }
 
         //actualizar la posicióna actual del raton, World y screen
@@ -89,7 +98,7 @@ public class ClickDetector : MonoBehaviour
         if (!(pogo || arrastre) && up && down)
         {
             salto = true;
-            Debug.Log("Salto");
+           // Debug.Log("Salto");
         }
         else
         {
@@ -102,49 +111,49 @@ public class ClickDetector : MonoBehaviour
 
 
 
-        
-            if (down && !up)
+
+        if (down && !up)
+        {
+            if (!arrastre && Vector2.Distance(screenMousePos, screenMousePosWhenDown) < pogoMargin) //not arrastre, para evitar de que entren a un ciclo de entrar y salir de la zona
             {
-                if (!arrastre && Vector2.Distance(screenMousePos, screenMousePosWhenDown) < pogoMargin ) //not arrastre, para evitar de que entren a un ciclo de entrar y salir de la zona
+                if (timeClickedDown + timeMarginForActions < Time.time)
                 {
-                    if (timeClickedDown + timeMarginForActions < Time.time)
-                    {
-                        if (!pogo)
+                    if (!pogo)
                         Debug.Log("Pogo");
-                        pogo = true;
-                    }
-
-                }
-                else if (!canNotCancelPogo || !pogo) //podemos hacer esto, para que una vez comenzado un pogo no se pueda comenzar el arrastre, lo comento para tenerlo en cuenta, de hecho loo voy a poner como eleccion en 
-                {
-
-                    //TODO a lo mejor no queremos que se cancelle un pogo si movemos el raton, si no que una vez empezado nos da igual, seguramente sea mas satisfacctorio.
-                    if (pogo)
-                    {
-                        Debug.Log("Pogo cancelled");
-                        pogoEnd = true;    
-                    }
-                    pogo = false;
-                    if (!arrastre)
-                    Debug.Log("Arrastre");
-                    arrastre = true;
+                    pogo = true;
                 }
 
             }
-            else
+            else if (!canNotCancelPogo || !pogo) //podemos hacer esto, para que una vez comenzado un pogo no se pueda comenzar el arrastre, lo comento para tenerlo en cuenta, de hecho loo voy a poner como eleccion en 
             {
 
+                //TODO a lo mejor no queremos que se cancelle un pogo si movemos el raton, si no que una vez empezado nos da igual, seguramente sea mas satisfacctorio.
                 if (pogo)
                 {
-                    Debug.Log("Pogo ended");
+                    Debug.Log("Pogo cancelled");
                     pogoEnd = true;
                 }
-                if (arrastre)
-                    Debug.Log("Arrastre ended");
                 pogo = false;
-                arrastre = false;
+                if (!arrastre)
+                    Debug.Log("Arrastre");
+                arrastre = true;
             }
 
-        
+        }
+        else
+        {
+
+            if (pogo)
+            {
+                Debug.Log("Pogo ended");
+                pogoEnd = true;
+            }
+            if (arrastre)
+                Debug.Log("Arrastre ended");
+            pogo = false;
+            arrastre = false;
+        }
+
+
     }
 }
