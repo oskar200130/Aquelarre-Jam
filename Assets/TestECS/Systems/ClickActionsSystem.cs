@@ -1,19 +1,29 @@
 using NSprites;
-using Unity.Entities;
 using Unity.Burst;
+using Unity.Collections;
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
+using UnityEngine;
 
 [BurstCompile]
-[UpdateBefore(typeof(SpriteUVAnimationSystem))]
-public partial struct PonchoAnimSystem : ISystem
+public partial struct ClickActionsSystem : ISystem
 {
+    //private ClickDetector click;
+
     [BurstCompile]
-    private partial struct ChangeAnimationJob : IJobEntity
+    public partial struct CheckClick : IJobEntity
     {
         public double Time;
+        public EntityCommandBuffer ecb;
 
-        private void Execute(AnimatorAspect animator, ChangeAnimTag tag)
-        {            
-            animator.SetAnimation(tag.nextAnim, Time);
+        private void Execute(Entity e, LocalToWorld tr)
+        {
+            float3 dist = math.abs(tr.Position - (float3)ClickDetector.instance.worldMousePosWhenDown);
+            if (math.length(dist) < ClickDetector.instance.distanceMarginActions)
+            {
+                ecb.AddComponent(e, new ChangeAnimTag { nextAnim = Animator.StringToHash("Death") });
+            }
         }
     }
 
@@ -25,9 +35,13 @@ public partial struct PonchoAnimSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        //click = ClickDetector.instance;
+        //if (click == null)
+        //    UnityEngine.Debug.LogError("No click detector found");
+
         var systemData = new SystemData();
 
-        var queryBuilder = new EntityQueryBuilder(Unity.Collections.Allocator.Temp)
+        var queryBuilder = new EntityQueryBuilder(Allocator.Temp)
             .WithAll<ChangeAnimTag>()
             .WithAspect<AnimatorAspect>()
             .WithOptions(EntityQueryOptions.IgnoreComponentEnabledState);
@@ -50,10 +64,14 @@ public partial struct PonchoAnimSystem : ISystem
             return;
         var time = SystemAPI.Time.ElapsedTime;
 
-        var animationSwitchJob = new ChangeAnimationJob
+        EntityCommandBuffer entityCB = new(Allocator.Temp);
+        var animationSwitchJob = new CheckClick
         {
-            Time = time
+            Time = time,
+            ecb = entityCB
         };
         state.Dependency = animationSwitchJob.ScheduleParallelByRef(systemData.MovableQuery, state.Dependency);
+
+        entityCB.Playback(World.DefaultGameObjectInjectionWorld.EntityManager);
     }
 }

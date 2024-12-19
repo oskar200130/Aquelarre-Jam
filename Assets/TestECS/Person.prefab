@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnimationAuthoringModule:
     AnimationSet: {fileID: 11400000, guid: 45ab69ed20f46e148b4e47cfabe6ff6a, type: 2}
-    InitialAnimationIndex: 3
+    InitialAnimationIndex: 0
   RegisterSpriteData:
     SpriteRenderData:
       Material: {fileID: 2100000, guid: d84d30a8fe326be4f98378dcb774dabf, type: 2}

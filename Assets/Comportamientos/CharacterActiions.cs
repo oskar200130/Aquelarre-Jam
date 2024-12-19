@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class CharacterActiions : MonoBehaviour
 {
-
-
     public ClickDetector detector;
     public float distanceMarginActions = 10.0f;
 

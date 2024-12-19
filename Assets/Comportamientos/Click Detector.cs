@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ClickDetector : MonoBehaviour
 {
+    public static ClickDetector instance;
 
     [Tooltip("Arbitary text message")]
     //Unidades de distacia, actualemten se comprueban unicamente con la pantalla (yo lo dejaria asi )
@@ -9,11 +10,7 @@ public class ClickDetector : MonoBehaviour
     public float timeMarginForActions = 0.6f;
     public bool canNotCancelPogo = false;
 
-
-
     public bool salto, pogo, arrastre, pogoEnd;
-
-
 
     public bool up, down;
 
@@ -28,10 +25,41 @@ public class ClickDetector : MonoBehaviour
     SCORE clickDownLastScore = SCORE.NONE;
     SCORE clickUpLastScore = SCORE.NONE;
 
+    //PEOPLE STATS
+    public float distanceMarginActions = 10.0f;
+
+    //private float currentSpeed = 0.0f;
+
+    //private Vector3 crowdPoint;
+
+    //private enum charStates { IDLE, JUMP, POGO, POGOEXIT, POGOEND, ARRASTE }
+    //private charStates estado = charStates.IDLE;
+
+    public float jumpForce = 20.0f;
+    public float gravity = -21f;
+
+    public float velocity;
+    public float distanceToMouseDown;
+    public float pogoForce;
+
+    public float minJumpForce = 1.0f;
+    public float maxJumpForce = 10.0f;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     // Update once per frame
     void Update()
     {
-
         float t;
 
         if (timeClickedDown == 0.0f)
@@ -61,7 +89,6 @@ public class ClickDetector : MonoBehaviour
                 //{
                 //    worldMousePosWhenDown = hitData2.point;
                 //}
-
             }
         }
 
@@ -75,9 +102,7 @@ public class ClickDetector : MonoBehaviour
         }
 
         //actualizar la posicióna actual del raton, World y screen
-
         screenMousePos = Input.mousePosition;
-
 
         //se puede restringir el objeto con el que colisiona, actualemte lo hago asi por pereza //TODO
         Ray ray = Camera.main.ScreenPointToRay(screenMousePos);
@@ -98,20 +123,14 @@ public class ClickDetector : MonoBehaviour
         if (!(pogo || arrastre) && up && down)
         {
             salto = true;
-           // Debug.Log("Salto");
+            // Debug.Log("Salto");
         }
         else
         {
             salto = false;
         }
 
-
         //primero el arrastre, imaginemos que el jugador mueve rapido el raton, entoces el timepo de acciones, que sirve apra diferenciar entre click o Pogo no importa. sabemos que e sun arrastre.
-
-
-
-
-
         if (down && !up)
         {
             if (!arrastre && Vector2.Distance(screenMousePos, screenMousePosWhenDown) < pogoMargin) //not arrastre, para evitar de que entren a un ciclo de entrar y salir de la zona
@@ -138,11 +157,9 @@ public class ClickDetector : MonoBehaviour
                     Debug.Log("Arrastre");
                 arrastre = true;
             }
-
         }
         else
         {
-
             if (pogo)
             {
                 Debug.Log("Pogo ended");
@@ -153,7 +170,5 @@ public class ClickDetector : MonoBehaviour
             pogo = false;
             arrastre = false;
         }
-
-
     }
 }
