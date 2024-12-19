@@ -14,12 +14,15 @@ public class CharacterActiions : MonoBehaviour
     private enum charStates { IDLE, JUMP, POGO, POGOEXIT, POGOEND, ARRASTE }
     private charStates estado = charStates.IDLE;
 
-    public float jumpForce = 20 * 2;
-    public float gravity = -9.81f * 2;
+    public float jumpForce = 20.0f;
+    public float gravity = -21f;
     
     public float velocity;
     public float distanceToMouseDown;
     public float pogoForce;
+
+    public float minJumpForce = 1.0f;
+    public float maxJumpForce = 10.0f;
     private void Start()
     {
         crowdPoint = transform.position; //cuandos e generen de verdad tal vez no se encuentren en este punto de referenceia,
@@ -27,6 +30,12 @@ public class CharacterActiions : MonoBehaviour
     }
 
     // Update is called once per frame
+
+
+    //TODO, El calculo de distancias esta todo hecho con las posiciones en patanlla,
+    //por eso visualmetne en pantalla se ve como circulos perfectos,
+    //pero se pueden ahcer mediante posiciones de mundo sin mucha ncomplicacion,
+    //tan solo cambiar los nombres, Pos por WorldPos
     void Update()
     {
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
@@ -61,7 +70,9 @@ public class CharacterActiions : MonoBehaviour
                 {
                     //startPosition = transform.position;
                     //hacemos el arrastre que este tocando
-                    estado = charStates.POGO;
+                    estado = charStates.ARRASTE;
+                    velocity = Random.Range(minJumpForce, maxJumpForce);
+
 
                 }
             }
@@ -73,6 +84,14 @@ public class CharacterActiions : MonoBehaviour
                 estado = charStates.POGOEND;
             }
         }
+        else if (estado == charStates.ARRASTE)
+        {
+            if (!detector.arrastre)
+            {
+                estado = charStates.IDLE;
+            }
+        }
+        
     }
 
     private void FixedUpdate()
@@ -83,17 +102,15 @@ public class CharacterActiions : MonoBehaviour
                 {
                     velocity += gravity * (Time.deltaTime*2);
                     transform.Translate(new Vector3(0, 0, velocity) * Time.deltaTime);
-                    if (velocity <= 0)
+
+                    //chekear que ha llegado al suelo //me da pereza
+                    if (crowdPoint.y >= transform.position.y)
                     {
-                        //chekear que ha llegado al suelo //me da pereza
-                        if (crowdPoint.y >= transform.position.y)
-                        {
-                            velocity = 0.0f;
+                        velocity = 0.0f;
 
-                            estado = charStates.IDLE;
+                        estado = charStates.IDLE;
 
-                            transform.position = crowdPoint;
-                        }
+                        transform.position = crowdPoint;
                     }
                 }
                 break;
@@ -156,11 +173,48 @@ public class CharacterActiions : MonoBehaviour
                 }
                 break;
             case charStates.ARRASTE:
+                {
+                    velocity += gravity * (Time.deltaTime * 2);
+                    transform.Translate(new Vector3(0, 0, velocity) * Time.deltaTime);
+                    if (velocity <= 0)
+                    {
+                        //chekear que ha llegado al suelo //me da pereza
+                        if (crowdPoint.y >= transform.position.y)
+                        {
+                            velocity = Random.Range(minJumpForce, maxJumpForce);
+
+                            transform.position = crowdPoint;
+                        }
+                    }
+
+                    distanceToMouseDown = Vector2.Distance(detector.screenMousePos, crowdPoint);
+                    if (distanceToMouseDown >= distanceMarginActions)
+                    {
+                        if (crowdPoint.y >= transform.position.y)
+                        {
+                            transform.position = crowdPoint;
+                            estado = charStates.IDLE;
+                        }
+                    }
+                }
                 break;
             default:
                 //animacion de Idle, puede ser un up & down o una animación de sprite
                 {
+                    //para parar los saltos
+                    if (transform.position.y != crowdPoint.y)
+                    {
+                        velocity += gravity * (Time.deltaTime * 2);
+                        transform.Translate(new Vector3(0, 0, velocity) * Time.deltaTime);
 
+                        //chekear que ha llegado al suelo //me da pereza
+                        if (crowdPoint.y >= transform.position.y)
+                        {
+                            velocity = 0.0f;
+
+                            transform.position = crowdPoint;
+                        }
+                    }
                 }
                 break;
         }
