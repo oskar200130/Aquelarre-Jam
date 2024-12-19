@@ -2,6 +2,8 @@ using NSprites;
 using Unity.Entities;
 using Unity.Burst;
 using Unity.Collections;
+using System.Diagnostics;
+using UnityEngine;
 
 [BurstCompile]
 [UpdateBefore(typeof(SpriteUVAnimationSystem))]
@@ -13,9 +15,9 @@ public partial struct PonchoAnimSystem : ISystem
         public PonchoAnimSettings animationSettings;
         public double Time;
 
-        private void Execute(AnimatorAspect animator, EnabledRefRO<ChangeAnimTag> tag)
-        {
-            animator.SetAnimation(animationSettings.WalkHash, Time);
+        private void Execute(AnimatorAspect animator, ChangeAnimTag tag)
+        {            
+            animator.SetAnimation(tag.nextAnim, Time);
         }
     }
 
