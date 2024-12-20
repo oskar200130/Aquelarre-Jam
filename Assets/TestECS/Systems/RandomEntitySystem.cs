@@ -33,7 +33,7 @@ public partial class RandomEntitySystem : SystemBase
 
     public float3 GetRandomEntityPos()
     {
-        if (entities == null) return new float3(0, 0, 0);
+        if (entities == null ||entities.Length == 0) return new float3(0, 0, 0);
         return SystemAPI.GetComponent<LocalTransform>(entities[RandomGenerator.NextInt(entities.Length - 1)]).Position;
     }
     [BurstCompile]
