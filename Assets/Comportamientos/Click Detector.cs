@@ -1,3 +1,4 @@
+using Unity.Burst;
 using UnityEngine;
 
 public class ClickDetector : MonoBehaviour
@@ -10,11 +11,14 @@ public class ClickDetector : MonoBehaviour
     public float timeMarginForActions = 0.6f;
     public bool canNotCancelPogo = false;
 
-    public bool salto, pogo, arrastre, pogoEnd;
+    public bool salto, pogo, arrastre, pogoEnd, rePogo;
+
+    public float TimeEndedPogo = -1.0f; //si puede haber varios pogos, pues haremos un array que los checke y lance el nuevo evento
 
     public bool up, down;
 
     public Vector3 worldMousePosWhenDown;
+    public Vector3 worldMousePosPOGOCOMENCE;
     public Vector2 screenMousePosWhenDown;
 
     //para hacer solo casting a este y no mil veces a la llamada de Input. que es mas costoso que lañ haga cada objeto.
@@ -24,26 +28,6 @@ public class ClickDetector : MonoBehaviour
     float timeClickedDown = 0.0f;
     SCORE clickDownLastScore = SCORE.NONE;
     SCORE clickUpLastScore = SCORE.NONE;
-
-    //PEOPLE STATS
-    public float distanceMarginActions = 10.0f;
-
-    //private float currentSpeed = 0.0f;
-
-    //private Vector3 crowdPoint;
-
-    //private enum charStates { IDLE, JUMP, POGO, POGOEXIT, POGOEND, ARRASTE }
-    //private charStates estado = charStates.IDLE;
-
-    public float jumpForce = 20.0f;
-    public float gravity = -21f;
-
-    public float velocity;
-    public float distanceToMouseDown;
-    public float pogoForce;
-
-    public float minJumpForce = 1.0f;
-    public float maxJumpForce = 10.0f;
 
     void Awake()
     {
@@ -61,6 +45,21 @@ public class ClickDetector : MonoBehaviour
     void Update()
     {
         float t;
+
+        if (TimeEndedPogo != 0.0f)
+        {
+            if (TimeEndedPogo + 2.5f <= Time.time )
+            {
+                rePogo = true;
+                TimeEndedPogo = 0.0f;
+            }
+        }
+        else
+        {
+            rePogo = false;
+        }
+
+
 
         if (timeClickedDown == 0.0f)
         {
@@ -140,6 +139,7 @@ public class ClickDetector : MonoBehaviour
                     if (!pogo)
                         Debug.Log("Pogo");
                     pogo = true;
+                    worldMousePosPOGOCOMENCE = worldMousePosWhenDown;
                 }
 
             }
@@ -164,6 +164,7 @@ public class ClickDetector : MonoBehaviour
             {
                 Debug.Log("Pogo ended");
                 pogoEnd = true;
+                TimeEndedPogo = Time.time;
             }
             if (arrastre)
                 Debug.Log("Arrastre ended");

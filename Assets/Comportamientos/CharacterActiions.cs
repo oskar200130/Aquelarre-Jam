@@ -14,7 +14,7 @@ public class CharacterActiions : MonoBehaviour
 
     public float jumpForce = 20.0f;
     public float gravity = -21f;
-    
+
     public float velocity;
     public float distanceToMouseDown;
     public float pogoForce;
@@ -89,7 +89,7 @@ public class CharacterActiions : MonoBehaviour
                 estado = charStates.IDLE;
             }
         }
-        
+
     }
 
     private void FixedUpdate()
@@ -98,7 +98,7 @@ public class CharacterActiions : MonoBehaviour
         {
             case charStates.JUMP:
                 {
-                    velocity += gravity * (Time.deltaTime*2);
+                    velocity += gravity * (Time.deltaTime * 2);
                     transform.Translate(new Vector3(0, 0, velocity) * Time.deltaTime);
 
                     //chekear que ha llegado al suelo //me da pereza
@@ -127,9 +127,6 @@ public class CharacterActiions : MonoBehaviour
 
                     // The step size is equal to speed times frame time.
                     float step = velocity * Time.deltaTime;
-
-                   
-
 
                     if (distanceToMouseDown >= distanceMarginActions)
                     {
@@ -160,7 +157,7 @@ public class CharacterActiions : MonoBehaviour
             case charStates.POGOEND:
                 {
                     //no se como hacerle para que quede guay ajajajaja (joder vamos espesos a estas horas 0:16)
-                    velocity = Random.Range(20.0f,100.0f);
+                    velocity = Random.Range(20.0f, 100.0f);
                     transform.position = Vector3.MoveTowards(transform.position, crowdPoint, velocity * Time.deltaTime);
 
                     if (Vector3.Distance(transform.position, crowdPoint) <= 0.1f)

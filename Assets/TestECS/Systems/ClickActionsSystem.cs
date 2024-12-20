@@ -8,18 +8,16 @@ using UnityEngine;
 
 [BurstCompile]
 public partial class ClickActionsSystem : SystemBase
-{
-    [BurstCompile]
-    public partial struct CheckClick : IJobEntity
+{    public partial struct CheckClick : IJobEntity
     {
         public float time;
         public Unity.Mathematics.Random RandomGenerator; // Generador de aleatoriedad
 
         private void Execute(ref ChangeAnimTag e, ref LocalTransform tr, ref EspectadorVariables ev)
         {
-            if (ev.estado == EspectadorVariables.espectatorStates.IDLE)
+            if (ev.estado == EspectadorVariables.espectatorStates.IDLE || ev.estado == EspectadorVariables.espectatorStates.POGOEND)
             {
-                if(ClickDetector.instance.salto)
+                if (ClickDetector.instance.salto)
                 {
                     float3 dist = math.abs(tr.Position - (float3)ClickDetector.instance.worldMousePosWhenDown);
                     if (math.length(dist) < ev.distanceMarginActions)
@@ -29,9 +27,6 @@ public partial class ClickActionsSystem : SystemBase
                         //Debug.Log("posiciones y transform : " + tr.Position.y + " crowd : " + ev.crowdPoint.y);
                         ev.estado = EspectadorVariables.espectatorStates.JUMP;
                         ev.velocity = ev.jumpForce * ((ev.distanceMarginActions - math.length(dist)) / ev.distanceMarginActions);
-
-                        //Debug.Log("velocidad : " + ev.velocity);
-                        //Debug.Log("gravedad : " + ev.gravity);
                     }
                 }
                 else if (ClickDetector.instance.arrastre)
@@ -44,6 +39,28 @@ public partial class ClickActionsSystem : SystemBase
                         e.nextAnim = Animator.StringToHash("WalkBack");
                     }
                 }
+                else if (ClickDetector.instance.pogo)
+                {
+                    float3 dist = math.abs(tr.Position - (float3)ClickDetector.instance.worldMousePosWhenDown);
+                    if (math.length(dist) < ev.distanceMarginActions)
+                    {
+                        ev.estado = EspectadorVariables.espectatorStates.POGO;
+                        //ev.velocity = RandomGenerator.NextFloat(ev.minJumpForce, ev.maxJumpForce);
+                        e.nextAnim = Animator.StringToHash("WalkBack");
+                    }
+                }
+                else if (ClickDetector.instance.rePogo)
+                {
+                    float3 dist = math.abs(tr.Position - (float3)ClickDetector.instance.worldMousePosPOGOCOMENCE);
+                    if (math.length(dist) < ev.distanceMarginActions)
+                    {
+                        e.nextAnim = Animator.StringToHash("Death"); //el de salto
+
+                        //Debug.Log("posiciones y transform : " + tr.Position.y + " crowd : " + ev.crowdPoint.y);
+                        ev.estado = EspectadorVariables.espectatorStates.JUMP;
+                        ev.velocity = ev.jumpForce * ((ev.distanceMarginActions - math.length(dist)) / ev.distanceMarginActions);
+                    }
+                }
             }
             else if (ev.estado == EspectadorVariables.espectatorStates.ARRASTE)
             {
@@ -52,21 +69,37 @@ public partial class ClickActionsSystem : SystemBase
                     ev.estado = EspectadorVariables.espectatorStates.IDLE;
                 }
             }
+            else if (ev.estado == EspectadorVariables.espectatorStates.POGO)
+            {
+                if (ClickDetector.instance.pogoEnd)
+                {
+
+                    ev.aceleration = RandomGenerator.NextFloat(5.0f, 15.0f);
+                    ev.jumpVel = RandomGenerator.NextFloat(ev.minJumpForce, ev.maxJumpForce);
+                    ev.estado = EspectadorVariables.espectatorStates.POGOEND;
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+            /*
+            Aqui se calculan los movimientos
+            
+            */
+
+
 
             if (ev.estado == EspectadorVariables.espectatorStates.JUMP)
             {
-                //Debug.Log("saltando");
-                //Debug.Log("time es :" + time);
-
                 tr.Position.y += (ev.velocity * time);
                 ev.velocity += (ev.gravity * (time * 2));
-
-                //Debug.Log("velocidad " + ev.velocity + " gravedad " + ev.gravity);
-
-                //Debug.Log("posiciones y transform : " + tr.Position.y + " crowd : " + ev.crowdPoint.y);
-
-                // move pos in a direction of current destination by passed frac of whole remaining move time
-                //tr.Position += ((destination.Value - tr.Position.xy) * DeltaTime / remainingDelta).ToFloat3();
 
                 //chekear que ha llegado al suelo 
                 if (ev.crowdPoint.y >= tr.Position.y)
@@ -80,11 +113,8 @@ public partial class ClickActionsSystem : SystemBase
             }
             else if (ev.estado == EspectadorVariables.espectatorStates.ARRASTE)
             {
-
                 tr.Position.y += (ev.velocity * time);
                 ev.velocity += (ev.gravity * (time * 2));
-
-
 
                 //si se sale del rango de arrastre, devolver a Idle.
                 //distanceToMouseDown = Vector3.Distance(detector.worldMousePos, crowdPoint);
@@ -112,6 +142,77 @@ public partial class ClickActionsSystem : SystemBase
                 }
 
             }
+            else if (ev.estado == EspectadorVariables.espectatorStates.POGO)
+            {
+                float3 dir = tr.Position - (float3)ClickDetector.instance.worldMousePosWhenDown; //tambien es la dirección, cunado lo normalicemos
+
+                float dist = math.length(math.abs(dir));
+                ev.pogoForce = (ev.distanceMarginActions - dist) / ev.distanceMarginActions;
+                ev.velocity = ev.jumpForce * ev.pogoForce;
+
+
+                dir = math.normalize(dir);
+
+                float step = ev.velocity * time;
+
+                //if (dist >= ev.distanceMarginActions)
+                //{
+                    
+                //}
+                //else
+                //{
+                    tr.Position += dir * step;
+                //}
+
+            }
+            else if (ev.estado == EspectadorVariables.espectatorStates.POGOEND)
+            {
+
+                //imaginemos que se acabo un pogo, vuelve a su estado de idle, pues hacer que caminen a su posición
+
+                float3 dir = ev.crowdPoint - tr.Position ; //tambien es la dirección, cunado lo normalicemos
+
+                float dist = math.length(math.abs(dir));
+
+                dir.y = 0.0f; //para que el salto sea independiente
+                dir = math.normalize(dir);
+
+                ev.directionalVel += dir * ev.aceleration * (time * 2);
+                //si esta muy cerca, se activa el damping, para impedir que se valla por las ramas
+
+                if (dist < 4.0f)
+                {
+                    ev.directionalVel *= math.pow(0.5f, time); //damping del 0,5f a dos unidades de distancia
+                }
+
+                //adegurarse de que si esta saltando, o en pogo, llegue al suelo
+                tr.Position.y += (ev.jumpVel * time);
+                ev.jumpVel += (ev.gravity * (time * 2));
+
+                //chekear que ha llegado al suelo 
+                if (ev.crowdPoint.y >= tr.Position.y)
+                {
+                    ev.jumpVel = RandomGenerator.NextFloat(ev.minJumpForce, ev.maxJumpForce); // que salte otra vez
+                    tr.Position.y = ev.crowdPoint.y;
+                }
+
+                tr.Position += ev.directionalVel * time; //velocidad de caminado puesot a apelo, //TODO
+                
+                if (math.length(ev.directionalVel) < 1.0f) //cuando la velocidad concuerde de que ha llegado a su fin, y que deje de saltar
+                {
+                    if (ev.crowdPoint.y >= tr.Position.y)
+                    {
+                        ev.jumpVel = 0.0f;
+                        ev.directionalVel = float3.zero;
+                        //ev.aceleration = 0.0f; //esto noe s necesario, ya qeu se calcula cada vez
+                        tr.Position = ev.crowdPoint;
+                        e.nextAnim = Animator.StringToHash("Idle"); //el de idle
+                        ev.estado = EspectadorVariables.espectatorStates.IDLE;
+
+                    }
+                }
+
+            }
             else if (ev.estado == EspectadorVariables.espectatorStates.IDLE && ev.crowdPoint.y != tr.Position.y)
             {
                 //adegurarse de que si esta saltando, o en pogo, llegue al suelo
@@ -127,6 +228,23 @@ public partial class ClickActionsSystem : SystemBase
                     e.nextAnim = Animator.StringToHash("Idle"); //el de idle
                     tr.Position = ev.crowdPoint;
                 }
+
+                ////imaginemos que se acabo un pogo, vuelve a su estado de idle, pues hacer que caminen a su posición
+
+                //float3 dir = tr.Position - ev.crowdPoint; //tambien es la dirección, cunado lo normalicemos
+
+                //float dist = math.length(math.abs(dir));
+
+                //if (dist > 0.5f)
+                //{
+                //    tr.Position += dir * 5.0f * time; //velocidad de caminado Idle puesot a apelo, //TODO
+                //}
+                //else
+                //{
+                //    //no voy a poner que se teletrasnporte a la posición porque leugo al lio, pero habria que ahcer algo si no esta cerca claro esta
+                //    //tr.Position
+                //}
+
             }
         }
     }
