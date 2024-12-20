@@ -23,7 +23,7 @@ public partial class ClickActionsSystem : SystemBase
                     float3 dist = math.abs(tr.Position - (float3)ClickDetector.instance.worldMousePosWhenDown);
                     if (math.length(dist) < ev.distanceMarginActions)
                     {
-                        e.nextAnim = Animator.StringToHash("Death"); //el de salto
+                        e.nextAnim = Animator.StringToHash("Arms"); //el de salto
 
                         //Debug.Log("posiciones y transform : " + tr.Position.y + " crowd : " + ev.crowdPoint.y);
                         ev.estado = EspectadorVariables.espectatorStates.JUMP;
@@ -37,7 +37,7 @@ public partial class ClickActionsSystem : SystemBase
                     {
                         ev.estado = EspectadorVariables.espectatorStates.ARRASTE;
                         ev.velocity = RandomGenerator.NextFloat(ev.minJumpForce, ev.maxJumpForce);
-                        e.nextAnim = Animator.StringToHash("WalkBack");
+                        e.nextAnim = Animator.StringToHash("Run");
                     }
                 }
                 else if (ClickDetector.instance.pogo)
@@ -47,7 +47,7 @@ public partial class ClickActionsSystem : SystemBase
                     {
                         ev.estado = EspectadorVariables.espectatorStates.POGO;
                         //ev.velocity = RandomGenerator.NextFloat(ev.minJumpForce, ev.maxJumpForce);
-                        e.nextAnim = Animator.StringToHash("WalkBack");
+                        e.nextAnim = Animator.StringToHash("Run");
                     }
                 }
                 else if (ClickDetector.instance.rePogo)
@@ -55,7 +55,7 @@ public partial class ClickActionsSystem : SystemBase
                     float3 dist = math.abs(tr.Position - (float3)ClickDetector.instance.worldMousePosPOGOCOMENCE);
                     if (math.length(dist) < ev.distanceMarginActions)
                     {
-                        e.nextAnim = Animator.StringToHash("Death"); //el de salto
+                        e.nextAnim = Animator.StringToHash("Arms"); //el de salto
 
                         //Debug.Log("posiciones y transform : " + tr.Position.y + " crowd : " + ev.crowdPoint.y);
                         ev.estado = EspectadorVariables.espectatorStates.JUMP;
@@ -74,29 +74,16 @@ public partial class ClickActionsSystem : SystemBase
             {
                 if (ClickDetector.instance.pogoEnd)
                 {
-
                     ev.aceleration = RandomGenerator.NextFloat(5.0f, 15.0f);
                     ev.jumpVel = RandomGenerator.NextFloat(ev.minJumpForce, ev.maxJumpForce);
                     ev.estado = EspectadorVariables.espectatorStates.POGOEND;
                 }
             }
 
-
-
-
-
-
-
-
-
-
             /*
             Aqui se calculan los movimientos
             
             */
-
-
-
             if (ev.estado == EspectadorVariables.espectatorStates.JUMP)
             {
                 tr.Position.y += (ev.velocity * time);
@@ -127,9 +114,9 @@ public partial class ClickActionsSystem : SystemBase
                     //chekear que ha llegado al suelo 
                     if (ev.crowdPoint.y >= tr.Position.y)
                     {
-
                         ev.velocity = 0.0f;
                         ev.estado = EspectadorVariables.espectatorStates.IDLE;
+                        e.nextAnim = Animator.StringToHash("Idle"); //el de idle
                         tr.Position = ev.crowdPoint;
                         return;
                     }

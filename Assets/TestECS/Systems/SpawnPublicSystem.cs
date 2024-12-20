@@ -15,9 +15,6 @@ public partial class SpawnPublicSystem : SystemBase
     [BurstCompile]
     protected override void OnStartRunning()
     {
-
-        //EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-
         SpawnerComponent spawner = SystemAPI.GetSingleton<SpawnerComponent>();
 
         EntityCommandBuffer ecb = new(Unity.Collections.Allocator.Temp);
@@ -26,10 +23,14 @@ public partial class SpawnPublicSystem : SystemBase
             Entity newEntity = ecb.Instantiate(spawner.prefab);
 
             ecb.SetComponent(newEntity, LocalTransform.FromPosition(new float3((i % spawner.spawnLengthNumber) * 1.1f, 0, (i / (int)spawner.spawnLengthNumber) * 1.1f)));
-            
-            ecb.AddComponent(newEntity, new ChangeAnimTag { nextAnim = Animator.StringToHash("Idle") });            
+            if (UnityEngine.Random.Range(0, 2) < 1)
+                ecb.SetComponent(newEntity, LocalTransform.FromRotation(new quaternion(0, 1, 0, 0)));
+            else
+                ecb.SetComponent(newEntity, LocalTransform.FromRotation(new quaternion(0, 0, 0, 1)));
+            ecb.AddComponent(newEntity, new ChangeAnimTag { nextAnim = Animator.StringToHash("Idle") });
             ecb.AddComponent(newEntity, new EspectadorVariables
-            {   distanceMarginActions = 10.0f,
+            {
+                distanceMarginActions = 10.0f,
                 currentSpeed = 0.0f,
                 crowdPoint = new float3((i % spawner.spawnLengthNumber) * 1.1f, 0, (i / (int)spawner.spawnLengthNumber) * 1.1f),
                 estado = EspectadorVariables.espectatorStates.IDLE,
@@ -38,7 +39,7 @@ public partial class SpawnPublicSystem : SystemBase
                 velocity = 0.0f,
                 jumpVel = 0.0f,
                 aceleration = 0.0f,
-                directionalVel = new float3(0.0f,0.0f,0.0f),
+                directionalVel = new float3(0.0f, 0.0f, 0.0f),
                 distanceToMouseDown = 0.0f,
                 pogoForce = 0.0f,
                 minJumpForce = 1.0f,
@@ -49,6 +50,6 @@ public partial class SpawnPublicSystem : SystemBase
     }
     protected override void OnUpdate()
     {
-        
+
     }
 }

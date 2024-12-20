@@ -10,16 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59540757d4006d444aaf5d4f510bc912, type: 3}
-  m_Name: PonchoSet
+  m_Name: WitchSet
   m_EditorClassIdentifier: 
   _animations:
   - name: Idle
     data: {fileID: 11400000, guid: 63191fc58fba8ae4ea8f9ecb8034bbf9, type: 2}
-  - name: Walk
+  - name: Run
     data: {fileID: 11400000, guid: 2dae88510b6888b4ba94333f1c2d7680, type: 2}
-  - name: WalkBack
-    data: {fileID: 11400000, guid: c4d856a34429d4642bf6f7b98a371018, type: 2}
-  - name: Hit
+  - name: Arms
     data: {fileID: 11400000, guid: 73d5cd29a55a78445ba87b68e554b340, type: 2}
-  - name: Death
-    data: {fileID: 11400000, guid: 50a24329e67fa424c88419726a9301bc, type: 2}

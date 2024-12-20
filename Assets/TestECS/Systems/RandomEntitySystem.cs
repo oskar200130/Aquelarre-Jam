@@ -15,16 +15,6 @@ public partial class RandomEntitySystem : SystemBase
     private Unity.Mathematics.Random RandomGenerator;
 
     [BurstCompile]
-    private partial struct GetRandomEntity : IJobEntity
-    {
-        public double Time;
-
-        private void Execute(AnimatorAspect animator, ChangeAnimTag tag)
-        {
-            animator.SetAnimation(tag.nextAnim, Time);
-        }
-    }
-    [BurstCompile]
     protected override void OnStartRunning()
     {
        

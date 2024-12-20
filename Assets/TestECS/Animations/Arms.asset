@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3dc460e3eaeb97f48b48aa09fa988f09, type: 3}
-  m_Name: Hit
+  m_Name: Arms
   m_EditorClassIdentifier: 
   SpriteSheet: {fileID: 21300000, guid: f6d32a32b083db14d9bc8af0bd29b386, type: 3}
   FrameCount:
     x: 13
     y: 1
   FrameRange:
-    Offset: 12
-    Count: 1
+    Offset: 7
+    Count: 4
   FrameDurations:
+  - 0.1
+  - 0.1
+  - 0.1
   - 0.1
