@@ -25,25 +25,6 @@ public partial class SpawnPublicSystem : SystemBase
         {
             Entity newEntity = ecb.Instantiate(spawner.prefab);
 
-            //tal vez asi funcione directamente para spawnearlos
-            //ecb.set<LocalTransform>(newEntity, new LocalTransform { Position = new float3((i % spawner.spawnLengthNumber) * 1.1f, 0, (i / (int)spawner.spawnLengthNumber) * 1.1f) });
-            //no funciono
-
-            //quito esta barbaridad porque crea un job que no apra de teletrasnportar a los pibes al mismo sitio
-            //ecb.AddComponent(newEntity, new MovePeopleComponent { destiny = new float3((i % spawner.spawnLengthNumber)*1.1f, 0, (i / (int)spawner.spawnLengthNumber)*1.1f) });            
-
-            //este si que vale
-            //ecb.SetComponent(newEntity, new TargetPositionComponent
-            //{
-            //    Value = new float3((i % spawner.spawnLengthNumber) * 1.1f, 0, (i / (int)spawner.spawnLengthNumber) * 1.1f)
-            //});
-
-
-            //esto funciona siquiera porque???
-            //entityManager.SetComponentData(newEntity, LocalTransform.FromPosition(new float3((i % spawner.spawnLengthNumber) * 1.1f, 0, (i / (int)spawner.spawnLengthNumber) * 1.1f)));
-            //entity manager no se puede uitilizar
-
-            //esta es la solución! pero creo que peirden al padre, lo cual es putadon? o no? seguramente no.
             ecb.SetComponent(newEntity, LocalTransform.FromPosition(new float3((i % spawner.spawnLengthNumber) * 1.1f, 0, (i / (int)spawner.spawnLengthNumber) * 1.1f)));
             
             ecb.AddComponent(newEntity, new ChangeAnimTag { nextAnim = Animator.StringToHash("Idle") });            
