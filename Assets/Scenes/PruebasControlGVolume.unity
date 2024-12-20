@@ -12792,7 +12792,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _globalVolume: {fileID: 1709522917}
+  debugpingpong: 1
   _bloomScatter: 1
+  scatterPingPong: {x: 1, y: 0.6}
+  _bloomItensity: 1.46
+  _bloomDirtIntensity: 4.1
+  depthOfFieldmode: 1
+  dofGaussianStart: 20.93
+  dofGaussianMaxRadius: 1.5
+  _filmGrainIntensity: 1
+  _chromaticAberrationIntensity: 0.195
+  _chromaticAberrationPingPong: {x: 1, y: 0.8}
 --- !u!114 &725505278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12800,7 +12810,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725505276}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58b0ddefc0d1c994e849ecf44e171691, type: 3}
   m_Name: 

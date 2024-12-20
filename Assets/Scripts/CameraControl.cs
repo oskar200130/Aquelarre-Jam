@@ -19,12 +19,76 @@ public class CameraControl : MonoBehaviour
     private ColorAdjustments _coloradjustements;
 
 
-    //esto lo voy a dejar tal que en el update cambie todo el rato el valor de cada una de estas variables si es que han cambiado,
-    //para gestionarlas desde el editor sin necesidad de estar haciendo un script de editor.
-    //el update de esta funcion se debe BORRAR antes de hacer la build
+    public bool debugpingpong = false;
+
     [Range(0f, 1f)]
     public float _bloomScatter = 1f;
+    //ESTE es el valor que habria que modificar segun las fases del juego.
+    //Es decir, si estamos en la fase normal, pues el minimo y el maximo del ping pong es X. Si va mas a tope por los combos,
+    //se cambia este minimo y maximo y entonces puede ser mas apoteosico.
+    //Ademas, la idea seria bloquear o no algunas de estas variables según esa fase. En plan: solo queremos que el chromatic aberration exista en la fase de tener muchos combos, pues bloqueamos.
+    public Vector2 scatterPingPong = new(0f, 1f);
 
+    [Min(0f)]
+    public float _bloomItensity = 1.46f;
+    [Min(0f)]
+    public float _bloomDirtIntensity = 4.1f;
+
+    //DEPTH OF FIELD
+    public DepthOfFieldMode depthOfFieldmode = DepthOfFieldMode.Gaussian;
+    [Min(0f)]
+    public float dofGaussianStart = 20.93f;
+    [Range(0.5f, 1.5f)]
+    public float dofGaussianMaxRadius = 1.5f;
+
+    //FILM GRAIN
+    [Range(0f, 1f)]
+    public float _filmGrainIntensity = 1f;
+
+    //CHROMATIC ABERRATION
+    [Range(0f, 1f)]
+    public float _chromaticAberrationIntensity = 0.195f;
+    public Vector2 _chromaticAberrationPingPong = new(0.195f, 1f);
+
+    //etc, ahora me da pereza. en el onvalidate, añadir cada uno de estos sets en caso de que se quiera toquetear en ejecucion.
+    //para cambiar los valores fuera de aqui, simplemente hay que acceder a las variables publicas de arriba (bloom, depth, etc) y hacer override en el valor que toque
+    private void OnValidate()
+    {
+        if (_bloom)
+        {
+            _bloom.scatter.Override(_bloomScatter);
+            _bloom.intensity.Override(_bloomItensity);
+            _bloom.dirtIntensity.Override(_bloomDirtIntensity);
+        }
+        if (_depthOfField)
+        {
+            _depthOfField.mode.Override(depthOfFieldmode);
+            _depthOfField.gaussianStart.Override(dofGaussianStart);
+            _depthOfField.gaussianMaxRadius.Override(dofGaussianMaxRadius);
+        }
+        if (_filmGrain)
+        {
+            _filmGrain.intensity.Override(_filmGrainIntensity);
+        }
+        if (_chromaticAberration)
+        {
+            _chromaticAberration.intensity.Override(_chromaticAberrationIntensity);
+        }
+    }
+
+    void Update()
+    {
+
+        if (debugpingpong)
+        {
+            float t = Mathf.PingPong(Time.time / (BeatManager._instance.beatInterval*0.5f), 1f);
+            float value = Mathf.Lerp(scatterPingPong.x, scatterPingPong.y, t);
+            _bloom.scatter.Override(value);
+            value = Mathf.Lerp(_chromaticAberrationPingPong.x, _chromaticAberrationPingPong.y, t);
+            _chromaticAberration.intensity.Override(value);
+        }
+
+    }
 
     private void Awake()
     {
@@ -63,11 +127,6 @@ public class CameraControl : MonoBehaviour
             Debug.LogError("petó por el global volume amego");
         }
     }
-    private void OnValidate()
-    {
-        if (_bloom) _bloom.scatter.Override(_bloomScatter);
-        
-    }
-    
-    
+
+
 }
