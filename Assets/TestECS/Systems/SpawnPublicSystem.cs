@@ -1,6 +1,7 @@
 using Unity.Entities;
 using Unity.Burst;
 using Unity.Mathematics;
+using UnityEngine;
 
 [BurstCompile]
 public partial class SpawnPublicSystem : SystemBase
@@ -20,6 +21,7 @@ public partial class SpawnPublicSystem : SystemBase
         {
             Entity newEntity = ecb.Instantiate(spawner.prefab);
             ecb.AddComponent(newEntity, new MovePeopleComponent { destiny = new float3((i % spawner.spawnLengthNumber)*1.1f, 0, (i / (int)spawner.spawnLengthNumber)*1.1f) });            
+            ecb.AddComponent(newEntity, new ChangeAnimTag { nextAnim = Animator.StringToHash("Idle") });            
         }
         ecb.Playback(EntityManager);
     }

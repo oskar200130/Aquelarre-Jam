@@ -4,25 +4,30 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [BurstCompile]
-public partial struct ClickActionsSystem : ISystem
+[UpdateBefore(typeof(SpriteUVAnimationSystem))]
+public partial class ClickActionsSystem : SystemBase
 {
     //private ClickDetector click;
 
-    [BurstCompile]
+    //[BurstCompile]
     public partial struct CheckClick : IJobEntity
     {
         public double Time;
-        public EntityCommandBuffer ecb;
 
-        private void Execute(Entity e, LocalToWorld tr)
+        private void Execute(ref ChangeAnimTag e, LocalTransform tr)
         {
-            float3 dist = math.abs(tr.Position - (float3)ClickDetector.instance.worldMousePosWhenDown);
-            if (math.length(dist) < ClickDetector.instance.distanceMarginActions)
+            if(ClickDetector.instance.salto || ClickDetector.instance.pogo)
             {
-                ecb.AddComponent(e, new ChangeAnimTag { nextAnim = Animator.StringToHash("Death") });
+                float3 dist = math.abs(tr.Position - (float3)ClickDetector.instance.worldMousePosWhenDown);
+                if (math.length(dist) < ClickDetector.instance.distanceMarginActions)
+                {
+                    e.nextAnim = Animator.StringToHash("Death");
+                    Debug.Log("Holo " + dist);
+                }
             }
         }
     }
@@ -32,8 +37,8 @@ public partial struct ClickActionsSystem : ISystem
         public EntityQuery MovableQuery;
     }
 
-    [BurstCompile]
-    public void OnCreate(ref SystemState state)
+    //[BurstCompile]
+    protected override void OnCreate()
     {
         //click = ClickDetector.instance;
         //if (click == null)
@@ -43,23 +48,23 @@ public partial struct ClickActionsSystem : ISystem
 
         var queryBuilder = new EntityQueryBuilder(Allocator.Temp)
             .WithAll<ChangeAnimTag>()
+            .WithAll<LocalTransform>()
             .WithAspect<AnimatorAspect>()
             .WithOptions(EntityQueryOptions.IgnoreComponentEnabledState);
 
-        var movableQuery = state.GetEntityQuery(queryBuilder);
+        var movableQuery = GetEntityQuery(queryBuilder);
 
-        movableQuery.AddChangedVersionFilter(ComponentType.ReadOnly<ChangeAnimTag>());
         systemData.MovableQuery = movableQuery;
 
-        _ = state.EntityManager.AddComponentData(state.SystemHandle, systemData);
+        _ = EntityManager.AddComponentData(SystemHandle, systemData);
 
         queryBuilder.Dispose();
     }
 
-    [BurstCompile]
-    public void OnUpdate(ref SystemState state)
+    //[BurstCompile]
+    protected override void OnUpdate()
     {
-        var systemData = SystemAPI.GetComponent<SystemData>(state.SystemHandle);
+        var systemData = SystemAPI.GetComponent<SystemData>(SystemHandle);
         if (!SystemAPI.TryGetSingleton<PonchoAnimSettings>(out var animationSettings))
             return;
         var time = SystemAPI.Time.ElapsedTime;
@@ -67,11 +72,10 @@ public partial struct ClickActionsSystem : ISystem
         EntityCommandBuffer entityCB = new(Allocator.Temp);
         var animationSwitchJob = new CheckClick
         {
-            Time = time,
-            ecb = entityCB
+            Time = time
         };
-        state.Dependency = animationSwitchJob.ScheduleParallelByRef(systemData.MovableQuery, state.Dependency);
+        Dependency = animationSwitchJob.ScheduleParallelByRef(systemData.MovableQuery, Dependency);
 
-        entityCB.Playback(World.DefaultGameObjectInjectionWorld.EntityManager);
+        entityCB.Playback(EntityManager);
     }
 }
