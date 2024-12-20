@@ -304,14 +304,6 @@ MonoBehaviour:
   screenMousePosWhenDown: {x: 0, y: 0}
   worldMousePos: {x: 0, y: 0, z: 0}
   screenMousePos: {x: 0, y: 0}
-  distanceMarginActions: 10
-  jumpForce: 20
-  gravity: -21
-  velocity: 0
-  distanceToMouseDown: 0
-  pogoForce: 0
-  minJumpForce: 1
-  maxJumpForce: 10
 --- !u!4 &602938858
 Transform:
   m_ObjectHideFlags: 0
@@ -656,6 +648,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1147868052}
   - component: {fileID: 1147868051}
+  - component: {fileID: 1147868053}
+  - component: {fileID: 1147868054}
   m_Layer: 0
   m_Name: BeatManager
   m_TagString: Untagged
@@ -701,6 +695,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1147868053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147868050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b0ddefc0d1c994e849ecf44e171691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 440
+  duration: 0.1
+--- !u!114 &1147868054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147868050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1b8f0e27b1def4cb00282b4b802b9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventEffect: {fileID: 7188750053391531260, guid: 556bc1a71f5ca92428569d95246fd2fa, type: 3}
+  minBeatsBetweenEvents: 10
+  probabilitySpawnEffect: 50
 --- !u!1 &1161155906
 GameObject:
   m_ObjectHideFlags: 0
