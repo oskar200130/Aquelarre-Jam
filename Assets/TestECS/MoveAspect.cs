@@ -1,5 +1,6 @@
 using Unity.Entities;
 using Unity.Transforms;
+//using UnityEngine;
 
 public readonly partial struct MoveAspect : IAspect
 {
@@ -8,6 +9,8 @@ public readonly partial struct MoveAspect : IAspect
 
     public void Move()
     {
-        _localTransform.ValueRW.Position = _targetPosition.ValueRO.destiny;
+        //_localTransform.ValueRW.Position = _targetPosition.ValueRO.destiny;
+
+        //Debug.Log("sigo ejecutandoem dando por culo");
     }
 }
