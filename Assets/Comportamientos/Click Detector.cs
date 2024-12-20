@@ -66,7 +66,7 @@ public class ClickDetector : MonoBehaviour
             down = Input.GetMouseButtonDown(0);
             if (down)
             {
-                clickDownLastScore = BeatManager._instance.evaluateClick(Time.time);
+                //clickDownLastScore = BeatManager._instance.evaluateClick(Time.time);
 
                 //en lugar de hacer un debug, este valor se debe utilizar cuando sea necesario para evaluar segun se necesite saber si se acerto un clickDown o un clickUp. Depende de la accion
                 //Debug.Log($"ClickDown: { clickDownLastScore } !!");
@@ -123,6 +123,8 @@ public class ClickDetector : MonoBehaviour
         {
             salto = true;
             // Debug.Log("Salto");
+            clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+
         }
         else
         {
@@ -151,6 +153,8 @@ public class ClickDetector : MonoBehaviour
                 {
                     Debug.Log("Pogo cancelled");
                     pogoEnd = true;
+                    clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+
                 }
                 pogo = false;
                 if (!arrastre)
@@ -164,10 +168,15 @@ public class ClickDetector : MonoBehaviour
             {
                 Debug.Log("Pogo ended");
                 pogoEnd = true;
+                clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+
                 TimeEndedPogo = Time.time;
             }
             if (arrastre)
+            {
                 Debug.Log("Arrastre ended");
+                clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+            }
             pogo = false;
             arrastre = false;
         }
