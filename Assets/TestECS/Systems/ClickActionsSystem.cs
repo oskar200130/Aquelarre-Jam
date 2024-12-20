@@ -16,7 +16,7 @@ public partial class ClickActionsSystem : SystemBase
 
         private void Execute(ref ChangeAnimTag e, ref LocalTransform tr, ref EspectadorVariables ev)
         {
-            if (ev.estado == EspectadorVariables.espectatorStates.IDLE)
+            if (ev.estado == EspectadorVariables.espectatorStates.IDLE || ev.estado == EspectadorVariables.espectatorStates.POGOEND)
             {
                 if (ClickDetector.instance.salto)
                 {
@@ -48,6 +48,18 @@ public partial class ClickActionsSystem : SystemBase
                         ev.estado = EspectadorVariables.espectatorStates.POGO;
                         //ev.velocity = RandomGenerator.NextFloat(ev.minJumpForce, ev.maxJumpForce);
                         e.nextAnim = Animator.StringToHash("WalkBack");
+                    }
+                }
+                else if (ClickDetector.instance.rePogo)
+                {
+                    float3 dist = math.abs(tr.Position - (float3)ClickDetector.instance.worldMousePosPOGOCOMENCE);
+                    if (math.length(dist) < ev.distanceMarginActions)
+                    {
+                        e.nextAnim = Animator.StringToHash("Death"); //el de salto
+
+                        //Debug.Log("posiciones y transform : " + tr.Position.y + " crowd : " + ev.crowdPoint.y);
+                        ev.estado = EspectadorVariables.espectatorStates.JUMP;
+                        ev.velocity = ev.jumpForce * ((ev.distanceMarginActions - math.length(dist)) / ev.distanceMarginActions);
                     }
                 }
             }
@@ -195,6 +207,7 @@ public partial class ClickActionsSystem : SystemBase
                         ev.directionalVel = float3.zero;
                         //ev.aceleration = 0.0f; //esto noe s necesario, ya qeu se calcula cada vez
                         tr.Position = ev.crowdPoint;
+                        e.nextAnim = Animator.StringToHash("Idle"); //el de idle
                         ev.estado = EspectadorVariables.espectatorStates.IDLE;
 
                     }

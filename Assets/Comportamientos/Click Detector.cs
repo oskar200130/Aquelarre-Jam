@@ -11,11 +11,14 @@ public class ClickDetector : MonoBehaviour
     public float timeMarginForActions = 0.6f;
     public bool canNotCancelPogo = false;
 
-    public bool salto, pogo, arrastre, pogoEnd;
+    public bool salto, pogo, arrastre, pogoEnd, rePogo;
+
+    public float TimeEndedPogo = -1.0f; //si puede haber varios pogos, pues haremos un array que los checke y lance el nuevo evento
 
     public bool up, down;
 
     public Vector3 worldMousePosWhenDown;
+    public Vector3 worldMousePosPOGOCOMENCE;
     public Vector2 screenMousePosWhenDown;
 
     //para hacer solo casting a este y no mil veces a la llamada de Input. que es mas costoso que lañ haga cada objeto.
@@ -43,12 +46,27 @@ public class ClickDetector : MonoBehaviour
     {
         float t;
 
+        if (TimeEndedPogo != 0.0f)
+        {
+            if (TimeEndedPogo + 2.5f <= Time.time )
+            {
+                rePogo = true;
+                TimeEndedPogo = 0.0f;
+            }
+        }
+        else
+        {
+            rePogo = false;
+        }
+
+
+
         if (timeClickedDown == 0.0f)
         {
             down = Input.GetMouseButtonDown(0);
             if (down)
             {
-                clickDownLastScore = BeatManager._instance.evaluateClick(Time.time);
+                //clickDownLastScore = BeatManager._instance.evaluateClick(Time.time);
 
                 //en lugar de hacer un debug, este valor se debe utilizar cuando sea necesario para evaluar segun se necesite saber si se acerto un clickDown o un clickUp. Depende de la accion
                 //Debug.Log($"ClickDown: { clickDownLastScore } !!");
@@ -105,6 +123,8 @@ public class ClickDetector : MonoBehaviour
         {
             salto = true;
             // Debug.Log("Salto");
+            clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+
         }
         else
         {
@@ -121,6 +141,7 @@ public class ClickDetector : MonoBehaviour
                     if (!pogo)
                         Debug.Log("Pogo");
                     pogo = true;
+                    worldMousePosPOGOCOMENCE = worldMousePosWhenDown;
                 }
 
             }
@@ -132,6 +153,8 @@ public class ClickDetector : MonoBehaviour
                 {
                     Debug.Log("Pogo cancelled");
                     pogoEnd = true;
+                    clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+
                 }
                 pogo = false;
                 if (!arrastre)
@@ -145,9 +168,15 @@ public class ClickDetector : MonoBehaviour
             {
                 Debug.Log("Pogo ended");
                 pogoEnd = true;
+                clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+
+                TimeEndedPogo = Time.time;
             }
             if (arrastre)
+            {
                 Debug.Log("Arrastre ended");
+                clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+            }
             pogo = false;
             arrastre = false;
         }
