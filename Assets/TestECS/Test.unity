@@ -672,7 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47cb7d57d7407f46a5e6f2afe372dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _BPM: 90
+  _BPM: 180
   _tolerance: 1
   _numerador: 4
   _denominador: 4
