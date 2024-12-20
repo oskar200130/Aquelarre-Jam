@@ -8,7 +8,8 @@ using UnityEngine;
 
 [BurstCompile]
 public partial class ClickActionsSystem : SystemBase
-{    public partial struct CheckClick : IJobEntity
+{
+    public partial struct CheckClick : IJobEntity
     {
         public float time;
         public Unity.Mathematics.Random RandomGenerator; // Generador de aleatoriedad
@@ -157,11 +158,11 @@ public partial class ClickActionsSystem : SystemBase
 
                 //if (dist >= ev.distanceMarginActions)
                 //{
-                    
+
                 //}
                 //else
                 //{
-                    tr.Position += dir * step;
+                tr.Position += dir * step;
                 //}
 
             }
@@ -170,7 +171,7 @@ public partial class ClickActionsSystem : SystemBase
 
                 //imaginemos que se acabo un pogo, vuelve a su estado de idle, pues hacer que caminen a su posición
 
-                float3 dir = ev.crowdPoint - tr.Position ; //tambien es la dirección, cunado lo normalicemos
+                float3 dir = ev.crowdPoint - tr.Position; //tambien es la dirección, cunado lo normalicemos
 
                 float dist = math.length(math.abs(dir));
 
@@ -197,7 +198,7 @@ public partial class ClickActionsSystem : SystemBase
                 }
 
                 tr.Position += ev.directionalVel * time; //velocidad de caminado puesot a apelo, //TODO
-                
+
                 if (math.length(ev.directionalVel) < 1.0f) //cuando la velocidad concuerde de que ha llegado a su fin, y que deje de saltar
                 {
                     if (ev.crowdPoint.y >= tr.Position.y)
@@ -256,7 +257,7 @@ public partial class ClickActionsSystem : SystemBase
 
     [BurstCompile]
     protected override void OnCreate()
-    {        
+    {
         var systemData = new SystemData();
 
         var queryBuilder = new EntityQueryBuilder(Allocator.Temp)
