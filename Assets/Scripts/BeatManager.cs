@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,25 +29,6 @@ public class BeatManager : MonoBehaviour
     [Tooltip("tiempo de beat (corchea, negra, etc ya saben)")][SerializeField] private int _denominador = 4;
 
     private float current_beat_time = 0f;
-    [SerializeField]private RITMOS current_measure_ritmo = RITMOS.NORMAL; //seguira el ritmo marcado para evaluar clicks en el compas X. Se cambiara segun avance la cancion
-
-    //SCORE: Esto igual tiene mas sentido meterlo en otro lao, donde se gestionen los puntos
-    private int queueSize = 10;
-    private Queue<SCORE> scores;
-    public void AddScore(SCORE newScore)
-    {
-        if (scores.Count >= 10) scores.Dequeue();
-        scores.Enqueue(newScore);
-    }
-    public SCORE[] GetScores()
-    {
-        return scores.ToArray();
-    }
-    public SCORE GetLatestScore()
-    {
-        return scores.Count > 0 ? scores.Peek() : SCORE.NONE;
-    }
-
 
 
 
@@ -77,6 +59,26 @@ public class BeatManager : MonoBehaviour
             calculateIntervals();
         }
     }
+    
+    private RITMOS current_measure_ritmo = RITMOS.NORMAL; //seguira el ritmo marcado para evaluar clicks en el compas X. Se cambiara segun avance la cancion
+
+    //SCORE: Esto igual tiene mas sentido meterlo en otro lao, donde se gestionen los puntos
+    private int queueSize = 10;
+    private Queue<SCORE> scores;
+    public void AddScore(SCORE newScore)
+    {
+        if (scores.Count >= 10) scores.Dequeue();
+        scores.Enqueue(newScore);
+    }
+    public SCORE[] GetScores()
+    {
+        return scores.ToArray();
+    }
+    public SCORE GetLatestScore()
+    {
+        return scores.Count > 0 ? scores.Peek() : SCORE.NONE;
+    }
+
 
 
     /// <summary>
@@ -84,6 +86,7 @@ public class BeatManager : MonoBehaviour
     /// </summary>
     [HideInInspector] public UnityEvent OnPulse; //resto de pulsos
     [HideInInspector] public UnityEvent OnMeasure; //inicio de cada compás (no habria por que usar esto, se puede usar solo onPulse y comprobar el numero del compas)
+    private FMOD.Studio.EventInstance musicEventInstance;
 
 
     private void Awake()
@@ -100,6 +103,7 @@ public class BeatManager : MonoBehaviour
         }
         scores = new Queue<SCORE>(queueSize);
         calculateIntervals();
+        musicEventInstance = RuntimeManager.CreateInstance("event:/Music");
     }
 
 
@@ -130,6 +134,7 @@ public class BeatManager : MonoBehaviour
 
             if (current_beat == 0)
             {
+                if (current_measure == 0) musicEventInstance.start();
                 OnMeasure.Invoke();
             }
 
