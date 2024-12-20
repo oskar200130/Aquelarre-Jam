@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 6525301336776586959, guid: 00cdd995ed5607b42bb4ca46164cf651, type: 3}
-  spawnNumber: 10000
+  spawnNumber: 50000
   spawnLenght: 500
 --- !u!4 &1161155908
 Transform:

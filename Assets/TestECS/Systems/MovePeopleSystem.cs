@@ -13,7 +13,7 @@ public partial struct MovePeopleSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        new MovePersonJob{}.ScheduleParallel(state.Dependency).Complete();
+        //new MovePersonJob{}.ScheduleParallel(state.Dependency).Complete();
     }
 }
 

@@ -8,9 +8,7 @@ using UnityEngine;
 
 [BurstCompile]
 public partial class ClickActionsSystem : SystemBase
-{
-    [BurstCompile]
-    public partial struct CheckClick : IJobEntity
+{    public partial struct CheckClick : IJobEntity
     {
         public float time;
         public Unity.Mathematics.Random RandomGenerator; // Generador de aleatoriedad
@@ -29,9 +27,6 @@ public partial class ClickActionsSystem : SystemBase
                         //Debug.Log("posiciones y transform : " + tr.Position.y + " crowd : " + ev.crowdPoint.y);
                         ev.estado = EspectadorVariables.espectatorStates.JUMP;
                         ev.velocity = ev.jumpForce * ((ev.distanceMarginActions - math.length(dist)) / ev.distanceMarginActions);
-
-                        //Debug.Log("velocidad : " + ev.velocity);
-                        //Debug.Log("gravedad : " + ev.gravity);
                     }
                 }
                 else if (ClickDetector.instance.arrastre)
@@ -55,18 +50,8 @@ public partial class ClickActionsSystem : SystemBase
 
             if (ev.estado == EspectadorVariables.espectatorStates.JUMP)
             {
-                //Debug.Log("saltando");
-                //Debug.Log("time es :" + time);
-
                 tr.Position.y += (ev.velocity * time);
                 ev.velocity += (ev.gravity * (time * 2));
-
-                //Debug.Log("velocidad " + ev.velocity + " gravedad " + ev.gravity);
-
-                //Debug.Log("posiciones y transform : " + tr.Position.y + " crowd : " + ev.crowdPoint.y);
-
-                // move pos in a direction of current destination by passed frac of whole remaining move time
-                //tr.Position += ((destination.Value - tr.Position.xy) * DeltaTime / remainingDelta).ToFloat3();
 
                 //chekear que ha llegado al suelo 
                 if (ev.crowdPoint.y >= tr.Position.y)
@@ -80,11 +65,8 @@ public partial class ClickActionsSystem : SystemBase
             }
             else if (ev.estado == EspectadorVariables.espectatorStates.ARRASTE)
             {
-
                 tr.Position.y += (ev.velocity * time);
                 ev.velocity += (ev.gravity * (time * 2));
-
-
 
                 //si se sale del rango de arrastre, devolver a Idle.
                 //distanceToMouseDown = Vector3.Distance(detector.worldMousePos, crowdPoint);

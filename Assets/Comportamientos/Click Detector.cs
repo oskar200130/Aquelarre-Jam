@@ -1,3 +1,4 @@
+using Unity.Burst;
 using UnityEngine;
 
 public class ClickDetector : MonoBehaviour
@@ -24,26 +25,6 @@ public class ClickDetector : MonoBehaviour
     float timeClickedDown = 0.0f;
     SCORE clickDownLastScore = SCORE.NONE;
     SCORE clickUpLastScore = SCORE.NONE;
-
-    //PEOPLE STATS
-    public float distanceMarginActions = 10.0f;
-
-    //private float currentSpeed = 0.0f;
-
-    //private Vector3 crowdPoint;
-
-    //private enum charStates { IDLE, JUMP, POGO, POGOEXIT, POGOEND, ARRASTE }
-    //private charStates estado = charStates.IDLE;
-
-    public float jumpForce = 20.0f;
-    public float gravity = -21f;
-
-    public float velocity;
-    public float distanceToMouseDown;
-    public float pogoForce;
-
-    public float minJumpForce = 1.0f;
-    public float maxJumpForce = 10.0f;
 
     void Awake()
     {
