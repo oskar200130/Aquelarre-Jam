@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="AudioFile" id="{5f2e7da6-2446-48c7-bb56-1b76598c47e4}">
+	<object class="AudioFile" id="{318f2d86-cee4-48e8-a151-7baaeb3807d7}">
 		<property name="assetPath">
-			<value>El Aquelarre Gamejam v0.1-001.mp3</value>
+			<value>El Aquelarre Gamejam v0.2.mp3</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>
@@ -14,7 +14,7 @@
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>86.7265306122449</value>
+			<value>118.7265306122449</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{63e44a5c-73bc-4c93-a161-f617c6fb8e5d}</destination>
