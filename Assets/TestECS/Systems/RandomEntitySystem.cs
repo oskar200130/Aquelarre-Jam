@@ -27,28 +27,33 @@ public partial class RandomEntitySystem : SystemBase
     [BurstCompile]
     protected override void OnStartRunning()
     {
-        var queryBuilder = new EntityQueryBuilder(Allocator.Temp)
-            .WithAll<LocalTransform>()
-            .WithOptions(EntityQueryOptions.IgnoreComponentEnabledState);
-        entities = GetEntityQuery(queryBuilder).ToEntityArray(Allocator.Persistent);
-
-        queryBuilder.Dispose();
-
-        uint seed = (uint)UnityEngine.Random.Range(1, int.MaxValue);
-        RandomGenerator = new Unity.Mathematics.Random(seed);
+       
     }
+    [BurstCompile]
 
     public float3 GetRandomEntityPos()
     {
         if (entities == null) return new float3(0, 0, 0);
         return SystemAPI.GetComponent<LocalTransform>(entities[RandomGenerator.NextInt(entities.Length - 1)]).Position;
     }
+    [BurstCompile]
+
     protected override void OnDestroy()
     {
         entities.Dispose();
     }
+    [BurstCompile]
+
     protected override void OnUpdate()
     {
+        var queryBuilder = new EntityQueryBuilder(Allocator.Temp)
+        .WithAll<LocalTransform>()
+        .WithOptions(EntityQueryOptions.IgnoreComponentEnabledState);
+        entities = GetEntityQuery(queryBuilder).ToEntityArray(Allocator.Persistent);
 
+        queryBuilder.Dispose();
+
+        uint seed = (uint)UnityEngine.Random.Range(1, int.MaxValue);
+        RandomGenerator = new Unity.Mathematics.Random(seed);
     }
 }

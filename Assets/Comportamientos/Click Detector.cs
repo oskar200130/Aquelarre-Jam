@@ -175,6 +175,7 @@ public class ClickDetector : MonoBehaviour
             if (arrastre)
             {
                 Debug.Log("Arrastre ended");
+                //ela rrastre al momento de detectar el click desde que lo suelta
                 clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
             }
             pogo = false;
