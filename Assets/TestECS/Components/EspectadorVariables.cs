@@ -16,6 +16,9 @@ public struct EspectadorVariables : IComponentData, IEnableableComponent
     public float gravity;// = -21f;
 
     public float velocity;
+    public float jumpVel;
+    public float aceleration;
+    public float3 directionalVel;
     public float distanceToMouseDown;
     public float pogoForce;
 
