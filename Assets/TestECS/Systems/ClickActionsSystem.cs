@@ -4,16 +4,12 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [BurstCompile]
-[UpdateBefore(typeof(SpriteUVAnimationSystem))]
 public partial class ClickActionsSystem : SystemBase
 {
-    //private ClickDetector click;
-
-    //[BurstCompile]
+    [BurstCompile]
     public partial struct CheckClick : IJobEntity
     {
         public double Time;
@@ -26,7 +22,6 @@ public partial class ClickActionsSystem : SystemBase
                 if (math.length(dist) < ClickDetector.instance.distanceMarginActions)
                 {
                     e.nextAnim = Animator.StringToHash("Death");
-                    Debug.Log("Holo " + dist);
                 }
             }
         }
@@ -37,13 +32,9 @@ public partial class ClickActionsSystem : SystemBase
         public EntityQuery MovableQuery;
     }
 
-    //[BurstCompile]
+    [BurstCompile]
     protected override void OnCreate()
-    {
-        //click = ClickDetector.instance;
-        //if (click == null)
-        //    UnityEngine.Debug.LogError("No click detector found");
-
+    {        
         var systemData = new SystemData();
 
         var queryBuilder = new EntityQueryBuilder(Allocator.Temp)
@@ -61,7 +52,7 @@ public partial class ClickActionsSystem : SystemBase
         queryBuilder.Dispose();
     }
 
-    //[BurstCompile]
+    [BurstCompile]
     protected override void OnUpdate()
     {
         var systemData = SystemAPI.GetComponent<SystemData>(SystemHandle);
