@@ -380,8 +380,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: 
-  sourceBankPath: 
+  sourceProjectPath: FMOD/Aquelarre/Aquelarre.fspro
+  sourceBankPath: FMOD/Aquelarre/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -402,7 +402,8 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
+  MasterBanks:
+  - Master
   Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264
@@ -420,17 +421,17 @@ MonoBehaviour:
   LastEventReferenceScanVersion: 131621
   Platforms:
   - {fileID: -9127595472811495970}
-  - {fileID: 9006921621942745032}
   - {fileID: -8191527919043177342}
-  - {fileID: -6099221660939117174}
-  - {fileID: 2850863738254190405}
-  - {fileID: 6580982290491953386}
-  - {fileID: 5681969992499188038}
-  - {fileID: 6620518147449707827}
-  - {fileID: 5312079973298048318}
-  - {fileID: -6043827508161667721}
-  - {fileID: 8624645919501394341}
   - {fileID: -6929975991808565863}
+  - {fileID: -6099221660939117174}
+  - {fileID: -6043827508161667721}
+  - {fileID: 2850863738254190405}
+  - {fileID: 5312079973298048318}
+  - {fileID: 5681969992499188038}
+  - {fileID: 6580982290491953386}
+  - {fileID: 6620518147449707827}
+  - {fileID: 8624645919501394341}
+  - {fileID: 9006921621942745032}
   MigratedPlatforms: 0500000000000000060000000a0000000800000009000000120000000c000000150000000b0000000200000001000000
 --- !u!114 &2850863738254190405
 MonoBehaviour:
@@ -941,15 +942,15 @@ MonoBehaviour:
   displaySortOrder: 0
   childIdentifiers:
   - 0f8eb3f400726694eb47beb1a9f94ce8
-  - 46fbfdf3fc43db0458918377fd40293e
-  - 2fea114e74ecf3c4f920e1d5cc1c4c40
-  - e7a046c753c3c3d4aacc91f6597f310d
-  - 52eb9df5db46521439908db3a29a1bbb
-  - 2c5177b11d81d824dbb064f9ac8527da
-  - b7716510a1f36934c87976f3a81dbf3d
-  - c88d16e5272a4e241b0ef0ac2e53b73d
-  - de700ef3f37a49b58a57ae3addf01ad9
   - fd7c55dab0fce234b8c25f6ffca523c1
+  - 46fbfdf3fc43db0458918377fd40293e
+  - c88d16e5272a4e241b0ef0ac2e53b73d
+  - 2fea114e74ecf3c4f920e1d5cc1c4c40
+  - b7716510a1f36934c87976f3a81dbf3d
+  - 52eb9df5db46521439908db3a29a1bbb
+  - e7a046c753c3c3d4aacc91f6597f310d
+  - 2c5177b11d81d824dbb064f9ac8527da
+  - de700ef3f37a49b58a57ae3addf01ad9
   codecChannels:
     Value: []
     HasValue: 0
