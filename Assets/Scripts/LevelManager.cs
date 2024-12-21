@@ -46,6 +46,26 @@ public class LevelManager : MonoBehaviour
             return;
         }
         scores = new Queue<SCORE>(queueSize);
+        BeatManager.onFixedBeat += metronome;
+    }
+
+    public int counter_beats = 0, counter_measures = 0;
+    public bool gameStarted { get; private set; } = false;
+    void metronome()
+    {
+        //Debug.Log($"Compás {counter_measures}, pulso {counter_beats}");
+        counter_beats = (counter_beats + 1) % 4; //hardcodeado a 4/4
+        if (counter_beats == 0) counter_measures++;
+    }
+
+    private void Start()
+    {
+        BeatManager._instance.playSong();
+    }
+
+    private void Update()
+    {
+        if (counter_measures == 0 && counter_beats == 2) gameStarted = true; //para que empiece todo cuando pase el segundo pulso
     }
 
     public void updatePoints(SCORE s)
