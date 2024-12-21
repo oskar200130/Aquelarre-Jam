@@ -240,6 +240,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &93203490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 93203492}
+  - component: {fileID: 93203491}
+  m_Layer: 0
+  m_Name: BeatManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &93203491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93203490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e8769ff35bcc046b293f76d7241938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventToPlay:
+    Guid:
+      Data1: 2119602483
+      Data2: 1201652424
+      Data3: 1953797566
+      Data4: -1931080715
+    Path: event:/Music
+  doDebugSounds: 0
+  downBeatEvent: {fileID: -1956182793875612465, guid: d6bf9b0a512f8c943a77e79d0b5f5fdc, type: 3}
+  upBeatEvent: {fileID: -1956182793875612465, guid: d6bf9b0a512f8c943a77e79d0b5f5fdc, type: 3}
+  upBeatDivisor: 1
+--- !u!4 &93203492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93203490}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &172079673
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,10 +820,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1147868052}
   - component: {fileID: 1147868051}
-  - component: {fileID: 1147868053}
   - component: {fileID: 1147868054}
   m_Layer: 0
-  m_Name: BeatManager
+  m_Name: LevelManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -786,17 +840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47cb7d57d7407f46a5e6f2afe372dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _BPM: 180
-  _tolerance: 1
-  _numerador: 4
-  _denominador: 4
   puntuacion: 2000
-  OnPulse:
-    m_PersistentCalls:
-      m_Calls: []
-  OnMeasure:
-    m_PersistentCalls:
-      m_Calls: []
   percentageCool: 0.0001
   percentagePerfect: 0.0005
   percentageHeavy: 0.001
@@ -818,21 +862,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1147868053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147868050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58b0ddefc0d1c994e849ecf44e171691, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frequency: 440
-  duration: 0.1
-  playUntilMeasure: 1
 --- !u!114 &1147868054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1232,6 +1261,7 @@ SceneRoots:
   - {fileID: 816207282}
   - {fileID: 602938858}
   - {fileID: 1147868052}
+  - {fileID: 93203492}
   - {fileID: 1869927232}
   - {fileID: 1868954773}
   - {fileID: 1319513097}

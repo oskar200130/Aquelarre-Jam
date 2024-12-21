@@ -20,7 +20,7 @@ public class SpecialEvent : MonoBehaviour
     void Start()
     {
         nextBeat = NextBeat;
-        BeatManager._instance?.OnPulse.AddListener(nextBeat);
+        BeatManager.onFixedBeat += NextBeat;
         animator = GetComponent<Animator>();
         type = (SpecialEventType)Random.Range(0, (int)SpecialEventType.POGO +1);   
     }
@@ -38,7 +38,7 @@ public class SpecialEvent : MonoBehaviour
         }
         else if (waitForBeats < 0)
         {
-            BeatManager._instance?.OnPulse.RemoveListener(nextBeat);
+            BeatManager.onFixedBeat -= NextBeat;
             Destroy(gameObject);
         }
     }

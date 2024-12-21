@@ -48,7 +48,7 @@ public class ClickDetector : MonoBehaviour
 
         if (TimeEndedPogo != 0.0f)
         {
-            if (TimeEndedPogo + 2.5f <= Time.time )
+            if (TimeEndedPogo + 2.5f <= BeatManager.GetCurrentTime() )
             {
                 rePogo = true;
                 TimeEndedPogo = 0.0f;
@@ -66,14 +66,11 @@ public class ClickDetector : MonoBehaviour
             down = Input.GetMouseButtonDown(0);
             if (down)
             {
-                //clickDownLastScore = BeatManager._instance.evaluateClick(Time.time);
 
-                //en lugar de hacer un debug, este valor se debe utilizar cuando sea necesario para evaluar segun se necesite saber si se acerto un clickDown o un clickUp. Depende de la accion
-                //Debug.Log($"ClickDown: { clickDownLastScore } !!");
 
                 pogoEnd = false;
                 screenMousePosWhenDown = Input.mousePosition;
-                timeClickedDown = Time.time;
+                timeClickedDown = BeatManager.GetCurrentTime();
 
                 //se puede restringir el objeto con el que colisiona, actualemte lo hago asi por pereza //TODO
                 Ray ray2 = Camera.main.ScreenPointToRay(screenMousePosWhenDown);
@@ -95,9 +92,6 @@ public class ClickDetector : MonoBehaviour
         if (up)
         {
             timeClickedDown = 0.0f;
-            //clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
-            //en lugar de hacer un debug, este valor se debe utilizar cuando sea necesario para evaluar segun se necesite saber si se acerto un clickDown o un clickUp. Depende de la accion
-            //Debug.Log($"ClickUp: {clickUpLastScore} !!");
         }
 
         //actualizar la posicióna actual del raton, World y screen
@@ -123,7 +117,7 @@ public class ClickDetector : MonoBehaviour
         {
             salto = true;
             // Debug.Log("Salto");
-            clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+            clickUpLastScore = BeatManager._instance.evaluateClick();
 
         }
         else
@@ -136,7 +130,7 @@ public class ClickDetector : MonoBehaviour
         {
             if (!arrastre && Vector2.Distance(screenMousePos, screenMousePosWhenDown) < pogoMargin) //not arrastre, para evitar de que entren a un ciclo de entrar y salir de la zona
             {
-                if (timeClickedDown + timeMarginForActions < Time.time)
+                if (timeClickedDown + timeMarginForActions < BeatManager.GetCurrentTime())
                 {
                     if (!pogo)
                         Debug.Log("Pogo");
@@ -153,7 +147,7 @@ public class ClickDetector : MonoBehaviour
                 {
                     Debug.Log("Pogo cancelled");
                     pogoEnd = true;
-                    clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+                    clickUpLastScore = BeatManager._instance.evaluateClick();
 
                 }
                 pogo = false;
@@ -168,15 +162,15 @@ public class ClickDetector : MonoBehaviour
             {
                 Debug.Log("Pogo ended");
                 pogoEnd = true;
-                clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+                clickUpLastScore = BeatManager._instance.evaluateClick();
 
-                TimeEndedPogo = Time.time;
+                TimeEndedPogo = BeatManager.GetCurrentTime();
             }
             if (arrastre)
             {
                 Debug.Log("Arrastre ended");
                 //ela rrastre al momento de detectar el click desde que lo suelta
-                clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+                clickUpLastScore = BeatManager._instance.evaluateClick();
             }
             pogo = false;
             arrastre = false;

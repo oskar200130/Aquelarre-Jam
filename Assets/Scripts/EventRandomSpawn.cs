@@ -14,7 +14,7 @@ public class EventRandomSpawn : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        BeatManager._instance?.OnPulse.AddListener(CreateEvent);
+        BeatManager.onFixedBeat += CreateEvent;
     }
 
     void CreateEvent()
