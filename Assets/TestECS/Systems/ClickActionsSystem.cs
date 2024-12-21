@@ -125,6 +125,7 @@ public partial class ClickActionsSystem : SystemBase
                 //chekear que ha llegado al suelo 
                 if (ev.crowdPoint.y >= tr.Position.y)
                 {
+                    e.nextAnim = Animator.StringToHash("Arms"); //el de idle
                     ev.velocity = RandomGenerator.NextFloat(ev.minJumpForce, ev.maxJumpForce);
                     tr.Position = ev.crowdPoint;
                 }
