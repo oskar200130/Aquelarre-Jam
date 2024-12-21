@@ -9,11 +9,9 @@ public class PonchoAnimAuthoring : MonoBehaviour
         {
             AddComponent(GetEntity(TransformUsageFlags.None), new PonchoAnimSettings
             {
-                IdleHash = Animator.StringToHash("idle"),
-                WalkHash = Animator.StringToHash("walk"),
-                WalkBackHash = Animator.StringToHash("walkBack"),
-                HitHash = Animator.StringToHash("hit"),
-                DeathHash = Animator.StringToHash("death")
+                IdleHash = Animator.StringToHash("Idle"),
+                RunHash = Animator.StringToHash("Run"),
+                ArmsHash = Animator.StringToHash("Arms")
             });
         }
     }

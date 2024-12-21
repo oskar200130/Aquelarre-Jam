@@ -250,7 +250,6 @@ GameObject:
   m_Component:
   - component: {fileID: 602938858}
   - component: {fileID: 602938857}
-  - component: {fileID: 602938856}
   m_Layer: 0
   m_Name: ClickManager
   m_TagString: Untagged
@@ -258,27 +257,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &602938856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 602938855}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e04e26b669173f45b0d434815df3142, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detector: {fileID: 0}
-  distanceMarginActions: 10
-  jumpForce: 20
-  gravity: -21
-  velocity: 0
-  distanceToMouseDown: 0
-  pogoForce: 0
-  minJumpForce: 1
-  maxJumpForce: 10
 --- !u!114 &602938857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,9 +276,12 @@ MonoBehaviour:
   pogo: 0
   arrastre: 0
   pogoEnd: 0
+  rePogo: 0
+  TimeEndedPogo: -1
   up: 0
   down: 0
   worldMousePosWhenDown: {x: 0, y: 0, z: 0}
+  worldMousePosPOGOCOMENCE: {x: 0, y: 0, z: 0}
   screenMousePosWhenDown: {x: 0, y: 0}
   worldMousePos: {x: 0, y: 0, z: 0}
   screenMousePos: {x: 0, y: 0}
@@ -669,11 +650,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47cb7d57d7407f46a5e6f2afe372dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _BPM: 120
+  _BPM: 180
   _tolerance: 1
   _numerador: 4
   _denominador: 4
-  current_measure_ritmo: 1
   OnPulse:
     m_PersistentCalls:
       m_Calls: []
@@ -709,6 +689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frequency: 440
   duration: 0.1
+  playUntilMeasure: 1
 --- !u!114 &1147868054
 MonoBehaviour:
   m_ObjectHideFlags: 0

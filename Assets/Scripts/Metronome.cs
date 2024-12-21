@@ -6,6 +6,7 @@ public class Metronome : MonoBehaviour
     public float duration = 0.1f;
     private AudioSource audioSource;
     private AudioClip beep;
+    public int playUntilMeasure = 1;
     private void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -41,5 +42,11 @@ public class Metronome : MonoBehaviour
         //Debug.Log($"Compás N.{BeatManager._instance.current_measure}. Llamado desde BeatManager._instance.OnMeasure");
         audioSource.pitch = 1.5f;
         audioSource.PlayOneShot(beep);
+        if (BeatManager._instance.current_measure == playUntilMeasure)
+        {
+            BeatManager._instance.OnPulse.RemoveListener(OnPulse);
+            BeatManager._instance.OnMeasure.RemoveListener(OnMeasure);
+        }
     }
+
 }
