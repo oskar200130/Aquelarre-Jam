@@ -48,7 +48,7 @@ public partial class SpawnPublicSystem : SystemBase
                 directionalVel = new float3(0.0f, 0.0f, 0.0f),
                 distanceToMouseDown = 0.0f,
                 pogoForce = 0.0f,
-                pogoDistantVariation = RandomGenerator.NextFloat(-3f, 3f),
+                pogoDistantVariation = RandomGenerator.NextFloat(-spawner.pogoVariationPos, spawner.pogoVariationPos),
                 minJumpForce = 1.0f,
                 maxJumpForce = 10.0f
             });

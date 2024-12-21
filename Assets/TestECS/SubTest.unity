@@ -197,6 +197,7 @@ MonoBehaviour:
   spawnLenght: 500
   spawnSeparation: 1.12
   spawnVariationPos: 2
+  pogoVariationPos: 3
 --- !u!4 &1161155908
 Transform:
   m_ObjectHideFlags: 0

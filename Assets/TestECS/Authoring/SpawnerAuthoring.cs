@@ -8,6 +8,7 @@ public class SpawnerAuthoring : MonoBehaviour
     public float spawnLenght;
     public float spawnSeparation;
     public float spawnVariationPos;
+    public float pogoVariationPos;
 
     class SpawnerBaker : Baker<SpawnerAuthoring>
     {
@@ -20,7 +21,8 @@ public class SpawnerAuthoring : MonoBehaviour
                 spawnNumberPeople = authoring.spawnNumber,
                 spawnLengthNumber = authoring.spawnLenght,
                 spawnVariationPos = authoring.spawnVariationPos,
-                spawnInitialSeparation = authoring.spawnSeparation
+                spawnInitialSeparation = authoring.spawnSeparation,
+                pogoVariationPos = authoring.pogoVariationPos
             });
         }
     }
