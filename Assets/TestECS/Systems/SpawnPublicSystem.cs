@@ -42,13 +42,15 @@ public partial class SpawnPublicSystem : SystemBase
 
             for (int i = numberEntities; i < beatManageador.puntuacion; i++, numberEntities++)
             {
+
+                //replantear las posiciones de spawn para que sean en un semi circulo desde el escenario (a saber como son esas mates)
                 Entity newEntity = ecb.Instantiate(spawner.prefab);
                 float x = (i % spawner.spawnLengthNumber) * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
                 float z = (i / (int)spawner.spawnLengthNumber) * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
                 
 
                 //recuerden que esto pone rotaciones a 0
-                ecb.SetComponent(newEntity, LocalTransform.FromPosition(new float3(x, 0, z)));
+                ecb.SetComponent(newEntity, LocalTransform.FromPosition(new float3(0, 0, 0)));
 
                 //LocalTransform.FromPositionRotation
                 //if (RandomGenerator.NextBool())
@@ -61,10 +63,10 @@ public partial class SpawnPublicSystem : SystemBase
                     distanceMarginActions = 10.0f,
                     currentSpeed = 0.0f,
                     crowdPoint = new float3(x, 0, z),
-                    estado = EspectadorVariables.espectatorStates.IDLE,
+                    estado = EspectadorVariables.espectatorStates.CAMINANDO,
                     jumpForce = 20.0f,
                     gravity = -21.0f,
-                    velocity = 0.0f,
+                    velocity = 20.0f,
                     jumpVel = 0.0f,
                     aceleration = 0.0f,
                     directionalVel = new float3(0.0f, 0.0f, 0.0f),
