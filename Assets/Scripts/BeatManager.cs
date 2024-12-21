@@ -449,7 +449,7 @@ public class BeatManager : MonoBehaviour
     }
 
 
-
+    public float terribleThreshold = 0.4f, coolThreshold = 0.75f, perfectThreshold = 0.9f;
     public SCORE evaluateClick()
     {
         /*
@@ -476,15 +476,15 @@ public class BeatManager : MonoBehaviour
         }
 
 
-        if (evaluacion <= 0.4) // mas cercano al centro, peor
+        if (evaluacion <= terribleThreshold) // mas cercano al centro, peor
         {
             res = SCORE.TERRIBLE;
         }
-        else if (evaluacion <= 0.8)
+        else if (evaluacion <= coolThreshold)
         {
             res = SCORE.COOL;
         }
-        else if (evaluacion <= 0.95)
+        else if (evaluacion <= perfectThreshold)
         {
             res = SCORE.PERFECT;
         }
