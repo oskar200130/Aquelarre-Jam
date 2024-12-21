@@ -48,11 +48,13 @@ public partial class SpawnPublicSystem : SystemBase
                 Entity newEntity = ecb.Instantiate(spawner.prefab);
                 float x = (i % spawner.spawnLengthNumber) * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
                 float z = (i / (int)spawner.spawnLengthNumber) * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
-                
+
+                float3 SpawnPoint = GetNearestOutsidePosition(new float3(x, 0, z));
+
                 if (RandomGenerator.NextBool())                    
-                    ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(new float3(x, 0, z), new quaternion(0, 1, 0, 0)));
+                    ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(SpawnPoint, new quaternion(0, 1, 0, 0)));
                 else
-                    ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(new float3(x, 0, z), new quaternion(0, 0, 0, 1)));
+                    ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(SpawnPoint, new quaternion(0, 0, 0, 1)));
                 ecb.AddComponent(newEntity, new ChangeAnimTag { nextAnim = Animator.StringToHash("Idle") });
                 ecb.AddComponent(newEntity, new EspectadorVariables
                 {
@@ -77,7 +79,34 @@ public partial class SpawnPublicSystem : SystemBase
 
         }
     }
-   
+
+
+
+    float3 GetNearestOutsidePosition(float3 insidePos)
+    {
+        //direccion, centro camara mundo con el punto, y calcular luego distancia de centro mundo a esquina camara mundo
+        
+
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
+
+        // Calculate the intersection with the (x, 0, z) plane
+        float t = -ray.origin.y / ray.direction.y;
+
+        float3 centro = ray.origin + ray.direction * t;
+
+        float3 dir = math.normalize(insidePos - centro);
+        if (dir.z > 0) dir.z = 0;
+
+        //vamos a calcular la distancia con el punto de la esquina inferior izquierda, y usar esa distancia como punto de spawneo
+        Ray ray2 = Camera.main.ScreenPointToRay(new Vector3(0, 0, 0));
+        t = -ray2.origin.y / ray2.direction.y;
+        float3 esquina = ray2.origin + ray2.direction * t;
+        float3 distancia = math.abs(math.length(centro - esquina));
+
+        return centro + (dir * distancia);
+
+    }
     //[BurstCompile]
     //protected override void OnDestroy()
     //{
