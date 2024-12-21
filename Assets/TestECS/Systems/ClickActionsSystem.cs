@@ -237,8 +237,6 @@ public partial class ClickActionsSystem : SystemBase
             }
             else if (ev.estado == EspectadorVariables.espectatorStates.CAMINANDO)
             {
-
-                Debug.Log(ev.crowdPoint);
                 float3 dir = ev.crowdPoint - tr.Position; //tambien es la dirección, cunado lo normalicemos
                 float dist = math.length(math.abs(dir));
 

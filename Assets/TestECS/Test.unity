@@ -433,7 +433,7 @@ Transform:
   m_GameObject: {fileID: 891132335}
   serializedVersion: 2
   m_LocalRotation: {x: 0.18117242, y: -0, z: -0, w: 0.98345137}
-  m_LocalPosition: {x: 36.5, y: 49.5, z: -91.3}
+  m_LocalPosition: {x: 30, y: 50, z: -90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -707,8 +707,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventEffect: {fileID: 7188750053391531260, guid: 556bc1a71f5ca92428569d95246fd2fa, type: 3}
-  minBeatsBetweenEvents: 10
-  probabilitySpawnEffect: 50
+  minBeatsBetweenEvents: 20
+  probabilitySpawnEffect: 5
 --- !u!1 &1161155906
 GameObject:
   m_ObjectHideFlags: 0

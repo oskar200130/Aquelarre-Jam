@@ -46,7 +46,8 @@ public partial class SpawnPublicSystem : SystemBase
 
                 //replantear las posiciones de spawn para que sean en un semi circulo desde el escenario (a saber como son esas mates)
                 Entity newEntity = ecb.Instantiate(spawner.prefab);
-                float x = (i % spawner.spawnLengthNumber) * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
+                int rowPos = (int)spawner.spawnLengthNumber/2 + (i%2 == 0?-(i % (int)spawner.spawnLengthNumber) / 2:((i % (int)spawner.spawnLengthNumber) + 1)/2);
+                float x = rowPos * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
                 float z = (i / (int)spawner.spawnLengthNumber) * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
 
                 float3 SpawnPoint = GetNearestOutsidePosition(new float3(x, 0, z));
