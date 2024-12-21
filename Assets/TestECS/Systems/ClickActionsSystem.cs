@@ -125,6 +125,7 @@ public partial class ClickActionsSystem : SystemBase
                 //chekear que ha llegado al suelo 
                 if (ev.crowdPoint.y >= tr.Position.y)
                 {
+                    e.nextAnim = Animator.StringToHash("Arms"); //el de idle
                     ev.velocity = RandomGenerator.NextFloat(ev.minJumpForce, ev.maxJumpForce);
                     tr.Position = ev.crowdPoint;
                 }
@@ -233,6 +234,23 @@ public partial class ClickActionsSystem : SystemBase
                 //    //tr.Position
                 //}
 
+            }
+            else if (ev.estado == EspectadorVariables.espectatorStates.CAMINANDO)
+            {
+                float3 dir = ev.crowdPoint - tr.Position; //tambien es la dirección, cunado lo normalicemos
+                float dist = math.length(math.abs(dir));
+
+                dir.y = 0.0f; //para que el salto sea independiente
+                dir = math.normalize(dir);
+
+                tr.Position += dir * ev.velocity * time; //velocidad de caminado puesot a apelo, //TODO
+
+                if (dist <= 0.5f)
+                {
+                    tr.Position = ev.crowdPoint;
+                    ev.estado = EspectadorVariables.espectatorStates.IDLE;
+                    e.nextAnim = Animator.StringToHash("Idle");
+                }
             }
         }
     }
