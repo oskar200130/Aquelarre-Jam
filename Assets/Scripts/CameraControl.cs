@@ -81,7 +81,7 @@ public class CameraControl : MonoBehaviour
 
     void Update()
     {
-        if (debugpingpong && LevelManager._instance.gameStarted)
+        if (debugpingpong)
         {
             // Calcula t en el rango [0, 1]
             float t = Mathf.PingPong(BeatManager.GetCurrentTime() / (BeatManager.GetBeatInterval()), 1f);
