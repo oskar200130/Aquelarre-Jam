@@ -12769,9 +12769,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 725505280}
-  - component: {fileID: 725505279}
-  - component: {fileID: 725505278}
   - component: {fileID: 725505277}
+  - component: {fileID: 725505281}
+  - component: {fileID: 725505283}
+  - component: {fileID: 725505279}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -12794,7 +12795,7 @@ MonoBehaviour:
   _globalVolume: {fileID: 1709522917}
   debugpingpong: 1
   _bloomScatter: 1
-  scatterPingPong: {x: 1, y: 0.6}
+  scatterPingPong: {x: 0.8, y: 1}
   _bloomItensity: 1.46
   _bloomDirtIntensity: 4.1
   depthOfFieldmode: 1
@@ -12802,22 +12803,7 @@ MonoBehaviour:
   dofGaussianMaxRadius: 1.5
   _filmGrainIntensity: 1
   _chromaticAberrationIntensity: 0.195
-  _chromaticAberrationPingPong: {x: 1, y: 0.8}
---- !u!114 &725505278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725505276}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58b0ddefc0d1c994e849ecf44e171691, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frequency: 440
-  duration: 0.1
-  playUntilMeasure: 2
+  _chromaticAberrationPingPong: {x: 0.8, y: 1}
 --- !u!114 &725505279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12830,16 +12816,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47cb7d57d7407f46a5e6f2afe372dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _BPM: 180
-  _tolerance: 1
-  _numerador: 4
-  _denominador: 4
-  OnPulse:
-    m_PersistentCalls:
-      m_Calls: []
-  OnMeasure:
-    m_PersistentCalls:
-      m_Calls: []
+  current_beat: 0
+  current_measure: 0
 --- !u!4 &725505280
 Transform:
   m_ObjectHideFlags: 0
@@ -12855,6 +12833,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &725505281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725505276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e89f9ecd9e7b54d91ef3b683189799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pogoMargin: 25
+  timeMarginForActions: 0.6
+  canNotCancelPogo: 0
+  salto: 0
+  pogo: 0
+  arrastre: 0
+  pogoEnd: 0
+  rePogo: 0
+  TimeEndedPogo: -1
+  up: 0
+  down: 0
+  worldMousePosWhenDown: {x: 0, y: 0, z: 0}
+  worldMousePosPOGOCOMENCE: {x: 0, y: 0, z: 0}
+  screenMousePosWhenDown: {x: 0, y: 0}
+  worldMousePos: {x: 0, y: 0, z: 0}
+  screenMousePos: {x: 0, y: 0}
+--- !u!114 &725505283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725505276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb3422ccbda8934bb1ff96bdf58e3e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventToPlay:
+    Guid:
+      Data1: 2119602483
+      Data2: 1201652424
+      Data3: 1953797566
+      Data4: -1931080715
+    Path: event:/Music
+  doDebugSounds: 1
+  downBeatEvent: {fileID: -1344258273077890949, guid: e9877d48c6ab20e4493bb6508fbd2a52, type: 3}
+  upBeatEvent: {fileID: -1344258273077890949, guid: e9877d48c6ab20e4493bb6508fbd2a52, type: 3}
+  upBeatDivisor: 1
+  combat: 0
+  beatDrop: 0
 --- !u!1 &731176556
 GameObject:
   m_ObjectHideFlags: 0

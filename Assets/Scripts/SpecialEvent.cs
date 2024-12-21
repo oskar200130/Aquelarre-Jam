@@ -10,8 +10,7 @@ public class SpecialEvent : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        nextBeat = NextBeat;
-        BeatManager._instance?.OnPulse.AddListener(nextBeat);
+        FMODBeatTracker.onFixedBeat += NextBeat;
     }
 
     void NextBeat()
@@ -21,7 +20,7 @@ public class SpecialEvent : MonoBehaviour
         {
             //TODO: multiplicador para el sistema de puntos
 
-            BeatManager._instance?.OnPulse.RemoveListener(nextBeat);
+            FMODBeatTracker.onFixedBeat -= NextBeat;
         }
     }
 }

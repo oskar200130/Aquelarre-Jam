@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UIElements;
+using static UnityEngine.Rendering.DebugUI;
+
 public class CameraControl : MonoBehaviour
 {
 
@@ -76,12 +79,12 @@ public class CameraControl : MonoBehaviour
         }
     }
 
+    bool songStarted = false;
     void Update()
     {
-
-        if (debugpingpong)
+       if (debugpingpong && songStarted)
         {
-            float t = Mathf.PingPong(Time.time / (BeatManager._instance.beatInterval*0.5f), 1f);
+            float t = Mathf.PingPong(Time.time / (FMODBeatTracker.GetBeatInterval()*0.5f), 1f);
             float value = Mathf.Lerp(scatterPingPong.x, scatterPingPong.y, t);
             _bloom.scatter.Override(value);
             value = Mathf.Lerp(_chromaticAberrationPingPong.x, _chromaticAberrationPingPong.y, t);
@@ -89,6 +92,7 @@ public class CameraControl : MonoBehaviour
         }
 
     }
+
 
     private void Awake()
     {
@@ -121,6 +125,10 @@ public class CameraControl : MonoBehaviour
             if (!_tonemapping) Debug.LogError("NO TIENE TONE MAPPING!!!");
             profile.TryGet(out _coloradjustements);
             if (!_coloradjustements) Debug.LogError("NO TIENE COLOR ADJUSTEMETS!!!");
+
+            //setea al parametro iniciar en caso de hacer pingpong
+            _bloom.scatter.Override(scatterPingPong.x);
+            _chromaticAberration.intensity.Override(_chromaticAberrationPingPong.x);
         }
         else
         {

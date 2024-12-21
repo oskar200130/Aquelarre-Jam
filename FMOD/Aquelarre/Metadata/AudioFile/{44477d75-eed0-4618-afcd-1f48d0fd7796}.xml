@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="AudioFile" id="{13a375fb-3675-497e-9538-d61e9cb0b92c}">
+	<object class="AudioFile" id="{44477d75-eed0-4618-afcd-1f48d0fd7796}">
 		<property name="assetPath">
-			<value>El Aquelarre Gamejam vAplha1.0-001.mp3</value>
+			<value>metronome.wav</value>
 		</property>
 		<property name="frequencyInKHz">
-			<value>44.0999985</value>
+			<value>24</value>
 		</property>
 		<property name="channelCount">
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>165.4073469387755</value>
+			<value>0.77075000000000005</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{63e44a5c-73bc-4c93-a161-f617c6fb8e5d}</destination>

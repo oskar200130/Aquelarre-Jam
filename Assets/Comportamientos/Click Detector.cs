@@ -26,8 +26,7 @@ public class ClickDetector : MonoBehaviour
     public Vector2 screenMousePos;
 
     float timeClickedDown = 0.0f;
-    SCORE clickDownLastScore = SCORE.NONE;
-    SCORE clickUpLastScore = SCORE.NONE;
+    SCORE clickLastScore = SCORE.NONE;
 
     void Awake()
     {
@@ -95,9 +94,6 @@ public class ClickDetector : MonoBehaviour
         if (up)
         {
             timeClickedDown = 0.0f;
-            //clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
-            //en lugar de hacer un debug, este valor se debe utilizar cuando sea necesario para evaluar segun se necesite saber si se acerto un clickDown o un clickUp. Depende de la accion
-            //Debug.Log($"ClickUp: {clickUpLastScore} !!");
         }
 
         //actualizar la posicióna actual del raton, World y screen
@@ -123,7 +119,7 @@ public class ClickDetector : MonoBehaviour
         {
             salto = true;
             // Debug.Log("Salto");
-            clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+            clickLastScore = FMODBeatTracker.beatTrackerInstance.evaluateClick();
 
         }
         else
@@ -153,7 +149,7 @@ public class ClickDetector : MonoBehaviour
                 {
                     Debug.Log("Pogo cancelled");
                     pogoEnd = true;
-                    clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+                    clickLastScore = FMODBeatTracker.beatTrackerInstance.evaluateClick();
 
                 }
                 pogo = false;
@@ -168,7 +164,7 @@ public class ClickDetector : MonoBehaviour
             {
                 Debug.Log("Pogo ended");
                 pogoEnd = true;
-                clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+                clickLastScore = FMODBeatTracker.beatTrackerInstance.evaluateClick();
 
                 TimeEndedPogo = Time.time;
             }
@@ -176,7 +172,7 @@ public class ClickDetector : MonoBehaviour
             {
                 Debug.Log("Arrastre ended");
                 //ela rrastre al momento de detectar el click desde que lo suelta
-                clickUpLastScore = BeatManager._instance.evaluateClick(Time.time);
+                clickLastScore = FMODBeatTracker.beatTrackerInstance.evaluateClick();
             }
             pogo = false;
             arrastre = false;

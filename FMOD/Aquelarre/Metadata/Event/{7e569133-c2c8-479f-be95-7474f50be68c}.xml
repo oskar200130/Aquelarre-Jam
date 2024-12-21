@@ -56,7 +56,14 @@
 			<destination>{0690e6ce-f684-4932-83a4-9564f1e1f1fe}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{02fed6a6-631a-4a24-a361-89b2dd0e5b26}" />
+	<object class="EventAutomatableProperties" id="{02fed6a6-631a-4a24-a361-89b2dd0e5b26}">
+		<property name="isPersistent">
+			<value>true</value>
+		</property>
+		<property name="priority">
+			<value>4</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{6007d2ee-b75a-4c7f-9890-a01511ebd6ce}" />
 	<object class="GroupTrack" id="{2f4f4e22-0b2f-463f-8db8-ae9b93c4b832}">
 		<relationship name="modules">
@@ -69,6 +76,9 @@
 	<object class="Timeline" id="{1deab032-41af-4f06-947d-bd4d08a1782c}">
 		<relationship name="modules">
 			<destination>{57ae9e69-9c77-4f59-9725-a93b545a1ad1}</destination>
+		</relationship>
+		<relationship name="markers">
+			<destination>{ebcb1fa9-0b99-4c95-818b-79021f82c82b}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{2f54038c-397b-47bf-b3f7-d50dd7586fd2}">
@@ -108,6 +118,20 @@
 		</relationship>
 		<relationship name="output">
 			<destination>{2f54038c-397b-47bf-b3f7-d50dd7586fd2}</destination>
+		</relationship>
+	</object>
+	<object class="TempoMarker" id="{ebcb1fa9-0b99-4c95-818b-79021f82c82b}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="tempo">
+			<value>90</value>
+		</property>
+		<relationship name="timeline">
+			<destination>{1deab032-41af-4f06-947d-bd4d08a1782c}</destination>
+		</relationship>
+		<relationship name="markerTrack">
+			<destination>{6007d2ee-b75a-4c7f-9890-a01511ebd6ce}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{351e9f07-9098-42fc-a131-cb2a8bd6f9df}">
