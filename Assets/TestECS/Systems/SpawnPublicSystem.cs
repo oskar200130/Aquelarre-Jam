@@ -45,12 +45,16 @@ public partial class SpawnPublicSystem : SystemBase
                 Entity newEntity = ecb.Instantiate(spawner.prefab);
                 float x = (i % spawner.spawnLengthNumber) * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
                 float z = (i / (int)spawner.spawnLengthNumber) * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
+                
+
+                //recuerden que esto pone rotaciones a 0
                 ecb.SetComponent(newEntity, LocalTransform.FromPosition(new float3(x, 0, z)));
 
-                if (RandomGenerator.NextBool())
-                    ecb.SetComponent(newEntity, LocalTransform.FromRotation(new quaternion(0, 1, 0, 0)));
-                else
-                    ecb.SetComponent(newEntity, LocalTransform.FromRotation(new quaternion(0, 0, 0, 1)));
+                //LocalTransform.FromPositionRotation
+                //if (RandomGenerator.NextBool())
+                //    ecb.SetComponent(newEntity, LocalTransform.FromRotation(new quaternion(0, 1, 0, 0)));
+                //else
+                //    ecb.SetComponent(newEntity, LocalTransform.FromRotation(new quaternion(0, 0, 0, 1)));
                 ecb.AddComponent(newEntity, new ChangeAnimTag { nextAnim = Animator.StringToHash("Idle") });
                 ecb.AddComponent(newEntity, new EspectadorVariables
                 {
