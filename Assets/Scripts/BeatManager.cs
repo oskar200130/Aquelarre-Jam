@@ -496,7 +496,7 @@ public class BeatManager : MonoBehaviour
         UnityEngine.Debug.Log($"{res}, {evaluacion}");
         UnityEngine.Debug.Log($" click: {clickTime},  lastbeat = {lastBeat}, nextBeat = {nextBeat}, middleBeat = {middleBeat}");
 
-        LevelManager._instance.updatePoints(res);
+        LevelManager._instance.addPointsByScore(res);
         return res;
     }
 }

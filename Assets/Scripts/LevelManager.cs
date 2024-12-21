@@ -28,7 +28,9 @@ public class LevelManager : MonoBehaviour
         return scores.Count > 0 ? scores.Peek() : SCORE.NONE;
     }
     //Rangos que multiplicaran la puntuacion / público
-    public float percentageCool = 0.0001f;
+    public float constantPeopleProbability = 0.7f;
+    public float percentageConstant = 0.00001f;
+    public float percentageCool = 0.0003f;
     public float percentagePerfect = 0.0005f;
     public float percentageHeavy = 0.001f;
 
@@ -57,14 +59,27 @@ public class LevelManager : MonoBehaviour
         //Debug.Log($"Compás {counter_measures}, pulso {counter_beats}");
         counter_beats = (counter_beats + 1) % 4; //hardcodeado a 4/4
         if (counter_beats == 0) counter_measures++;
+
+
+        //añade de manera aleatoria a gente al escenario de forma constante
+        if(Random.Range(0,1.01f) < constantPeopleProbability)
+        {
+          //  addPointsByFloat(percentageConstant);
+        }
     }
 
     private void Start()
     {
         //BeatManager._instance.playSong();
-        pointsText.text = $"PEOPLE: {puntuacion}";
     }
-    public void updatePoints(SCORE s)
+
+    public void addPointsByFloat(float percentage)
+    {
+        puntuacion += Mathf.CeilToInt(puntuacion * percentage);
+        pointsText.text = $"PEOPLE: {puntuacion}";
+
+    }
+    public void addPointsByScore(SCORE s)
     {
 
         foreach (SpeakerParticle speaker in speakers)
