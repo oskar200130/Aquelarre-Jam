@@ -134,7 +134,7 @@ public partial class ClickActionsSystem : SystemBase
             {
                 float3 dir = tr.Position - (float3)ClickDetector.instance.worldMousePosWhenDown; //tambien es la dirección, cunado lo normalicemos
 
-                float dist = math.length(math.abs(dir));
+                float dist = math.length(math.abs(dir)) + ev.pogoDistantVariation;
                 ev.pogoForce = (ev.distanceMarginActions - dist) / ev.distanceMarginActions;
                 ev.velocity = ev.jumpForce * ev.pogoForce;
 

@@ -21,6 +21,7 @@ public struct EspectadorVariables : IComponentData, IEnableableComponent
     public float3 directionalVel;
     public float distanceToMouseDown;
     public float pogoForce;
+    public float pogoDistantVariation;
 
     public float minJumpForce;// = 1.0f;
     public float maxJumpForce;// = 10.0f;

@@ -6,6 +6,8 @@ public class SpawnerAuthoring : MonoBehaviour
     public GameObject prefab;
     public float spawnNumber;
     public float spawnLenght;
+    public float spawnSeparation;
+    public float spawnVariationPos;
 
     class SpawnerBaker : Baker<SpawnerAuthoring>
     {
@@ -16,7 +18,9 @@ public class SpawnerAuthoring : MonoBehaviour
                 prefab = GetEntity(authoring.prefab, TransformUsageFlags.None),
                 spawnZone = authoring.transform.position,
                 spawnNumberPeople = authoring.spawnNumber,
-                spawnLengthNumber = authoring.spawnLenght
+                spawnLengthNumber = authoring.spawnLenght,
+                spawnVariationPos = authoring.spawnVariationPos,
+                spawnInitialSeparation = authoring.spawnSeparation
             });
         }
     }

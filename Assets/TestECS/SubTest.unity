@@ -195,6 +195,8 @@ MonoBehaviour:
   prefab: {fileID: 6525301336776586959, guid: 00cdd995ed5607b42bb4ca46164cf651, type: 3}
   spawnNumber: 50000
   spawnLenght: 500
+  spawnSeparation: 1.12
+  spawnVariationPos: 2
 --- !u!4 &1161155908
 Transform:
   m_ObjectHideFlags: 0
