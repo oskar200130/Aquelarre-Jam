@@ -654,12 +654,16 @@ MonoBehaviour:
   _tolerance: 1
   _numerador: 4
   _denominador: 4
+  puntuacion: 1
   OnPulse:
     m_PersistentCalls:
       m_Calls: []
   OnMeasure:
     m_PersistentCalls:
       m_Calls: []
+  percentageCool: 0.0001
+  percentagePerfect: 0.0005
+  percentageHeavy: 0.001
 --- !u!4 &1147868052
 Transform:
   m_ObjectHideFlags: 0

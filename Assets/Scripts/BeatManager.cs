@@ -65,6 +65,7 @@ public class BeatManager : MonoBehaviour
     //SCORE: Esto igual tiene mas sentido meterlo en otro lao, donde se gestionen los puntos
     private int queueSize = 10;
     private Queue<SCORE> scores;
+    public int puntuacion = 1;
     public void AddScore(SCORE newScore)
     {
         if (scores.Count >= 10) scores.Dequeue();
@@ -146,6 +147,16 @@ public class BeatManager : MonoBehaviour
         }
     }
 
+
+
+    //Rangos que multiplicaran la puntuacion / público
+    public float percentageCool = 0.0001f;
+    public float percentagePerfect = 0.0005f;
+    public float percentageHeavy = 0.001f;
+
+
+
+
     public SCORE evaluateClick(float clickTime)
     {
 
@@ -157,11 +168,39 @@ public class BeatManager : MonoBehaviour
 
         SCORE res;
         if (accuracy < 0.3f) res = SCORE.TERRIBLE;
-        else if (accuracy < 0.6f) res = SCORE.MID;
-        else if (accuracy < 0.80f) res = SCORE.COOL;
-        else if (accuracy < 0.95f) res = SCORE.PERFECT;
-        else res = SCORE.HEAVY;
+        else if (accuracy < 0.80f) res = SCORE.COOL; //10000 : 1
+        else if (accuracy < 0.95f) res = SCORE.PERFECT; //10000 : 5
+        else res = SCORE.HEAVY; //10000 : 10
         Debug.Log($"Beat {current_beat}: {accuracy} , {res} !! ---- Click on: {clickTime}, beat on: {current_beat_time}");
+
+        //nota, spawmear permite dar al final con todas las notas, ya sean aciertos o fallos y subir siempre, habria qu elimitar el que solo s epudea hacer uan vez cada beat, apra saber cual sera nuestro máximo
+
+        switch (res)
+        {
+            case SCORE.COOL:
+                {
+                    
+                    //10000 : 1
+                    puntuacion += Mathf.CeilToInt(puntuacion * percentageCool);
+                }
+                break;
+            case SCORE.PERFECT:
+                {
+                    //10000 : 5
+                    puntuacion += Mathf.CeilToInt(puntuacion * percentagePerfect);
+                }
+                break;
+            case SCORE.HEAVY:
+                {
+                    //10000 : 10
+                    puntuacion += Mathf.CeilToInt(puntuacion * percentageHeavy);
+                }
+                break;
+            default:
+            //Terrible
+            //puntuacion ni crece
+            break;
+        }
 
 
         AddScore(res);
@@ -173,7 +212,6 @@ public enum SCORE
 {
     NONE, //NA
     TERRIBLE, //<0-30%
-    MID, //<31-60%
     COOL, //<61-85%
     PERFECT, //<86-90%
     HEAVY //95-100%
