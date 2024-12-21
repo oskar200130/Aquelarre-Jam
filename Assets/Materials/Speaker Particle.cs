@@ -3,23 +3,27 @@ using UnityEngine;
 public class SpeakerParticle : MonoBehaviour
 {
     [SerializeField]
-    ParticleSystem _particleSystem;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    ParticleSystem musicParticles;
+    [SerializeField]
+    ParticleSystem terribleParticles;
+    [SerializeField]
+    ParticleSystem coolParticles;
+    [SerializeField]
+    ParticleSystem perfectParticles;
+    [SerializeField]
+    ParticleSystem heavyParticles;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void playParticle()
     {
-        //_particleSystem.Clear();
-        //_particleSystem.Stop();
-        _particleSystem.Play();
+        musicParticles.Play();
+
+        // MIERDA DE DIFERENCIAR EN FUNCION A LA PUNTUACION, QUE NO SE HACERLO
+        // SEGURO QUE ES FACIL A ALGUIEN SE LE HABRA OCURRIDO HACER UN SINGLETON PARA SACAR LA PUNTUACION ACTUAL O ALGO
+        // QUE ALGUIEN LLAME A ALGUIEN
+        terribleParticles.Play();
+        coolParticles.Play();
+        perfectParticles.Play();
+        heavyParticles.Play();
     }
 }
