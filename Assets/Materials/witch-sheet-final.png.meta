@@ -190,7 +190,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -199,12 +199,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -1413,7 +1413,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -1422,7 +1422,59 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      witch-sheet-final_0: 176265115355518829
+      witch-sheet-final_1: 8939590278334717683
+      witch-sheet-final_10: -4006063373147031319
+      witch-sheet-final_11: -2983988520688658744
+      witch-sheet-final_12: -9088284250573854471
+      witch-sheet-final_13: 1929939241929661370
+      witch-sheet-final_14: 2927630588509863572
+      witch-sheet-final_15: -5707596354717737731
+      witch-sheet-final_16: 2471907013094107352
+      witch-sheet-final_17: 6772440125370795424
+      witch-sheet-final_18: -7696079822344663620
+      witch-sheet-final_19: -3574221303126256204
+      witch-sheet-final_2: 7357934538271518784
+      witch-sheet-final_20: 1517762091110833872
+      witch-sheet-final_21: 4754055109744995997
+      witch-sheet-final_22: 2464869341979278955
+      witch-sheet-final_23: 2173232189846234724
+      witch-sheet-final_24: -5272531653318858143
+      witch-sheet-final_25: 2684649864010395233
+      witch-sheet-final_26: 6011818678968220171
+      witch-sheet-final_27: 4865564046465017422
+      witch-sheet-final_28: 4628888548753894900
+      witch-sheet-final_29: -3765835369648849278
+      witch-sheet-final_3: 4829171788572508059
+      witch-sheet-final_30: 5978782785997372575
+      witch-sheet-final_31: -6769800176846582891
+      witch-sheet-final_32: -8207272634348476974
+      witch-sheet-final_33: 4796381714321171031
+      witch-sheet-final_34: -6828907318476089981
+      witch-sheet-final_35: 6475523329921783698
+      witch-sheet-final_36: -9089045760128225994
+      witch-sheet-final_37: -64043472513219258
+      witch-sheet-final_38: -7134373035993754380
+      witch-sheet-final_39: -1560568298033632098
+      witch-sheet-final_4: -1457737020540730646
+      witch-sheet-final_40: -626773945469776369
+      witch-sheet-final_41: 845637844767588563
+      witch-sheet-final_42: 6710596993738459680
+      witch-sheet-final_43: 5157093806737758647
+      witch-sheet-final_44: -4397293456162521770
+      witch-sheet-final_45: 684076408907599102
+      witch-sheet-final_46: -7001959702659939373
+      witch-sheet-final_47: -8189750493406836529
+      witch-sheet-final_48: 3135231483782581477
+      witch-sheet-final_49: 232724228214896093
+      witch-sheet-final_5: 2197077933329611316
+      witch-sheet-final_50: 3133417786256042839
+      witch-sheet-final_51: -8497234763324985721
+      witch-sheet-final_6: 6376193181208833661
+      witch-sheet-final_7: 2644469412509948510
+      witch-sheet-final_8: -3102866393359514314
+      witch-sheet-final_9: -1126249319493677610
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

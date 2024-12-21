@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      beatHalo_0: 5553212622460704404
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -25,4 +25,6 @@ public struct EspectadorVariables : IComponentData, IEnableableComponent
 
     public float minJumpForce;// = 1.0f;
     public float maxJumpForce;// = 10.0f;
+
+    public int colorid; // 1--4
 }
