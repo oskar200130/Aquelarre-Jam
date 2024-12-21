@@ -94,6 +94,11 @@ public class BeatManager : MonoBehaviour
         _instance = this;
     }
 
+    public void playSong()
+    {
+        SetMusicTrack(eventToPlay);
+        PlayMusicTrack();
+    }
     private void AssignMusicCallbacks()
     {
         timelineInfo = new TimelineInfo();
@@ -237,11 +242,6 @@ public class BeatManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SetMusicTrack(eventToPlay);
-            PlayMusicTrack();
-        }
 
         currentMusicTrack.getPlaybackState(out musicPlayState);
 
@@ -493,6 +493,7 @@ public class BeatManager : MonoBehaviour
             res = SCORE.HEAVY;
         }
         UnityEngine.Debug.Log($"{res}, {evaluacion}");
+        UnityEngine.Debug.Log($" click: {clickTime},  lastbeat = {lastBeat}, nextBeat = {nextBeat}, middleBeat = {middleBeat}");
 
         LevelManager._instance.updatePoints(res);
         return res;

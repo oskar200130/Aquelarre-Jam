@@ -55,6 +55,7 @@ public class CameraMovement : MonoBehaviour
             {
                 actTime = 0;
                 transitioning = false;
+                BeatManager._instance.playSong();
             }
             else 
                 actTime += Time.deltaTime;

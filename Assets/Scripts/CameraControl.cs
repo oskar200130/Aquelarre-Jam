@@ -79,10 +79,9 @@ public class CameraControl : MonoBehaviour
         }
     }
 
-    bool songStarted = false;
     void Update()
     {
-        if (debugpingpong)
+        if (debugpingpong && LevelManager._instance.gameStarted)
         {
             // Calcula t en el rango [0, 1]
             float t = Mathf.PingPong(BeatManager.GetCurrentTime() / (BeatManager.GetBeatInterval()), 1f);
