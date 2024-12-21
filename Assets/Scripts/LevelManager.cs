@@ -70,7 +70,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        //BeatManager._instance.playSong();
+        BeatManager._instance.playSong();
     }
 
     public void addPointsByFloat(float percentage)

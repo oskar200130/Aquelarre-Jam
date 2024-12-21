@@ -4,6 +4,25 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
 
+
+/*
+ 
+ PARAMETRIZAR:
+BLOOM ->
+    INTENSITY, SCATTER, TINT
+lens distortion
+    intensity
+chromatic aberration
+    intensity
+vignette
+    color, intensity
+Color adjustements
+    todo
+
+ 
+ */
+
+
 public class CameraControl : MonoBehaviour
 {
 
