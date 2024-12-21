@@ -12795,7 +12795,7 @@ MonoBehaviour:
   _globalVolume: {fileID: 1709522917}
   debugpingpong: 1
   _bloomScatter: 1
-  scatterPingPong: {x: 0.8, y: 1}
+  scatterPingPong: {x: 0.5, y: 1}
   _bloomItensity: 1.46
   _bloomDirtIntensity: 4.1
   depthOfFieldmode: 1
@@ -12803,7 +12803,7 @@ MonoBehaviour:
   dofGaussianMaxRadius: 1.5
   _filmGrainIntensity: 1
   _chromaticAberrationIntensity: 0.195
-  _chromaticAberrationPingPong: {x: 0.8, y: 1}
+  _chromaticAberrationPingPong: {x: 0.5, y: 1}
 --- !u!114 &725505279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12818,6 +12818,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current_beat: 0
   current_measure: 0
+  nBeatsToStart: 2
+  started: 0
 --- !u!4 &725505280
 Transform:
   m_ObjectHideFlags: 0

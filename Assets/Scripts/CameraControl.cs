@@ -82,12 +82,20 @@ public class CameraControl : MonoBehaviour
     bool songStarted = false;
     void Update()
     {
-       if (debugpingpong && songStarted)
+        if (debugpingpong)
         {
-            float t = Mathf.PingPong(Time.time / (FMODBeatTracker.GetBeatInterval()*0.5f), 1f);
-            float value = Mathf.Lerp(scatterPingPong.x, scatterPingPong.y, t);
+            // Calcula t en el rango [0, 1]
+            float t = Mathf.PingPong(FMODBeatTracker.GetCurrentTime() / (FMODBeatTracker.GetBeatInterval()), 1f);
+
+            // Aplica una curva exponencial al tiempo t para que llegue rápidamente a los límites
+            float curvedT = Mathf.Pow(t, 3) * (t < 0.1f ? 1f : -1f) + Mathf.Clamp01(t);
+
+            // Interpolación exponencial para scatterPingPong
+            float value = Mathf.Lerp(scatterPingPong.x, scatterPingPong.y, curvedT);
             _bloom.scatter.Override(value);
-            value = Mathf.Lerp(_chromaticAberrationPingPong.x, _chromaticAberrationPingPong.y, t);
+
+            // Interpolación exponencial para _chromaticAberrationPingPong
+            value = Mathf.Lerp(_chromaticAberrationPingPong.x, _chromaticAberrationPingPong.y, curvedT);
             _chromaticAberration.intensity.Override(value);
         }
 

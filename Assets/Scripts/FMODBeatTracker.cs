@@ -466,20 +466,56 @@ public class FMODBeatTracker : MonoBehaviour
 
     public SCORE evaluateClick()
     {
-        return SCORE.NONE;
+        /*
+         La evaluacion es la siguiente: como peor puedes hacerlo es a la mitad entre un beat y el siguiente.
+        Esto es porque cuanto mas cerca estes de un beat, mejor lo haces, ya sea pasandote o dandole muy pronto.
+        Por lo tanto, 
+     TIMELINE DE BEAT    lastBeat -1------------------------------------middlebeat 0----------------------------------- nextBeat 1
+     TIEMPO CUANDO CLICK   HEAVY  PERFECT  COOL   COOL  COOL  TERRIBLE  TERRIBLE  TERRIBLE   COOL   COOL   COOL   PERFECT HEAVY
+        algo asi.
+        */
+
+        SCORE res = SCORE.NONE;
+        double clickTime = lastDSPTime; double lastBeat = lastFixedBeatDSPTime; double nextBeat = lastBeat + beatInterval; double middleBeat = nextBeat - (beatInterval / 2);
+        double evaluacion;
+        if (clickTime < middleBeat)
+        {
+            //comprueba con el beat anterior 
+           evaluacion = (clickTime - lastBeat) / (beatInterval*0.5);
+        }
+        else
+        {
+            //comprueba con el beat posterior
+            evaluacion = (nextBeat - clickTime) / (beatInterval * 0.5);
+        }
+
+
+        if (evaluacion <= 0.4) // mas cercano al centro, peor
+        {
+            res = SCORE.TERRIBLE;
+        }
+        else if (evaluacion <= 0.8) 
+        {
+            res = SCORE.COOL;
+        }
+        else if (evaluacion <= 0.95)
+        {
+            res = SCORE.PERFECT;
+        }
+        else
+        {
+            res = SCORE.HEAVY;
+        }
+        Debug.Log($"{res}, {evaluacion}");
+        return res;
     }
-
-
-
 }
-
-
 
 public enum SCORE
 {
     NONE, //NA
-    TERRIBLE, //<0-30%
-    COOL, //<61-85%
-    PERFECT, //<86-90%
-    HEAVY //95-100%
+    TERRIBLE,
+    COOL, 
+    PERFECT, 
+    HEAVY 
 }
