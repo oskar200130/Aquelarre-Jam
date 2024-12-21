@@ -1,230 +1,501 @@
-using FMODUnity;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-
-
-
-
+using System;
+using System.Runtime.InteropServices;
+using FMODUnity;
+using System.Globalization;
+using System.Collections.Generic;
+using FMOD;
 
 public class BeatManager : MonoBehaviour
 {
-    public static BeatManager _instance { get; private set; }
-    /// <summary>
-    /// tiempos y contadores de compas y cancion en general
-    /// </summary>
-    [HideInInspector] public float beatInterval { get; private set; } //intervalo de tiempo en segundos que dura un pulso
-    [HideInInspector] public float measureInterval { get; private set; } //intervalo de tiempo en segundos que dura un compas
-    [HideInInspector] public int current_beat { get; private set; } = 0;
-    [HideInInspector] public int current_measure { get; private set; } = 0;
+    public EventReference eventToPlay;
 
-    /// <summary>
-    /// medidas del compas
-    /// </summary>
-    [SerializeField] private float _BPM = 120f;
-    //al 100%, comprueba el golpe en el pulso exacto. A menos valor, mas dificil, a mas valor, mas permisivo.
-    [SerializeField] private float _tolerance = 1f;
-    [Tooltip("numero de beats")][SerializeField] private int _numerador = 4;
-    [Tooltip("tiempo de beat (corchea, negra, etc ya saben)")][SerializeField] private int _denominador = 4;
+    public enum BeatType { FixedBeat, UpBeat };
 
-    private float current_beat_time = 0f;
+    public static bool isPlayingMusic = false;
+
+    [Header("DEBUG STUFF:")]
+    public bool doDebugSounds = false;
+    public FMODUnity.StudioEventEmitter downBeatEvent;
+    public FMODUnity.StudioEventEmitter upBeatEvent;
+
+    [Header("OTHER OPTIONS:")]
+    public float upBeatDivisor = 2f;
+
+    private int masterSampleRate;
+    private double currentSamples = 0;
+    private static double currentTime = 0f;
+
+    private ulong dspClock;
+    private ulong parentDSP;
+
+    private static double beatInterval = 0f;
+
+    private static double dspDeltaTime = 0f;
+    private static double lastDSPTime = 0f;
+
+    private bool tempoWaitForNextBeat = false;
 
 
+    private double tempoTrackDSPStartTime;
+    private static string markerString = "";
+    private static bool justHitMarker = false;
+    private static int markerTime;
 
-    public int denominador
+    // BEAT DELEGATES!!!
+    public delegate void BeatEventDelegate();
+    public static event BeatEventDelegate onFixedBeat;
+
+    private static double lastFixedBeatTime = -2;
+    private static double lastFixedBeatDSPTime = -2;
+
+    public static event BeatEventDelegate onUpBeat;
+
+    private double lastUpBeatTime = -2;
+
+    public delegate void TempoUpdateDelegate(float beatInterval);
+    public static event TempoUpdateDelegate onTempoChanged;
+
+    public delegate void MarkerListenerDelegate();
+    public static event MarkerListenerDelegate onMarkerUpdated;
+    // END!!!
+
+    public static BeatManager _instance;
+
+
+    private FMOD.Studio.PLAYBACK_STATE musicPlayState;
+    private FMOD.Studio.PLAYBACK_STATE lastMusicPlayState;
+
+    [StructLayout(LayoutKind.Sequential)]
+    public class TimelineInfo
     {
-        get { return _denominador; }
-        set
-        {
-            _denominador = value;
-            calculateIntervals();
-        }
-    }
-    public int numerador
-    {
-        get { return _numerador; }
-        set
-        {
-            _numerador = value;
-            calculateIntervals();
-        }
-    }
-    public float BPM
-    {
-        get { return _BPM; }
-        set
-        {
-            _BPM = value;
-            calculateIntervals();
-        }
-    }
-    
-    private RITMOS current_measure_ritmo = RITMOS.NORMAL; //seguira el ritmo marcado para evaluar clicks en el compas X. Se cambiara segun avance la cancion
-
-    //SCORE: Esto igual tiene mas sentido meterlo en otro lao, donde se gestionen los puntos
-    private int queueSize = 10;
-    private Queue<SCORE> scores;
-    public int puntuacion = 1;
-    public void AddScore(SCORE newScore)
-    {
-        if (scores.Count >= 10) scores.Dequeue();
-        scores.Enqueue(newScore);
-    }
-    public SCORE[] GetScores()
-    {
-        return scores.ToArray();
-    }
-    public SCORE GetLatestScore()
-    {
-        return scores.Count > 0 ? scores.Peek() : SCORE.NONE;
+        public int currentBeat = 0;
+        public int currentBar = 0;
+        public int beatPosition = 0;
+        public float currentTempo = 0;
+        public float lastTempo = 0;
+        public int currentPosition = 0;
+        public int songLengthInMS = 0;
+        public FMOD.StringWrapper lastMarker = new FMOD.StringWrapper();
     }
 
+    public TimelineInfo timelineInfo = null;
 
+    private GCHandle timelineHandle;
 
-    /// <summary>
-    /// eventos de beats
-    /// </summary>
-    [HideInInspector] public UnityEvent OnPulse; //resto de pulsos
-    [HideInInspector] public UnityEvent OnMeasure; //inicio de cada compás (no habria por que usar esto, se puede usar solo onPulse y comprobar el numero del compas)
-    private FMOD.Studio.EventInstance musicEventInstance;
+    private FMOD.Studio.EVENT_CALLBACK beatCallback;
+    private FMOD.Studio.EventDescription descriptionCallback;
+
+    private static FMOD.Studio.EventInstance currentMusicTrack;
 
 
     private void Awake()
     {
-        if (_instance == null)
+        _instance = this;
+    }
+
+    private void AssignMusicCallbacks()
+    {
+        timelineInfo = new TimelineInfo();
+        beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
+
+        timelineHandle = GCHandle.Alloc(timelineInfo, GCHandleType.Pinned);
+        currentMusicTrack.setUserData(GCHandle.ToIntPtr(timelineHandle));
+        currentMusicTrack.setCallback(beatCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
+
+        currentMusicTrack.getDescription(out descriptionCallback);
+        descriptionCallback.getLength(out int length);
+
+        timelineInfo.songLengthInMS = length;
+
+        //Debug.Log("SONG LENGTH = " + length);
+
+
+        FMOD.SPEAKERMODE speakerMode;
+        int numRawSpeakers;
+
+        //FMODUnity.RuntimeManager.CoreSystem.getMasterChannelGroup(out masterChannelGroup);
+
+        FMODUnity.RuntimeManager.CoreSystem.getSoftwareFormat(out masterSampleRate, out speakerMode, out numRawSpeakers);
+    }
+
+
+    private static float currentPitch = 1f;
+
+    public static void SetPitch(float newPitch)
+    {
+        currentMusicTrack.setPitch(newPitch);
+        currentPitch = newPitch;
+    }
+
+    public static float GetPitch()
+    {
+        return currentPitch;
+    }
+
+    public static void SetMusicTrack(EventReference newTrack)
+    {
+        FMOD.Studio.EventDescription description;
+
+        if (isPlayingMusic)
         {
-            Debug.Log("BeatManager instanced");
-            _instance = this;
+            isPlayingMusic = false;
+
+            currentMusicTrack.getDescription(out description);
+            description.unloadSampleData();
+
+            currentMusicTrack.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+
+        currentMusicTrack = RuntimeManager.CreateInstance(newTrack);
+
+        currentMusicTrack.getDescription(out description);
+
+        description.loadSampleData();
+    }
+
+    public static void PlayMusicTrack()
+    {
+        isPlayingMusic = true;
+
+        currentMusicTrack.start();
+
+        _instance.AssignMusicCallbacks();
+    }
+
+    private void SetTrackStartInfo()
+    {
+        lastDSPTime = 0f;
+
+        UpdateDSPClock();
+
+        tempoTrackDSPStartTime = currentTime;
+        lastFixedBeatTime = 0f;
+        lastFixedBeatDSPTime = currentTime;
+    }
+
+    private void UpdateDSPClock()
+    {
+        //masterChannelGroup.getDSPClock(out dspClock, out parentDSP);
+
+        currentMusicTrack.getChannelGroup(out FMOD.ChannelGroup newChanGrp);
+        newChanGrp.getDSPClock(out dspClock, out parentDSP);
+
+        currentSamples = dspClock;
+        currentTime = currentSamples / masterSampleRate;
+
+        dspDeltaTime = currentTime - lastDSPTime;
+
+        lastDSPTime = currentTime;
+    }
+
+    public static void CheckHitSpecialMarker(string markerName)
+    {
+        markerName = markerName.ToLower();
+
+        if (markerName.Contains("swing =") || markerName.Contains("swing="))
+        {
+            markerName = markerName.Split('=')[1];
+            if (float.TryParse(markerName, NumberStyles.Any, CultureInfo.InvariantCulture, out float swingValue))
+            {
+                _instance.upBeatDivisor = swingValue;
+            }
+
+            return;
+        }
+    }
+
+    public static float GetBeatInterval()
+    {
+        return (float)beatInterval;
+    }
+
+    public static float GetLastFixedBeatDSPTime()
+    {
+        return (float)lastFixedBeatDSPTime;
+    }
+
+    public static float GetCurrentTime()
+    {
+        return (float)currentTime;
+    }
+
+    public static int GetCurrentTimeInMilliseconds()
+    {
+        return _instance.timelineInfo.currentPosition;
+    }
+
+    public static int GetTrackLengthInMilliseconds()
+    {
+        return _instance.timelineInfo.songLengthInMS;
+    }
+
+    public static float GetDSPDeltaTime()
+    {
+        return (float)dspDeltaTime;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SetMusicTrack(eventToPlay);
+            PlayMusicTrack();
+        }
+
+        currentMusicTrack.getPlaybackState(out musicPlayState);
+
+        if (lastMusicPlayState != FMOD.Studio.PLAYBACK_STATE.PLAYING && musicPlayState == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        {
+            SetTrackStartInfo();
+        }
+
+        lastMusicPlayState = musicPlayState;
+
+        if (musicPlayState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        {
+            return;
+        }
+
+
+        currentMusicTrack.getTimelinePosition(out timelineInfo.currentPosition);
+
+        UpdateDSPClock();
+
+        CheckTempoMarkers();
+
+        if (beatInterval == 0f)
+        {
+            return;
+        }
+
+        if (justHitMarker)
+        {
+            justHitMarker = false;
+
+            if (lastFixedBeatDSPTime < currentTime - (beatInterval / 2f))
+            {
+                DoFixedBeat();
+            }
+
+            int currentTimelinePos;
+
+            currentMusicTrack.getTimelinePosition(out currentTimelinePos);
+
+            float offset = (currentTimelinePos - markerTime) / 1000f;
+
+            tempoTrackDSPStartTime = currentTime - offset;
+            lastFixedBeatTime = 0f;
+            lastFixedBeatDSPTime = tempoTrackDSPStartTime;
+
+            lastUpBeatTime = 0f;
+
+            if (onMarkerUpdated != null)
+            {
+                onMarkerUpdated();
+            }
+        }
+
+        CheckNextBeat();
+    }
+
+    public static float UpBeatPosition()
+    {
+        return ((float)beatInterval / _instance.upBeatDivisor);
+    }
+
+    private void CheckNextBeat()
+    {
+        float fixedSongPosition = (float)(currentTime - tempoTrackDSPStartTime);
+        float upBeatSongPosition = fixedSongPosition + UpBeatPosition();
+
+        // FIXED BEAT
+        if (fixedSongPosition >= lastFixedBeatTime + beatInterval)
+        {
+            float r = Mathf.Repeat(fixedSongPosition, (float)beatInterval);
+
+            DoFixedBeat();
+
+
+            lastFixedBeatTime = (fixedSongPosition - r);
+            lastFixedBeatDSPTime = (currentTime - r);
+
+            if (tempoWaitForNextBeat)
+            {
+                SetTrackTempo();
+
+                tempoWaitForNextBeat = false;
+            }
+        }
+
+        // UP BEAT
+        if (upBeatSongPosition >= lastUpBeatTime + beatInterval)
+        {
+            float r = Mathf.Repeat(upBeatSongPosition, (float)beatInterval);
+
+            DoUpBeat();
+
+            lastUpBeatTime = (upBeatSongPosition - r);
+        }
+    }
+
+    private void DoFixedBeat()
+    {
+        if (onFixedBeat != null)
+        {
+            onFixedBeat();
+        }
+
+        if (doDebugSounds)
+        {
+            downBeatEvent.Play();
+        }
+    }
+
+    private void DoUpBeat()
+    {
+        if (onUpBeat != null)
+        {
+            onUpBeat();
+        }
+
+        if (doDebugSounds)
+        {
+            upBeatEvent.Play();
+        }
+    }
+
+    private bool CheckTempoMarkers()
+    {
+        if (timelineInfo.currentTempo != timelineInfo.lastTempo && !tempoWaitForNextBeat)
+        {
+            SetTrackTempo();
+            return true;
+        }
+
+        return false;
+    }
+
+    private void SetTrackTempo()
+    {
+        int currentTimelinePos;
+
+        currentMusicTrack.getTimelinePosition(out currentTimelinePos);
+
+        float offset = (currentTimelinePos - timelineInfo.beatPosition) / 1000f; // divided into seconds
+
+        tempoTrackDSPStartTime = currentTime - offset;
+
+        lastFixedBeatTime = 0f;
+        lastFixedBeatDSPTime = tempoTrackDSPStartTime;
+
+        lastUpBeatTime = 0f;
+
+        timelineInfo.lastTempo = timelineInfo.currentTempo;
+
+        beatInterval = 60f / timelineInfo.currentTempo;
+
+        if (onTempoChanged != null)
+        {
+            onTempoChanged((float)beatInterval);
+        }
+    }
+
+    [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
+    static FMOD.RESULT BeatEventCallback(FMOD.Studio.EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr)
+    {
+        FMOD.Studio.EventInstance instance = new FMOD.Studio.EventInstance(instancePtr);
+
+        // Retrieve the user data
+        IntPtr timelineInfoPtr;
+        FMOD.RESULT result = instance.getUserData(out timelineInfoPtr);
+        if (result != FMOD.RESULT.OK)
+        {
+            UnityEngine.Debug.LogError("Timeline Callback error: " + result);
+        }
+        else if (timelineInfoPtr != IntPtr.Zero)
+        {
+            // Get the object to store beat and marker details
+            GCHandle timelineHandle = GCHandle.FromIntPtr(timelineInfoPtr);
+            TimelineInfo timelineInfo = (TimelineInfo)timelineHandle.Target;
+
+            switch (type)
+            {
+                case FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT:
+                    {
+                        //Debug.Log("RECEIVED BEAT CALLBACK!!!");
+
+                        var parameter = (FMOD.Studio.TIMELINE_BEAT_PROPERTIES)Marshal.PtrToStructure(parameterPtr, typeof(FMOD.Studio.TIMELINE_BEAT_PROPERTIES));
+                        timelineInfo.currentBar = parameter.bar;
+                        timelineInfo.currentBeat = parameter.beat;
+                        timelineInfo.beatPosition = parameter.position;
+                        timelineInfo.currentTempo = parameter.tempo;
+                    }
+                    break;
+                case FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER:
+                    {
+                        var parameter = (FMOD.Studio.TIMELINE_MARKER_PROPERTIES)Marshal.PtrToStructure(parameterPtr, typeof(FMOD.Studio.TIMELINE_MARKER_PROPERTIES));
+                        timelineInfo.lastMarker = parameter.name;
+                        markerString = parameter.name;
+                        markerTime = parameter.position;
+                        CheckHitSpecialMarker(parameter.name);
+
+                        justHitMarker = true;
+                    }
+                    break;
+            }
+        }
+        return FMOD.RESULT.OK;
+    }
+
+
+
+    public SCORE evaluateClick()
+    {
+        /*
+         La evaluacion es la siguiente: como peor puedes hacerlo es a la mitad entre un beat y el siguiente.
+        Esto es porque cuanto mas cerca estes de un beat, mejor lo haces, ya sea pasandote o dandole muy pronto.
+        Por lo tanto, 
+     TIMELINE DE BEAT    lastBeat -1------------------------------------middlebeat 0----------------------------------- nextBeat 1
+     TIEMPO CUANDO CLICK   HEAVY  PERFECT  COOL   COOL  COOL  TERRIBLE  TERRIBLE  TERRIBLE   COOL   COOL   COOL   PERFECT HEAVY
+        algo asi.
+        */
+
+        SCORE res = SCORE.NONE;
+        double clickTime = lastDSPTime; double lastBeat = lastFixedBeatDSPTime; double nextBeat = lastBeat + beatInterval; double middleBeat = nextBeat - (beatInterval / 2);
+        double evaluacion;
+        if (clickTime < middleBeat)
+        {
+            //comprueba con el beat anterior 
+            evaluacion = (clickTime - lastBeat) / (beatInterval * 0.5);
         }
         else
         {
-            Destroy(this);
-            return;
+            //comprueba con el beat posterior
+            evaluacion = (nextBeat - clickTime) / (beatInterval * 0.5);
         }
-        scores = new Queue<SCORE>(queueSize);
-        calculateIntervals();
-        musicEventInstance = RuntimeManager.CreateInstance("event:/Music");
-    }
 
 
-    private void calculateIntervals()
-    {
-        beatInterval = (60f / BPM) * (4f / _denominador);
-        measureInterval = beatInterval * numerador;
-    }
-    // Llamado cuando cambian las propiedades en el Inspector
-    private void OnValidate()
-    {
-        calculateIntervals();
-    }
-
-    private void Start()
-    {
-        if (OnPulse == null) OnPulse = new UnityEvent();
-
-        if (OnMeasure == null) OnMeasure = new UnityEvent();
-
-        StartCoroutine(Beat());
-    }
-    private IEnumerator Beat()
-    {
-        while (true)
+        if (evaluacion <= 0.4) // mas cercano al centro, peor
         {
-            OnPulse.Invoke();
-
-            if (current_beat == 0)
-            {
-                if (current_measure == 0) musicEventInstance.start();
-                OnMeasure.Invoke();
-            }
-
-            current_beat = (current_beat + 1) % numerador;
-            if (current_beat == 0) current_measure++;
-            current_beat_time = Time.time;
-
-            yield return new WaitForSeconds(beatInterval);
+            res = SCORE.TERRIBLE;
         }
-    }
-
-
-
-    //Rangos que multiplicaran la puntuacion / público
-    public float percentageCool = 0.0001f;
-    public float percentagePerfect = 0.0005f;
-    public float percentageHeavy = 0.001f;
-
-    [SerializeField] SpeakerParticle[] speakers;
-
-
-    public SCORE evaluateClick(float clickTime)
-    {
-
-        float timeDifference = Mathf.Abs(clickTime - current_beat_time);
-              
-
-        float accuracy = 1- (timeDifference / _tolerance);
-
-
-        SCORE res;
-        if (accuracy < 0.3f) res = SCORE.TERRIBLE;
-        else if (accuracy < 0.80f) res = SCORE.COOL; //10000 : 1
-        else if (accuracy < 0.95f) res = SCORE.PERFECT; //10000 : 5
-        else res = SCORE.HEAVY; //10000 : 10
-        //Debug.Log($"Beat {current_beat}: {accuracy} , {res} !! ---- Click on: {clickTime}, beat on: {current_beat_time}");
-        foreach (SpeakerParticle speaker in speakers)
-            speaker.playParticle(res);
-        //nota, spawmear permite dar al final con todas las notas, ya sean aciertos o fallos y subir siempre, habria qu elimitar el que solo s epudea hacer uan vez cada beat, apra saber cual sera nuestro máximo
-
-        switch (res)
+        else if (evaluacion <= 0.8)
         {
-            case SCORE.COOL:
-                {
-                    
-                    //10000 : 1
-                    puntuacion += Mathf.CeilToInt(puntuacion * percentageCool);
-                }
-                break;
-            case SCORE.PERFECT:
-                {
-                    //10000 : 5
-                    puntuacion += Mathf.CeilToInt(puntuacion * percentagePerfect);
-                }
-                break;
-            case SCORE.HEAVY:
-                {
-                    //10000 : 10
-                    puntuacion += Mathf.CeilToInt(puntuacion * percentageHeavy);
-                }
-                break;
-            default:
-            //Terrible
-            //puntuacion ni crece
-            break;
+            res = SCORE.COOL;
         }
+        else if (evaluacion <= 0.95)
+        {
+            res = SCORE.PERFECT;
+        }
+        else
+        {
+            res = SCORE.HEAVY;
+        }
+        UnityEngine.Debug.Log($"{res}, {evaluacion}");
 
-
-        AddScore(res);
+        LevelManager._instance.updatePoints(res);
         return res;
     }
-
-}
-public enum SCORE
-{
-    NONE, //NA
-    TERRIBLE, //<0-30%
-    COOL, //<61-85%
-    PERFECT, //<86-90%
-    HEAVY //95-100%
 }
 
-public enum RITMOS
-{
-    NONE, //no contaremos puntos en estos compases
-    NORMAL, //cada beat
-    DOBLES, //dos clicks por beat
-    MITAD, //1 click cada dos beats
-    TRESILLOS //3 clicks por beat???? de locos este
-              //etc
-
-}

@@ -22,13 +22,13 @@ public partial class SpawnPublicSystem : SystemBase
 
 
     private SpawnerComponent spawner;
-    private BeatManager beatManageador;
+    private LevelManager beatManageador;
     [BurstCompile]
     protected override void OnStartRunning()
     {
 
         spawner = SystemAPI.GetSingleton<SpawnerComponent>();
-        beatManageador = BeatManager._instance;
+        beatManageador = LevelManager._instance;
     }
 
 

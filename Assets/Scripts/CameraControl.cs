@@ -1,6 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UIElements;
+using static UnityEngine.Rendering.DebugUI;
+
 public class CameraControl : MonoBehaviour
 {
 
@@ -26,7 +29,7 @@ public class CameraControl : MonoBehaviour
     //ESTE es el valor que habria que modificar segun las fases del juego.
     //Es decir, si estamos en la fase normal, pues el minimo y el maximo del ping pong es X. Si va mas a tope por los combos,
     //se cambia este minimo y maximo y entonces puede ser mas apoteosico.
-    //Ademas, la idea seria bloquear o no algunas de estas variables según esa fase. En plan: solo queremos que el chromatic aberration exista en la fase de tener muchos combos, pues bloqueamos.
+    //Ademas, la idea seria bloquear o no algunas de estas variables segï¿½n esa fase. En plan: solo queremos que el chromatic aberration exista en la fase de tener muchos combos, pues bloqueamos.
     public Vector2 scatterPingPong = new(0f, 1f);
 
     [Min(0f)]
@@ -50,7 +53,7 @@ public class CameraControl : MonoBehaviour
     public float _chromaticAberrationIntensity = 0.195f;
     public Vector2 _chromaticAberrationPingPong = new(0.195f, 1f);
 
-    //etc, ahora me da pereza. en el onvalidate, añadir cada uno de estos sets en caso de que se quiera toquetear en ejecucion.
+    //etc, ahora me da pereza. en el onvalidate, aï¿½adir cada uno de estos sets en caso de que se quiera toquetear en ejecucion.
     //para cambiar los valores fuera de aqui, simplemente hay que acceder a las variables publicas de arriba (bloom, depth, etc) y hacer override en el valor que toque
     private void OnValidate()
     {
@@ -76,19 +79,28 @@ public class CameraControl : MonoBehaviour
         }
     }
 
+    bool songStarted = false;
     void Update()
     {
-
         if (debugpingpong)
         {
-            float t = Mathf.PingPong(Time.time / (BeatManager._instance.beatInterval*0.5f), 1f);
-            float value = Mathf.Lerp(scatterPingPong.x, scatterPingPong.y, t);
+            // Calcula t en el rango [0, 1]
+            float t = Mathf.PingPong(BeatManager.GetCurrentTime() / (BeatManager.GetBeatInterval()), 1f);
+
+            // Aplica una curva exponencial al tiempo t para que llegue rï¿½pidamente a los lï¿½mites
+            float curvedT = Mathf.Pow(t, 3) * (t < 0.1f ? 1f : -1f) + Mathf.Clamp01(t);
+
+            // Interpolaciï¿½n exponencial para scatterPingPong
+            float value = Mathf.Lerp(scatterPingPong.x, scatterPingPong.y, curvedT);
             _bloom.scatter.Override(value);
-            value = Mathf.Lerp(_chromaticAberrationPingPong.x, _chromaticAberrationPingPong.y, t);
+
+            // Interpolaciï¿½n exponencial para _chromaticAberrationPingPong
+            value = Mathf.Lerp(_chromaticAberrationPingPong.x, _chromaticAberrationPingPong.y, curvedT);
             _chromaticAberration.intensity.Override(value);
         }
 
     }
+
 
     private void Awake()
     {
@@ -121,10 +133,14 @@ public class CameraControl : MonoBehaviour
             if (!_tonemapping) Debug.LogError("NO TIENE TONE MAPPING!!!");
             profile.TryGet(out _coloradjustements);
             if (!_coloradjustements) Debug.LogError("NO TIENE COLOR ADJUSTEMETS!!!");
+
+            //setea al parametro iniciar en caso de hacer pingpong
+            _bloom.scatter.Override(scatterPingPong.x);
+            _chromaticAberration.intensity.Override(_chromaticAberrationPingPong.x);
         }
         else
         {
-            Debug.LogError("petó por el global volume amego");
+            Debug.LogError("petï¿½ por el global volume amego");
         }
     }
 
