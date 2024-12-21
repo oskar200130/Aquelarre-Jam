@@ -13,9 +13,27 @@ MonoBehaviour:
   m_Name: WitchSet
   m_EditorClassIdentifier: 
   _animations:
-  - name: Idle
-    data: {fileID: 11400000, guid: 63191fc58fba8ae4ea8f9ecb8034bbf9, type: 2}
-  - name: Run
-    data: {fileID: 11400000, guid: 2dae88510b6888b4ba94333f1c2d7680, type: 2}
-  - name: Arms
+  - name: Arms1
     data: {fileID: 11400000, guid: 73d5cd29a55a78445ba87b68e554b340, type: 2}
+  - name: Arms2
+    data: {fileID: 11400000, guid: 5e4a6578e743c4d42bbb9cbc6dd6b81f, type: 2}
+  - name: Arms3
+    data: {fileID: 11400000, guid: 189f398b0a5aa6f44b99ef5b0102689f, type: 2}
+  - name: Arms4
+    data: {fileID: 11400000, guid: 646c1e0741ae68f43aeb8fefc954ddc4, type: 2}
+  - name: Idle1
+    data: {fileID: 11400000, guid: 63191fc58fba8ae4ea8f9ecb8034bbf9, type: 2}
+  - name: Idle2
+    data: {fileID: 11400000, guid: 1adea114cc125ca4caac3b0b5937fc68, type: 2}
+  - name: Idle3
+    data: {fileID: 11400000, guid: 2e3576f7769160648a53785101711f2a, type: 2}
+  - name: Idle4
+    data: {fileID: 11400000, guid: a12479f62f58f6142b6d737a80874411, type: 2}
+  - name: Run1
+    data: {fileID: 11400000, guid: 2dae88510b6888b4ba94333f1c2d7680, type: 2}
+  - name: Run2
+    data: {fileID: 11400000, guid: 7360eb977cbfa534f8846c73b54a7d36, type: 2}
+  - name: Run3
+    data: {fileID: 11400000, guid: 26d52cf2345cd69439f7541514307441, type: 2}
+  - name: Run4
+    data: {fileID: 11400000, guid: 9c07d6ff1dded6443a144a2e144e8cd6, type: 2}

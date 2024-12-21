@@ -22,13 +22,13 @@ public partial class SpawnPublicSystem : SystemBase
 
 
     private SpawnerComponent spawner;
-    private BeatManager beatManageador;
+    private LevelManager beatManageador;
     [BurstCompile]
     protected override void OnStartRunning()
     {
 
         spawner = SystemAPI.GetSingleton<SpawnerComponent>();
-        beatManageador = BeatManager._instance;
+        beatManageador = LevelManager._instance;
     }
 
 
@@ -48,7 +48,10 @@ public partial class SpawnPublicSystem : SystemBase
                 Entity newEntity = ecb.Instantiate(spawner.prefab);
                 int rowPos = (int)spawner.spawnLengthNumber/2 + (i%2 == 0?-(i % (int)spawner.spawnLengthNumber) / 2:((i % (int)spawner.spawnLengthNumber) + 1)/2);
                 float x = rowPos * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
-                float z = (i / (int)spawner.spawnLengthNumber) * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
+                //lo he puesto en negativo, apra que el publico crezca hacia atras y no hacia el escenario jjjj
+                float z = -(i / (int)spawner.spawnLengthNumber) * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
+
+                int color = RandomGenerator.NextInt(1, 4);
 
                 float3 SpawnPoint = GetNearestOutsidePosition(new float3(x, 0, z));
 
@@ -56,7 +59,7 @@ public partial class SpawnPublicSystem : SystemBase
                     ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(SpawnPoint, new quaternion(0, 1, 0, 0)));
                 else
                     ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(SpawnPoint, new quaternion(0, 0, 0, 1)));
-                ecb.AddComponent(newEntity, new ChangeAnimTag { nextAnim = Animator.StringToHash("Idle") });
+                ecb.AddComponent(newEntity, new ChangeAnimTag { nextAnim = Animator.StringToHash("Idle" + color) });
                 ecb.AddComponent(newEntity, new EspectadorVariables
                 {
                     distanceMarginActions = 10.0f,
@@ -73,8 +76,10 @@ public partial class SpawnPublicSystem : SystemBase
                     pogoForce = 0.0f,
                     pogoDistantVariation = RandomGenerator.NextFloat(-spawner.pogoVariationPos, spawner.pogoVariationPos),
                     minJumpForce = 1.0f,
-                    maxJumpForce = 10.0f
-                });
+                    maxJumpForce = 10.0f,
+                    colorid = color
+
+                }); ;
             }
             ecb.Playback(EntityManager);
 
