@@ -96,7 +96,7 @@ public partial class SpawnPublicSystem : SystemBase
         float3 centro = ray.origin + ray.direction * t;
 
         float3 dir = math.normalize(insidePos - centro);
-
+        if (dir.z > 0) dir.z = 0;
 
         //vamos a calcular la distancia con el punto de la esquina inferior izquierda, y usar esa distancia como punto de spawneo
         Ray ray2 = Camera.main.ScreenPointToRay(new Vector3(0, 0, 0));
