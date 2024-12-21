@@ -3,6 +3,7 @@ using Unity.Burst;
 using Unity.Mathematics;
 using UnityEngine;
 using Unity.Transforms;
+using NSprites;
 
 [BurstCompile]
 public partial class SpawnPublicSystem : SystemBase
@@ -46,15 +47,10 @@ public partial class SpawnPublicSystem : SystemBase
                 float x = (i % spawner.spawnLengthNumber) * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
                 float z = (i / (int)spawner.spawnLengthNumber) * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
                 
-
-                //recuerden que esto pone rotaciones a 0
-                ecb.SetComponent(newEntity, LocalTransform.FromPosition(new float3(x, 0, z)));
-
-                //LocalTransform.FromPositionRotation
-                //if (RandomGenerator.NextBool())
-                //    ecb.SetComponent(newEntity, LocalTransform.FromRotation(new quaternion(0, 1, 0, 0)));
-                //else
-                //    ecb.SetComponent(newEntity, LocalTransform.FromRotation(new quaternion(0, 0, 0, 1)));
+                if (RandomGenerator.NextBool())                    
+                    ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(new float3(x, 0, z), new quaternion(0, 1, 0, 0)));
+                else
+                    ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(new float3(x, 0, z), new quaternion(0, 0, 0, 1)));
                 ecb.AddComponent(newEntity, new ChangeAnimTag { nextAnim = Animator.StringToHash("Idle") });
                 ecb.AddComponent(newEntity, new EspectadorVariables
                 {
