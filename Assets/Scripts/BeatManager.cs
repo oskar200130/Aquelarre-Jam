@@ -94,11 +94,6 @@ public class BeatManager : MonoBehaviour
         _instance = this;
     }
 
-    public void playSong()
-    {
-        SetMusicTrack(eventToPlay);
-        PlayMusicTrack();
-    }
     private void AssignMusicCallbacks()
     {
         timelineInfo = new TimelineInfo();
@@ -238,6 +233,12 @@ public class BeatManager : MonoBehaviour
     public static float GetDSPDeltaTime()
     {
         return (float)dspDeltaTime;
+    }
+
+    public void playSong()
+    {
+        SetMusicTrack(eventToPlay);
+        PlayMusicTrack();
     }
 
     private void Update()
@@ -456,23 +457,23 @@ public class BeatManager : MonoBehaviour
          La evaluacion es la siguiente: como peor puedes hacerlo es a la mitad entre un beat y el siguiente.
         Esto es porque cuanto mas cerca estes de un beat, mejor lo haces, ya sea pasandote o dandole muy pronto.
         Por lo tanto, 
-     TIMELINE DE BEAT    lastBeat -1------------------------------------middlebeat 0----------------------------------- nextBeat 1
+     TIMELINE DE BEAT    lastBeat -1------------------------------------onMiddlebeat 0----------------------------------- nextBeat 1
      TIEMPO CUANDO CLICK   HEAVY  PERFECT  COOL   COOL  COOL  TERRIBLE  TERRIBLE  TERRIBLE   COOL   COOL   COOL   PERFECT HEAVY
         algo asi.
         */
 
         SCORE res = SCORE.NONE;
-        double clickTime = lastDSPTime; double lastBeat = lastFixedBeatDSPTime; double nextBeat = lastBeat + beatInterval; double middleBeat = nextBeat - (beatInterval / 2);
+        double clickTime = GetCurrentTime(); double lastBeat = lastFixedBeatDSPTime; double nextBeat = lastBeat + beatInterval; double middleBeat = lastBeat + (beatInterval *0.5);
         double evaluacion;
         if (clickTime < middleBeat)
         {
             //comprueba con el beat anterior 
-            evaluacion = (clickTime - lastBeat) / (beatInterval * 0.5);
+            evaluacion = 1- ((clickTime - lastBeat) / (beatInterval * 0.5));
         }
         else
         {
             //comprueba con el beat posterior
-            evaluacion = (nextBeat - clickTime) / (beatInterval * 0.5);
+            evaluacion = 1- ((nextBeat - clickTime) / (beatInterval * 0.5));
         }
 
 
@@ -495,7 +496,7 @@ public class BeatManager : MonoBehaviour
         UnityEngine.Debug.Log($"{res}, {evaluacion}");
         UnityEngine.Debug.Log($" click: {clickTime},  lastbeat = {lastBeat}, nextBeat = {nextBeat}, middleBeat = {middleBeat}");
 
-        LevelManager._instance.updatePoints(res);
+        LevelManager._instance.addPointsByScore(res);
         return res;
     }
 }

@@ -2,13 +2,14 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager _instance { get; private set; }
-   
+
     //SCORE: Esto igual tiene mas sentido meterlo en otro lao, donde se gestionen los puntos
     private int queueSize = 10;
     private Queue<SCORE> scores;
@@ -27,12 +28,15 @@ public class LevelManager : MonoBehaviour
         return scores.Count > 0 ? scores.Peek() : SCORE.NONE;
     }
     //Rangos que multiplicaran la puntuacion / público
-    public float percentageCool = 0.0001f;
+    public float constantPeopleProbability = 0.7f;
+    public float percentageConstant = 0.00001f;
+    public float percentageCool = 0.0003f;
     public float percentagePerfect = 0.0005f;
     public float percentageHeavy = 0.001f;
 
     [SerializeField] SpeakerParticle[] speakers;
-
+    private int counter_beats = 1; private int counter_measures = 0;
+    public TMP_Text pointsText;
     private void Awake()
     {
         if (_instance == null)
@@ -49,26 +53,33 @@ public class LevelManager : MonoBehaviour
         BeatManager.onFixedBeat += metronome;
     }
 
-    public int counter_beats = 0, counter_measures = 0;
-    public bool gameStarted { get; private set; } = false;
     void metronome()
     {
+        //text.text = $"Compás {counter_measures}, pulso {counter_beats}";
         //Debug.Log($"Compás {counter_measures}, pulso {counter_beats}");
         counter_beats = (counter_beats + 1) % 4; //hardcodeado a 4/4
         if (counter_beats == 0) counter_measures++;
+
+
+        //añade de manera aleatoria a gente al escenario de forma constante
+        if(Random.Range(0,1.01f) < constantPeopleProbability)
+        {
+          //  addPointsByFloat(percentageConstant);
+        }
     }
 
     private void Start()
     {
-        BeatManager._instance.playSong();
+        //BeatManager._instance.playSong();
     }
 
-    private void Update()
+    public void addPointsByFloat(float percentage)
     {
-        if (counter_measures == 0 && counter_beats == 2) gameStarted = true; //para que empiece todo cuando pase el segundo pulso
-    }
+        puntuacion += Mathf.CeilToInt(puntuacion * percentage);
+        pointsText.text = $"PEOPLE: {puntuacion}";
 
-    public void updatePoints(SCORE s)
+    }
+    public void addPointsByScore(SCORE s)
     {
 
         foreach (SpeakerParticle speaker in speakers)
@@ -102,6 +113,7 @@ public class LevelManager : MonoBehaviour
                 break;
         }
 
+        pointsText.text = $"PEOPLE: {puntuacion}";
 
         AddScore(s);
     }
