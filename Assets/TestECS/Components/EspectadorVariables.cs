@@ -9,7 +9,7 @@ public struct EspectadorVariables : IComponentData, IEnableableComponent
 
     public float3 crowdPoint;
 
-    public enum espectatorStates { IDLE, JUMP, POGO, POGOEXIT, POGOEND, ARRASTE }
+    public enum espectatorStates { IDLE, JUMP, POGO, POGOEXIT, POGOEND, ARRASTE, CAMINANDO }
     public espectatorStates estado;// = charStates.IDLE;
 
     public float jumpForce;// = 20.0f;
