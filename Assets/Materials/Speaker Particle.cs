@@ -14,16 +14,25 @@ public class SpeakerParticle : MonoBehaviour
     ParticleSystem heavyParticles;
 
 
-    public void playParticle()
+    public void playParticle(SCORE score)
     {
         musicParticles.Play();
-
-        // MIERDA DE DIFERENCIAR EN FUNCION A LA PUNTUACION, QUE NO SE HACERLO
-        // SEGURO QUE ES FACIL A ALGUIEN SE LE HABRA OCURRIDO HACER UN SINGLETON PARA SACAR LA PUNTUACION ACTUAL O ALGO
-        // QUE ALGUIEN LLAME A ALGUIEN
-        terribleParticles.Play();
-        coolParticles.Play();
-        perfectParticles.Play();
-        heavyParticles.Play();
+        switch (score)
+        {
+            case SCORE.HEAVY:
+                heavyParticles.Play();
+                break;
+            case SCORE.PERFECT:
+                perfectParticles.Play();
+                break;
+            case SCORE.COOL:
+                coolParticles.Play();
+                break;
+            case SCORE.TERRIBLE:
+                terribleParticles.Play();
+                break;
+            case SCORE.NONE:
+                break;
+        }
     }
 }

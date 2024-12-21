@@ -154,7 +154,7 @@ public class BeatManager : MonoBehaviour
     public float percentagePerfect = 0.0005f;
     public float percentageHeavy = 0.001f;
 
-
+    [SerializeField] SpeakerParticle[] speakers;
 
 
     public SCORE evaluateClick(float clickTime)
@@ -171,8 +171,9 @@ public class BeatManager : MonoBehaviour
         else if (accuracy < 0.80f) res = SCORE.COOL; //10000 : 1
         else if (accuracy < 0.95f) res = SCORE.PERFECT; //10000 : 5
         else res = SCORE.HEAVY; //10000 : 10
-        Debug.Log($"Beat {current_beat}: {accuracy} , {res} !! ---- Click on: {clickTime}, beat on: {current_beat_time}");
-
+        //Debug.Log($"Beat {current_beat}: {accuracy} , {res} !! ---- Click on: {clickTime}, beat on: {current_beat_time}");
+        foreach (SpeakerParticle speaker in speakers)
+            speaker.playParticle(res);
         //nota, spawmear permite dar al final con todas las notas, ya sean aciertos o fallos y subir siempre, habria qu elimitar el que solo s epudea hacer uan vez cada beat, apra saber cual sera nuestro máximo
 
         switch (res)
