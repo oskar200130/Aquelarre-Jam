@@ -890,232 +890,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 209474199626159415, guid: 8aa08301885cf404d85e34ad29bec6bf, type: 3}
   m_PrefabInstance: {fileID: 1193059499}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &307791265
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 307791266}
-  - component: {fileID: 307791268}
-  - component: {fileID: 307791267}
-  m_Layer: 0
-  m_Name: Camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &307791266
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307791265}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.769999, y: 21.3, z: -13.110001}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1675566909}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &307791267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307791265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 559361d2a2b2ff043886826f1eae5b8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _globalVolume: {fileID: 1779941395}
-  chill_normal_heavy: 0
-  postproModes:
-  - useComplexLerp: 0
-    useBloom: 0
-    useLensDistortion: 0
-    useChromaticAberration: 0
-    useVignette: 0
-    useColorAdjustements: 0
-    scatter: 0
-    scatterInterpolation: {x: 0, y: 0}
-    useScatter: 0
-    scatterDoInterpolation: 0
-    bloomIntensity: 0
-    bloomIntensityInterpolation: {x: 0, y: 0}
-    useBloomIntensity: 0
-    bloomIntensityDoInterpolation: 0
-    bloomTint: {r: 0, g: 0, b: 0, a: 0}
-    bloomTintInterpolation: []
-    useBloomTint: 0
-    bloomTintDoInterpolation: 0
-    lensDistortionIntensity: 0
-    lensDistortionIntensityInterpolation: {x: 0, y: 0}
-    useLensDistortionIntensity: 0
-    lensDistortionIntensityDoInterpolation: 0
-    _chromaticAberrationIntensity: 0
-    _chromaticAberrationInterpolation: {x: 0, y: 0}
-    useChromaticAberrationIntensity: 0
-    chromaticAberrationIntensityDoInterpolation: 0
-    vignetteIntensity: 0
-    vignetteIntensityInterpolation: {x: 0, y: 0}
-    useVignetteIntensity: 0
-    vignetteIntensityDoInterpolation: 0
-    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
-    vignetteColorInterpolation: []
-    useVignetteColor: 0
-    vignetteColorDoInterpolation: 0
-    postExposure: 0
-    postExposureInterpolation: {x: 0, y: 0}
-    usePostExposure: 0
-    postExposureDoInterpolation: 0
-    contrast: 0
-    contrastInterpolation: {x: 0, y: 0}
-    useContrast: 0
-    contrastDoInterpolation: 0
-    colorFilter: {r: 0, g: 0, b: 0, a: 0}
-    colorFilterInterpolation: []
-    useColorFilter: 0
-    colorFilterDoInterpolation: 0
-    hueShift: 0
-    hueShiftInterpolation: {x: 0, y: 0}
-    useHueShift: 0
-    hueShiftDoInterpolation: 0
-    saturation: 0
-    saturationInterpolation: {x: 0, y: 0}
-    useSaturation: 0
-    saturationDoInterpolation: 0
-  - useComplexLerp: 0
-    useBloom: 0
-    useLensDistortion: 0
-    useChromaticAberration: 0
-    useVignette: 0
-    useColorAdjustements: 0
-    scatter: 0
-    scatterInterpolation: {x: 0, y: 0}
-    useScatter: 0
-    scatterDoInterpolation: 0
-    bloomIntensity: 0
-    bloomIntensityInterpolation: {x: 0, y: 0}
-    useBloomIntensity: 0
-    bloomIntensityDoInterpolation: 0
-    bloomTint: {r: 0, g: 0, b: 0, a: 0}
-    bloomTintInterpolation: []
-    useBloomTint: 0
-    bloomTintDoInterpolation: 0
-    lensDistortionIntensity: 0
-    lensDistortionIntensityInterpolation: {x: 0, y: 0}
-    useLensDistortionIntensity: 0
-    lensDistortionIntensityDoInterpolation: 0
-    _chromaticAberrationIntensity: 0
-    _chromaticAberrationInterpolation: {x: 0, y: 0}
-    useChromaticAberrationIntensity: 0
-    chromaticAberrationIntensityDoInterpolation: 0
-    vignetteIntensity: 0
-    vignetteIntensityInterpolation: {x: 0, y: 0}
-    useVignetteIntensity: 0
-    vignetteIntensityDoInterpolation: 0
-    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
-    vignetteColorInterpolation: []
-    useVignetteColor: 0
-    vignetteColorDoInterpolation: 0
-    postExposure: 0
-    postExposureInterpolation: {x: 0, y: 0}
-    usePostExposure: 0
-    postExposureDoInterpolation: 0
-    contrast: 0
-    contrastInterpolation: {x: 0, y: 0}
-    useContrast: 0
-    contrastDoInterpolation: 0
-    colorFilter: {r: 0, g: 0, b: 0, a: 0}
-    colorFilterInterpolation: []
-    useColorFilter: 0
-    colorFilterDoInterpolation: 0
-    hueShift: 0
-    hueShiftInterpolation: {x: 0, y: 0}
-    useHueShift: 0
-    hueShiftDoInterpolation: 0
-    saturation: 0
-    saturationInterpolation: {x: 0, y: 0}
-    useSaturation: 0
-    saturationDoInterpolation: 0
-  - useComplexLerp: 0
-    useBloom: 0
-    useLensDistortion: 0
-    useChromaticAberration: 0
-    useVignette: 0
-    useColorAdjustements: 0
-    scatter: 0
-    scatterInterpolation: {x: 0, y: 0}
-    useScatter: 0
-    scatterDoInterpolation: 0
-    bloomIntensity: 0
-    bloomIntensityInterpolation: {x: 0, y: 0}
-    useBloomIntensity: 0
-    bloomIntensityDoInterpolation: 0
-    bloomTint: {r: 0, g: 0, b: 0, a: 0}
-    bloomTintInterpolation: []
-    useBloomTint: 0
-    bloomTintDoInterpolation: 0
-    lensDistortionIntensity: 0
-    lensDistortionIntensityInterpolation: {x: 0, y: 0}
-    useLensDistortionIntensity: 0
-    lensDistortionIntensityDoInterpolation: 0
-    _chromaticAberrationIntensity: 0
-    _chromaticAberrationInterpolation: {x: 0, y: 0}
-    useChromaticAberrationIntensity: 0
-    chromaticAberrationIntensityDoInterpolation: 0
-    vignetteIntensity: 0
-    vignetteIntensityInterpolation: {x: 0, y: 0}
-    useVignetteIntensity: 0
-    vignetteIntensityDoInterpolation: 0
-    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
-    vignetteColorInterpolation: []
-    useVignetteColor: 0
-    vignetteColorDoInterpolation: 0
-    postExposure: 0
-    postExposureInterpolation: {x: 0, y: 0}
-    usePostExposure: 0
-    postExposureDoInterpolation: 0
-    contrast: 0
-    contrastInterpolation: {x: 0, y: 0}
-    useContrast: 0
-    contrastDoInterpolation: 0
-    colorFilter: {r: 0, g: 0, b: 0, a: 0}
-    colorFilterInterpolation: []
-    useColorFilter: 0
-    colorFilterDoInterpolation: 0
-    hueShift: 0
-    hueShiftInterpolation: {x: 0, y: 0}
-    useHueShift: 0
-    hueShiftDoInterpolation: 0
-    saturation: 0
-    saturationInterpolation: {x: 0, y: 0}
-    useSaturation: 0
-    saturationDoInterpolation: 0
---- !u!114 &307791268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307791265}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 126fb9b40fd3dbb4b8b9a13d3a12831f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuPos: {fileID: 1560401722}
-  initialPos: {fileID: 1352194417}
-  farStepsPositions: []
 --- !u!1001 &341589735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2146,343 +1920,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fadb3db4363c084db886ca5dd37eeb0, type: 3}
---- !u!1 &891132335
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 891132338}
-  - component: {fileID: 891132337}
-  - component: {fileID: 891132339}
-  - component: {fileID: 891132340}
-  - component: {fileID: 891132341}
-  - component: {fileID: 891132342}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!20 &891132337
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891132335}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 108
-  orthographic: 0
-  orthographic size: 0.9
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &891132338
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891132335}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.51615596, y: -0, z: -0, w: 0.8564946}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1675566909}
-  m_LocalEulerAnglesHint: {x: 62.149, y: 0, z: 0}
---- !u!114 &891132339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891132335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 1
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_AllowHDROutput: 1
-  m_UseScreenCoordOverride: 0
-  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
-  m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
---- !u!114 &891132340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891132335}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 126fb9b40fd3dbb4b8b9a13d3a12831f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuPos: {fileID: 1560401722}
-  initialPos: {fileID: 1352194417}
-  farStepsPositions: []
---- !u!114 &891132341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891132335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 559361d2a2b2ff043886826f1eae5b8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _globalVolume: {fileID: 1779941395}
-  chill_normal_heavy: 0
-  postproModes:
-  - useComplexLerp: 0
-    useBloom: 0
-    useLensDistortion: 0
-    useChromaticAberration: 0
-    useVignette: 0
-    useColorAdjustements: 0
-    scatter: 0
-    scatterInterpolation: {x: 0, y: 0}
-    useScatter: 0
-    scatterDoInterpolation: 0
-    bloomIntensity: 0
-    bloomIntensityInterpolation: {x: 0, y: 0}
-    useBloomIntensity: 0
-    bloomIntensityDoInterpolation: 0
-    bloomTint: {r: 0, g: 0, b: 0, a: 0}
-    bloomTintInterpolation: []
-    useBloomTint: 0
-    bloomTintDoInterpolation: 0
-    lensDistortionIntensity: 0
-    lensDistortionIntensityInterpolation: {x: 0, y: 0}
-    useLensDistortionIntensity: 0
-    lensDistortionIntensityDoInterpolation: 0
-    _chromaticAberrationIntensity: 0
-    _chromaticAberrationInterpolation: {x: 0, y: 0}
-    useChromaticAberrationIntensity: 0
-    chromaticAberrationIntensityDoInterpolation: 0
-    vignetteIntensity: 0
-    vignetteIntensityInterpolation: {x: 0, y: 0}
-    useVignetteIntensity: 0
-    vignetteIntensityDoInterpolation: 0
-    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
-    vignetteColorInterpolation: []
-    useVignetteColor: 0
-    vignetteColorDoInterpolation: 0
-    postExposure: 0
-    postExposureInterpolation: {x: 0, y: 0}
-    usePostExposure: 0
-    postExposureDoInterpolation: 0
-    contrast: 0
-    contrastInterpolation: {x: 0, y: 0}
-    useContrast: 0
-    contrastDoInterpolation: 0
-    colorFilter: {r: 0, g: 0, b: 0, a: 0}
-    colorFilterInterpolation: []
-    useColorFilter: 0
-    colorFilterDoInterpolation: 0
-    hueShift: 0
-    hueShiftInterpolation: {x: 0, y: 0}
-    useHueShift: 0
-    hueShiftDoInterpolation: 0
-    saturation: 0
-    saturationInterpolation: {x: 0, y: 0}
-    useSaturation: 0
-    saturationDoInterpolation: 0
-  - useComplexLerp: 0
-    useBloom: 0
-    useLensDistortion: 0
-    useChromaticAberration: 0
-    useVignette: 0
-    useColorAdjustements: 0
-    scatter: 0
-    scatterInterpolation: {x: 0, y: 0}
-    useScatter: 0
-    scatterDoInterpolation: 0
-    bloomIntensity: 0
-    bloomIntensityInterpolation: {x: 0, y: 0}
-    useBloomIntensity: 0
-    bloomIntensityDoInterpolation: 0
-    bloomTint: {r: 0, g: 0, b: 0, a: 0}
-    bloomTintInterpolation: []
-    useBloomTint: 0
-    bloomTintDoInterpolation: 0
-    lensDistortionIntensity: 0
-    lensDistortionIntensityInterpolation: {x: 0, y: 0}
-    useLensDistortionIntensity: 0
-    lensDistortionIntensityDoInterpolation: 0
-    _chromaticAberrationIntensity: 0
-    _chromaticAberrationInterpolation: {x: 0, y: 0}
-    useChromaticAberrationIntensity: 0
-    chromaticAberrationIntensityDoInterpolation: 0
-    vignetteIntensity: 0
-    vignetteIntensityInterpolation: {x: 0, y: 0}
-    useVignetteIntensity: 0
-    vignetteIntensityDoInterpolation: 0
-    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
-    vignetteColorInterpolation: []
-    useVignetteColor: 0
-    vignetteColorDoInterpolation: 0
-    postExposure: 0
-    postExposureInterpolation: {x: 0, y: 0}
-    usePostExposure: 0
-    postExposureDoInterpolation: 0
-    contrast: 0
-    contrastInterpolation: {x: 0, y: 0}
-    useContrast: 0
-    contrastDoInterpolation: 0
-    colorFilter: {r: 0, g: 0, b: 0, a: 0}
-    colorFilterInterpolation: []
-    useColorFilter: 0
-    colorFilterDoInterpolation: 0
-    hueShift: 0
-    hueShiftInterpolation: {x: 0, y: 0}
-    useHueShift: 0
-    hueShiftDoInterpolation: 0
-    saturation: 0
-    saturationInterpolation: {x: 0, y: 0}
-    useSaturation: 0
-    saturationDoInterpolation: 0
-  - useComplexLerp: 0
-    useBloom: 0
-    useLensDistortion: 0
-    useChromaticAberration: 0
-    useVignette: 0
-    useColorAdjustements: 0
-    scatter: 0
-    scatterInterpolation: {x: 0, y: 0}
-    useScatter: 0
-    scatterDoInterpolation: 0
-    bloomIntensity: 0
-    bloomIntensityInterpolation: {x: 0, y: 0}
-    useBloomIntensity: 0
-    bloomIntensityDoInterpolation: 0
-    bloomTint: {r: 0, g: 0, b: 0, a: 0}
-    bloomTintInterpolation: []
-    useBloomTint: 0
-    bloomTintDoInterpolation: 0
-    lensDistortionIntensity: 0
-    lensDistortionIntensityInterpolation: {x: 0, y: 0}
-    useLensDistortionIntensity: 0
-    lensDistortionIntensityDoInterpolation: 0
-    _chromaticAberrationIntensity: 0
-    _chromaticAberrationInterpolation: {x: 0, y: 0}
-    useChromaticAberrationIntensity: 0
-    chromaticAberrationIntensityDoInterpolation: 0
-    vignetteIntensity: 0
-    vignetteIntensityInterpolation: {x: 0, y: 0}
-    useVignetteIntensity: 0
-    vignetteIntensityDoInterpolation: 0
-    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
-    vignetteColorInterpolation: []
-    useVignetteColor: 0
-    vignetteColorDoInterpolation: 0
-    postExposure: 0
-    postExposureInterpolation: {x: 0, y: 0}
-    usePostExposure: 0
-    postExposureDoInterpolation: 0
-    contrast: 0
-    contrastInterpolation: {x: 0, y: 0}
-    useContrast: 0
-    contrastDoInterpolation: 0
-    colorFilter: {r: 0, g: 0, b: 0, a: 0}
-    colorFilterInterpolation: []
-    useColorFilter: 0
-    colorFilterDoInterpolation: 0
-    hueShift: 0
-    hueShiftInterpolation: {x: 0, y: 0}
-    useHueShift: 0
-    hueShiftDoInterpolation: 0
-    saturation: 0
-    saturationInterpolation: {x: 0, y: 0}
-    useSaturation: 0
-    saturationDoInterpolation: 0
---- !u!114 &891132342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891132335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nonRigidbodyVelocity: 0
-  attenuationObject: {fileID: 0}
 --- !u!4 &914902190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 209474199626159415, guid: 1fadb3db4363c084db886ca5dd37eeb0, type: 3}
@@ -2882,6 +2319,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 209474199626159415, guid: 5055bc9665be83747903288d80e8bd53, type: 3}
   m_PrefabInstance: {fileID: 1770823912}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1059264754
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3120585683735094066, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 21.769999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120585683735094066, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 21.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120585683735094066, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.110001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120585683735094066, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8564946
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120585683735094066, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.51615596
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120585683735094066, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120585683735094066, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120585683735094066, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 62.149
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120585683735094066, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120585683735094066, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3582808091347979542, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_Name
+      value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8902488630703878751, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: _globalVolume
+      value: 
+      objectReference: {fileID: 1779941395}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
 --- !u!1 &1066305927
 GameObject:
   m_ObjectHideFlags: 0
@@ -3051,7 +2549,7 @@ MonoBehaviour:
   puntuacion: 1000
   beatMarkerContainerAnimator: {fileID: 1188774878}
   goatsController: {fileID: 8719917828556144306}
-  thunder: {fileID: 0}
+  thunder: {fileID: -1956182793875612465, guid: 03daa419324af334f939260558fcc12b, type: 3}
   constantPeopleProbability: 0.7
   percentageConstant: 0.00001
   percentageCool: 0.0001
@@ -3062,6 +2560,9 @@ MonoBehaviour:
   - {fileID: 1393617518}
   pointsText: {fileID: 354622928}
   actualState: 0
+  nFreestyles: 3
+  freestyleProbability: 0.35
+  freestyleGO: {fileID: 499500261}
   gameStarted: 0
 --- !u!4 &1147868052
 Transform:
@@ -4548,67 +4049,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fadb3db4363c084db886ca5dd37eeb0, type: 3}
---- !u!1001 &1588586022
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 23.040796
-      objectReference: {fileID: 0}
-    - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.99998474
-      objectReference: {fileID: 0}
-    - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 58.476906
-      objectReference: {fileID: 0}
-    - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.89153576
-      objectReference: {fileID: 0}
-    - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.45295033
-      objectReference: {fileID: 0}
-    - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 53.866
-      objectReference: {fileID: 0}
-    - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8487378614071711959, guid: a302b2d128b88924ab04764376d75de0, type: 3}
-      propertyPath: m_Name
-      value: Meca Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 8487378614071711959, guid: a302b2d128b88924ab04764376d75de0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a302b2d128b88924ab04764376d75de0, type: 3}
 --- !u!4 &1615560225 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 209474199626159415, guid: 1fadb3db4363c084db886ca5dd37eeb0, type: 3}
@@ -4743,61 +4183,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8aa08301885cf404d85e34ad29bec6bf, type: 3}
---- !u!1 &1675566908
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1675566909}
-  - component: {fileID: 1675566910}
-  m_Layer: 0
-  m_Name: Camera Container
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1675566909
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675566908}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 891132338}
-  m_Father: {fileID: 307791266}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1675566910
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675566908}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a2577398dd2e92841bc54496ada9c506, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1719510013
 GameObject:
   m_ObjectHideFlags: 0
@@ -17256,7 +16641,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 64254729}
-  - {fileID: 307791266}
+  - {fileID: 1059264754}
   - {fileID: 1779941396}
   - {fileID: 816207282}
   - {fileID: 602938858}
@@ -17272,7 +16657,6 @@ SceneRoots:
   - {fileID: 1522010523}
   - {fileID: 8972977258502168759}
   - {fileID: 592198830}
-  - {fileID: 1588586022}
   - {fileID: 1407838546}
   - {fileID: 1964617050}
   - {fileID: 1801637762}

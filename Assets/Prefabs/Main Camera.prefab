@@ -165,7 +165,7 @@ MonoBehaviour:
     useBloom: 1
     useLensDistortion: 0
     useChromaticAberration: 1
-    useVignette: 0
+    useVignette: 1
     useColorAdjustements: 0
     scatter: 1
     scatterInterpolation: {x: 0, y: 1}
@@ -184,16 +184,16 @@ MonoBehaviour:
     useLensDistortionIntensity: 0
     lensDistortionIntensityDoInterpolation: 0
     _chromaticAberrationIntensity: 0.195
-    _chromaticAberrationInterpolation: {x: 0.195, y: 1}
+    _chromaticAberrationInterpolation: {x: 0.195, y: 0.8}
     useChromaticAberrationIntensity: 1
     chromaticAberrationIntensityDoInterpolation: 1
-    vignetteIntensity: 0
+    vignetteIntensity: 0.35
     vignetteIntensityInterpolation: {x: 0, y: 0}
-    useVignetteIntensity: 0
+    useVignetteIntensity: 1
     vignetteIntensityDoInterpolation: 0
-    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+    vignetteColor: {r: 0.26821658, g: 0.8490566, b: 0.20425417, a: 0}
     vignetteColorInterpolation: []
-    useVignetteColor: 0
+    useVignetteColor: 1
     vignetteColorDoInterpolation: 0
     postExposure: 0
     postExposureInterpolation: {x: 0, y: 0}
@@ -219,14 +219,14 @@ MonoBehaviour:
     useBloom: 1
     useLensDistortion: 0
     useChromaticAberration: 1
-    useVignette: 0
+    useVignette: 1
     useColorAdjustements: 0
     scatter: 1
     scatterInterpolation: {x: 0, y: 1}
     useScatter: 1
     scatterDoInterpolation: 0
     bloomIntensity: 1.46
-    bloomIntensityInterpolation: {x: 1.46, y: 1}
+    bloomIntensityInterpolation: {x: 1.6, y: 1}
     useBloomIntensity: 1
     bloomIntensityDoInterpolation: 1
     bloomTint: {r: 1, g: 1, b: 1, a: 0}
@@ -238,16 +238,16 @@ MonoBehaviour:
     useLensDistortionIntensity: 0
     lensDistortionIntensityDoInterpolation: 0
     _chromaticAberrationIntensity: 0.195
-    _chromaticAberrationInterpolation: {x: 0.195, y: 1}
+    _chromaticAberrationInterpolation: {x: 0.4, y: 1.2}
     useChromaticAberrationIntensity: 1
     chromaticAberrationIntensityDoInterpolation: 1
-    vignetteIntensity: 0
+    vignetteIntensity: 0.5
     vignetteIntensityInterpolation: {x: 0, y: 0}
-    useVignetteIntensity: 0
+    useVignetteIntensity: 1
     vignetteIntensityDoInterpolation: 0
-    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+    vignetteColor: {r: 0.764151, g: 0.26171386, b: 0.010813437, a: 0}
     vignetteColorInterpolation: []
-    useVignetteColor: 0
+    useVignetteColor: 1
     vignetteColorDoInterpolation: 0
     postExposure: 0
     postExposureInterpolation: {x: 0, y: 0}
@@ -271,37 +271,37 @@ MonoBehaviour:
     saturationDoInterpolation: 0
   - useComplexLerp: 1
     useBloom: 1
-    useLensDistortion: 0
+    useLensDistortion: 1
     useChromaticAberration: 1
-    useVignette: 0
+    useVignette: 1
     useColorAdjustements: 0
-    scatter: 1
+    scatter: 0.783
     scatterInterpolation: {x: 0, y: 1}
     useScatter: 1
     scatterDoInterpolation: 0
     bloomIntensity: 1.46
-    bloomIntensityInterpolation: {x: 1.46, y: 1}
+    bloomIntensityInterpolation: {x: 1, y: 2}
     useBloomIntensity: 1
     bloomIntensityDoInterpolation: 1
     bloomTint: {r: 1, g: 1, b: 1, a: 0}
     bloomTintInterpolation: []
     useBloomTint: 1
     bloomTintDoInterpolation: 0
-    lensDistortionIntensity: 0
+    lensDistortionIntensity: 0.212
     lensDistortionIntensityInterpolation: {x: 0, y: 0}
     useLensDistortionIntensity: 0
     lensDistortionIntensityDoInterpolation: 0
     _chromaticAberrationIntensity: 0.195
-    _chromaticAberrationInterpolation: {x: 0.195, y: 1}
+    _chromaticAberrationInterpolation: {x: 0.195, y: 2}
     useChromaticAberrationIntensity: 1
     chromaticAberrationIntensityDoInterpolation: 1
     vignetteIntensity: 0
-    vignetteIntensityInterpolation: {x: 0, y: 0}
-    useVignetteIntensity: 0
-    vignetteIntensityDoInterpolation: 0
-    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+    vignetteIntensityInterpolation: {x: 0.4, y: 0.7}
+    useVignetteIntensity: 1
+    vignetteIntensityDoInterpolation: 1
+    vignetteColor: {r: 0.8867924, g: 0, b: 0, a: 0}
     vignetteColorInterpolation: []
-    useVignetteColor: 0
+    useVignetteColor: 1
     vignetteColorDoInterpolation: 0
     postExposure: 0
     postExposureInterpolation: {x: 0, y: 0}
