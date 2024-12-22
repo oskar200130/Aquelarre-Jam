@@ -44,7 +44,7 @@ public partial class SpawnPublicSystem : SystemBase
 
                 //replantear las posiciones de spawn para que sean en un semi circulo desde el escenario (a saber como son esas mates)
                 Entity newEntity = ecb.Instantiate(spawner.prefab);
-                ecb.SetComponent(newEntity, new SortingData(0, 10));
+                ecb.SetComponent(newEntity, new SortingData(1, 1));
                 int rowPos = (int)spawner.spawnLengthNumber / 2 + (i % 2 == 0 ? -(i % (int)spawner.spawnLengthNumber) / 2 : ((i % (int)spawner.spawnLengthNumber) + 1) / 2);
                 float x = rowPos * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
                 //lo he puesto en negativo, apra que el publico crezca hacia atras y no hacia el escenario jjjj
@@ -56,9 +56,9 @@ public partial class SpawnPublicSystem : SystemBase
 
                 quaternion rotation;
                 if (RandomGenerator.NextBool()) 
-                    rotation = new quaternion(0.32556805f, 0f, 0f, 0.945518613f);
+                    rotation = new quaternion(0.34f, 0f, 0f, 0.94f);
                 else
-                    rotation = new quaternion(0f, -0.32556805f, 0.945518613f, 0f);
+                    rotation = new quaternion(0f, 0.94f, 0.34f, 0f);
                 
                 ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(SpawnPoint, rotation));
 

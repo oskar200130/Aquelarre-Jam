@@ -354,9 +354,7 @@ MonoBehaviour:
   downBeatEvent: {fileID: -1956182793875612465, guid: d6bf9b0a512f8c943a77e79d0b5f5fdc, type: 3}
   upBeatEvent: {fileID: -1956182793875612465, guid: d6bf9b0a512f8c943a77e79d0b5f5fdc, type: 3}
   upBeatDivisor: 1
-  terribleThreshold: 0.4
-  coolThreshold: 0.75
-  perfectThreshold: 0.9
+  earlyTolerancePercentage: 0.1
 --- !u!4 &93203492
 Transform:
   m_ObjectHideFlags: 0
@@ -2950,6 +2948,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puntuacion: 1000
   beatMarkerContainerAnimator: {fileID: 1188774878}
+  goatsController: {fileID: 0}
+  thunder: {fileID: 0}
   constantPeopleProbability: 0.7
   percentageConstant: 0.00001
   percentageCool: 0.0001
@@ -2960,6 +2960,7 @@ MonoBehaviour:
   - {fileID: 1393617518}
   pointsText: {fileID: 354622928}
   actualState: 0
+  gameStarted: 0
 --- !u!4 &1147868052
 Transform:
   m_ObjectHideFlags: 0
@@ -2992,7 +2993,7 @@ MonoBehaviour:
   - {fileID: 5034826773972506533, guid: 43d0e0cf53150a94bb5c2922d2e06f81, type: 3}
   - {fileID: 8745455329611077599, guid: 00fe9fd02f7235c44b4e747968123a0c, type: 3}
   minBeatsBetweenEvents: 20
-  probabilitySpawnEffect: 5
+  probabilitySpawnEffect: 50
 --- !u!1 &1161155906
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,6 @@ public class BillboardShit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(cam.position);
+        transform.LookAt(cam.position+Vector3.back*20);     //La suma es para que no se giren las palabras
     }
 }

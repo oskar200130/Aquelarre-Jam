@@ -41,6 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Witches
+    uniqueID: 411078051
+    locked: 0
+  - name: Overlay
+    uniqueID: 3953326725
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1
