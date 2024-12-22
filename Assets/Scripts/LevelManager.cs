@@ -48,6 +48,12 @@ public class LevelManager : MonoBehaviour
     public int nFreestyles = 3; public float freestyleProbability = 0.35f;  private int doneFreestyles = 0; bool canFreestyle = true;
     public GameObject freestyleGO;
     private int freestyleStartMeasure = 0;
+
+    [SerializeField]
+    Animator lightAnimator;
+    [SerializeField]
+    GameObject trees;
+
     [SerializeField]
     float[] milestonesPoints;
     private int idMilestone = 0;
@@ -170,6 +176,7 @@ public class LevelManager : MonoBehaviour
                 if (actualState == STATES.CHILL) return;
                 actualState = STATES.CHILL;
                 Debug.Log("cambio a estado chill, trankilitos");
+                quitarEpilepsia();
                 break;
             case 10:
             case 30:
@@ -190,6 +197,7 @@ public class LevelManager : MonoBehaviour
                 if (actualState == STATES.NORMAL) return;
                 actualState = STATES.NORMAL;
                 Debug.Log("cambio a estado Normal, se pone intensillo");
+                //quitarEpilepsia();
                 break;
 
             case 45:
@@ -209,6 +217,7 @@ public class LevelManager : MonoBehaviour
                 if (actualState == STATES.HEAVY) return;
                 mostrarCabra();
                 actualState = STATES.HEAVY;
+                epilepsia();
                 Debug.Log("cambio a estado HEAVY, WOOOOOOOOOOO");
                 break;
             default:
@@ -224,6 +233,27 @@ public class LevelManager : MonoBehaviour
         thunder.Play();
         Debug.Log("LA CABRAAAAAAAAAAA");
         cabraLoca = true;
+    }
+
+    public void epilepsia()
+    {
+        lightAnimator.SetTrigger("HEAVY");
+        Animator[] childAnimators = trees.GetComponentsInChildren<Animator>();
+
+        foreach (Animator animator in childAnimators)
+        {
+            animator.enabled = true; 
+        }
+    }
+    public void quitarEpilepsia()
+    {
+        lightAnimator.SetTrigger("ANTIHEAVY");
+        Animator[] childAnimators = trees.GetComponentsInChildren<Animator>();
+
+        foreach (Animator animator in childAnimators)
+        {
+            animator.enabled = false;
+        }
     }
 
     private void Start()
@@ -304,3 +334,4 @@ public enum STATES
     NORMAL,
     HEAVY
 }
+
