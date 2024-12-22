@@ -11,6 +11,8 @@ public class EventRandomSpawn : MonoBehaviour
     float probabilitySpawnEffect;
 
     private int lastSpawn = 0;
+
+    public bool freestyleMode = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,6 +27,7 @@ public class EventRandomSpawn : MonoBehaviour
 
     void CreateEvent()
     {
+        if (freestyleMode) return;
         if (lastSpawn <= 0)
         {
             if (Random.Range(0f, 100f) >= probabilitySpawnEffect) return;
