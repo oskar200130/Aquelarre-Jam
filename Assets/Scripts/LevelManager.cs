@@ -61,7 +61,7 @@ public class LevelManager : MonoBehaviour
     void metronome()
     {
         //text.text = $"Compás {counter_measures}, pulso {counter_beats}";
-        Debug.Log($"Compás {counter_measures+1}, pulso {counter_beats}");
+        //Debug.Log($"Compás {counter_measures+1}, pulso {counter_beats}");
 
         checkSongStates();
         counter_beats = (counter_beats + 1) % 4; //hardcodeado a 4/4

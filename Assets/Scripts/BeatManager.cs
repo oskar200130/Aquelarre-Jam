@@ -460,11 +460,12 @@ public class BeatManager : MonoBehaviour
      TIMELINE DE BEAT    lastBeat -1------------------------------------onMiddlebeat 0----------------------------------- nextBeat 1
      TIEMPO CUANDO CLICK   HEAVY  PERFECT  COOL   COOL  COOL  TERRIBLE  TERRIBLE  TERRIBLE   COOL   COOL   COOL   PERFECT HEAVY
         algo asi.
-        */
+        
+           */
 
         SCORE res = SCORE.NONE;
         double clickTime = GetCurrentTime(); double lastBeat = lastFixedBeatDSPTime; double nextBeat = lastBeat + beatInterval; double middleBeat = lastBeat + (beatInterval *0.5);
-        double evaluacion;
+        double evaluacion; 
         if (clickTime < middleBeat)
         {
             //comprueba con el beat anterior 
