@@ -108,6 +108,7 @@ public class LevelManager : MonoBehaviour
             case 95:
                 if (actualState == STATES.CHILL) return;
                 actualState = STATES.CHILL;
+                esconderCabra();
                 Debug.Log("cambio a estado chill, trankilitos");
                 break;
             case 10:
@@ -116,6 +117,7 @@ public class LevelManager : MonoBehaviour
             case 54:
                 if (actualState == STATES.NORMAL) return;
                 actualState = STATES.NORMAL;
+                esconderCabra();
                 Debug.Log("cambio a estado Normal, se pone intensillo");
                 break;
             case 46:
@@ -123,11 +125,21 @@ public class LevelManager : MonoBehaviour
                 if (actualState == STATES.HEAVY) return;
                 actualState = STATES.HEAVY;
                 Debug.Log("cambio a estado HEAVY, WOOOOOOOOOOO");
+                mostrarCabra();
                 break;
             default:
                 break;
 
         }
+    }
+
+    public void mostrarCabra()
+    {
+        Debug.Log("LA CABRAAAAAAAAAAA");
+    }
+    public void esconderCabra()
+    {
+        Debug.Log("nos dejo el cabrito");
     }
 
     private void Start()
