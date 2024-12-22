@@ -1,0 +1,339 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3582808091347979542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3120585683735094066}
+  - component: {fileID: 2772087570557210257}
+  - component: {fileID: 1019519110746707839}
+  - component: {fileID: 2318587400272111206}
+  - component: {fileID: 8902488630703878751}
+  - component: {fileID: 5214620866969700407}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3120585683735094066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582808091347979542}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.51615596, y: -0, z: -0, w: 0.8564946}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 62.149, y: 0, z: 0}
+--- !u!20 &2772087570557210257
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582808091347979542}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 108
+  orthographic: 0
+  orthographic size: 0.9
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!114 &1019519110746707839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582808091347979542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+--- !u!114 &2318587400272111206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582808091347979542}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 126fb9b40fd3dbb4b8b9a13d3a12831f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuPos: {fileID: 0}
+  initialPos: {fileID: 0}
+  farStepsPositions: []
+--- !u!114 &8902488630703878751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582808091347979542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559361d2a2b2ff043886826f1eae5b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _globalVolume: {fileID: 0}
+  chill_normal_heavy: 0
+  postproModes:
+  - useComplexLerp: 1
+    useBloom: 1
+    useLensDistortion: 0
+    useChromaticAberration: 1
+    useVignette: 0
+    useColorAdjustements: 0
+    scatter: 1
+    scatterInterpolation: {x: 0, y: 1}
+    useScatter: 1
+    scatterDoInterpolation: 0
+    bloomIntensity: 1.46
+    bloomIntensityInterpolation: {x: 1.46, y: 1}
+    useBloomIntensity: 1
+    bloomIntensityDoInterpolation: 1
+    bloomTint: {r: 1, g: 1, b: 1, a: 0}
+    bloomTintInterpolation: []
+    useBloomTint: 1
+    bloomTintDoInterpolation: 0
+    lensDistortionIntensity: 0
+    lensDistortionIntensityInterpolation: {x: 0, y: 0}
+    useLensDistortionIntensity: 0
+    lensDistortionIntensityDoInterpolation: 0
+    _chromaticAberrationIntensity: 0.195
+    _chromaticAberrationInterpolation: {x: 0.195, y: 1}
+    useChromaticAberrationIntensity: 1
+    chromaticAberrationIntensityDoInterpolation: 1
+    vignetteIntensity: 0
+    vignetteIntensityInterpolation: {x: 0, y: 0}
+    useVignetteIntensity: 0
+    vignetteIntensityDoInterpolation: 0
+    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+    vignetteColorInterpolation: []
+    useVignetteColor: 0
+    vignetteColorDoInterpolation: 0
+    postExposure: 0
+    postExposureInterpolation: {x: 0, y: 0}
+    usePostExposure: 0
+    postExposureDoInterpolation: 0
+    contrast: 0
+    contrastInterpolation: {x: 0, y: 0}
+    useContrast: 0
+    contrastDoInterpolation: 0
+    colorFilter: {r: 0, g: 0, b: 0, a: 0}
+    colorFilterInterpolation: []
+    useColorFilter: 0
+    colorFilterDoInterpolation: 0
+    hueShift: 0
+    hueShiftInterpolation: {x: 0, y: 0}
+    useHueShift: 0
+    hueShiftDoInterpolation: 0
+    saturation: 0
+    saturationInterpolation: {x: 0, y: 0}
+    useSaturation: 0
+    saturationDoInterpolation: 0
+  - useComplexLerp: 1
+    useBloom: 1
+    useLensDistortion: 0
+    useChromaticAberration: 1
+    useVignette: 0
+    useColorAdjustements: 0
+    scatter: 1
+    scatterInterpolation: {x: 0, y: 1}
+    useScatter: 1
+    scatterDoInterpolation: 0
+    bloomIntensity: 1.46
+    bloomIntensityInterpolation: {x: 1.46, y: 1}
+    useBloomIntensity: 1
+    bloomIntensityDoInterpolation: 1
+    bloomTint: {r: 1, g: 1, b: 1, a: 0}
+    bloomTintInterpolation: []
+    useBloomTint: 1
+    bloomTintDoInterpolation: 0
+    lensDistortionIntensity: 0
+    lensDistortionIntensityInterpolation: {x: 0, y: 0}
+    useLensDistortionIntensity: 0
+    lensDistortionIntensityDoInterpolation: 0
+    _chromaticAberrationIntensity: 0.195
+    _chromaticAberrationInterpolation: {x: 0.195, y: 1}
+    useChromaticAberrationIntensity: 1
+    chromaticAberrationIntensityDoInterpolation: 1
+    vignetteIntensity: 0
+    vignetteIntensityInterpolation: {x: 0, y: 0}
+    useVignetteIntensity: 0
+    vignetteIntensityDoInterpolation: 0
+    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+    vignetteColorInterpolation: []
+    useVignetteColor: 0
+    vignetteColorDoInterpolation: 0
+    postExposure: 0
+    postExposureInterpolation: {x: 0, y: 0}
+    usePostExposure: 0
+    postExposureDoInterpolation: 0
+    contrast: 0
+    contrastInterpolation: {x: 0, y: 0}
+    useContrast: 0
+    contrastDoInterpolation: 0
+    colorFilter: {r: 0, g: 0, b: 0, a: 0}
+    colorFilterInterpolation: []
+    useColorFilter: 0
+    colorFilterDoInterpolation: 0
+    hueShift: 0
+    hueShiftInterpolation: {x: 0, y: 0}
+    useHueShift: 0
+    hueShiftDoInterpolation: 0
+    saturation: 0
+    saturationInterpolation: {x: 0, y: 0}
+    useSaturation: 0
+    saturationDoInterpolation: 0
+  - useComplexLerp: 1
+    useBloom: 1
+    useLensDistortion: 0
+    useChromaticAberration: 1
+    useVignette: 0
+    useColorAdjustements: 0
+    scatter: 1
+    scatterInterpolation: {x: 0, y: 1}
+    useScatter: 1
+    scatterDoInterpolation: 0
+    bloomIntensity: 1.46
+    bloomIntensityInterpolation: {x: 1.46, y: 1}
+    useBloomIntensity: 1
+    bloomIntensityDoInterpolation: 1
+    bloomTint: {r: 1, g: 1, b: 1, a: 0}
+    bloomTintInterpolation: []
+    useBloomTint: 1
+    bloomTintDoInterpolation: 0
+    lensDistortionIntensity: 0
+    lensDistortionIntensityInterpolation: {x: 0, y: 0}
+    useLensDistortionIntensity: 0
+    lensDistortionIntensityDoInterpolation: 0
+    _chromaticAberrationIntensity: 0.195
+    _chromaticAberrationInterpolation: {x: 0.195, y: 1}
+    useChromaticAberrationIntensity: 1
+    chromaticAberrationIntensityDoInterpolation: 1
+    vignetteIntensity: 0
+    vignetteIntensityInterpolation: {x: 0, y: 0}
+    useVignetteIntensity: 0
+    vignetteIntensityDoInterpolation: 0
+    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+    vignetteColorInterpolation: []
+    useVignetteColor: 0
+    vignetteColorDoInterpolation: 0
+    postExposure: 0
+    postExposureInterpolation: {x: 0, y: 0}
+    usePostExposure: 0
+    postExposureDoInterpolation: 0
+    contrast: 0
+    contrastInterpolation: {x: 0, y: 0}
+    useContrast: 0
+    contrastDoInterpolation: 0
+    colorFilter: {r: 0, g: 0, b: 0, a: 0}
+    colorFilterInterpolation: []
+    useColorFilter: 0
+    colorFilterDoInterpolation: 0
+    hueShift: 0
+    hueShiftInterpolation: {x: 0, y: 0}
+    useHueShift: 0
+    hueShiftDoInterpolation: 0
+    saturation: 0
+    saturationInterpolation: {x: 0, y: 0}
+    useSaturation: 0
+    saturationDoInterpolation: 0
+--- !u!114 &5214620866969700407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582808091347979542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
