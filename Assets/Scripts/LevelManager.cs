@@ -86,25 +86,23 @@ public class LevelManager : MonoBehaviour
         switch (counter_measures + 60)
         {
             case 0:
-            case 18:
             case 26:
+            case 34:
+            case 95:
                 if (actualState == STATES.CHILL) return;
                 actualState = STATES.CHILL;
                 Debug.Log("cambio a estado chill, trankilitos");
                 break;
-            case 62: //final de la cancion, es un caso especial porque se pone suave en el pulso 3 del compas, no en el inicio
-                if (counter_beats >= 2) actualState = STATES.CHILL;
-                break;
             case 10:
-            case 22:
             case 30:
             case 38:
+            case 54:
                 if (actualState == STATES.NORMAL) return;
                 actualState = STATES.NORMAL;
                 Debug.Log("cambio a estado Normal, se pone intensillo");
                 break;
-            case 34:
-            case 58: //final
+            case 46:
+            case 86: //final
                 if (actualState == STATES.HEAVY) return;
                 actualState = STATES.HEAVY;
                 Debug.Log("cambio a estado HEAVY, WOOOOOOOOOOO");
