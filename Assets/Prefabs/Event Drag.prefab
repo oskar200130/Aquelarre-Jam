@@ -160,7 +160,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radiusClick: 4.5
-  multiplier: 2
+  multiplier: 1.5
+  drag: 1
+  maxDragSpawns: 3
 --- !u!1 &6225376666671201900
 GameObject:
   m_ObjectHideFlags: 0

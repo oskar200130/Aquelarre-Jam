@@ -1,8 +1,5 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using Unity.Burst;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class ClickDetector : MonoBehaviour
 {
@@ -36,6 +33,7 @@ public class ClickDetector : MonoBehaviour
     SCORE clickUpLastScore = SCORE.NONE;
 
     public List<SpecialEvent> specialEvents;
+    private float dragMulti;
 
     void Awake()
     {
@@ -94,12 +92,15 @@ public class ClickDetector : MonoBehaviour
                 {
                     if (specialEvents[i].CheckClick())
                     {
-                        multiplier = specialEvents[i].multiplier;
+                        if (specialEvents[i].drag)
+                            dragMulti += specialEvents[i].multiplier;
+                        else
+                            multiplier = specialEvents[i].multiplier;
                         break;
                     }
                 }
+
                 clickUpLastScore = BeatManager._instance.evaluateClick(multiplier);
-                if (multiplier != 1) Debug.Log("Multiplicador click: " + multiplier);
             }
         }
 
@@ -137,12 +138,26 @@ public class ClickDetector : MonoBehaviour
             {
                 if (timeClickedDown + timeMarginForActions < BeatManager.GetCurrentTime())
                 {
-                    if (!pogo)
-                        Debug.Log("Pogo");
                     pogo = true;
                     worldMousePosPOGOCOMENCE = worldMousePosWhenDown;
                 }
 
+            }
+            else if (arrastre)
+            {
+                //Posicion para detectar los eventos especiales
+                RaycastHit hit;
+                if (planeSpecialDetector.Raycast(ray, out hit, 1000000000f))
+                    specialDetectorHitPoint = hit.point;
+                for (int i = 0; i < specialEvents.Count; i++)
+                {
+                    if (specialEvents[i].CheckClick())
+                    {
+                        dragMulti += specialEvents[i].multiplier;
+                        specialEvents[i].DestroyMyself();
+                        break;
+                    }
+                }
             }
             else if (!canNotCancelPogo || !pogo) //podemos hacer esto, para que una vez comenzado un pogo no se pueda comenzar el arrastre, lo comento para tenerlo en cuenta, de hecho loo voy a poner como eleccion en 
             {
@@ -150,12 +165,9 @@ public class ClickDetector : MonoBehaviour
                 //TODO a lo mejor no queremos que se cancelle un pogo si movemos el raton, si no que una vez empezado nos da igual, seguramente sea mas satisfacctorio.
                 if (pogo)
                 {
-                    Debug.Log("Pogo cancelled");
                     pogoEnd = true;
                 }
                 pogo = false;
-                if (!arrastre)
-                    Debug.Log("Arrastre");
                 arrastre = true;
             }
         }
@@ -163,7 +175,6 @@ public class ClickDetector : MonoBehaviour
         {
             if (pogo)       //POGO CIERRA
             {
-                Debug.Log("Pogo ended");
                 pogoEnd = true;
                 float multiplier = 1;
                 for (int i = 0; i < specialEvents.Count; i++)
@@ -175,13 +186,14 @@ public class ClickDetector : MonoBehaviour
                     }
                 }
                 clickUpLastScore = BeatManager._instance.evaluateClick(multiplier);
-                if(multiplier!=1) Debug.Log("Multiplicador finPogo: " + multiplier);
 
                 TimeEndedPogo = BeatManager.GetCurrentTime();
             }
             if (arrastre)       //ARRASTE FIN
             {
-                Debug.Log("Arrastre ended");
+                Debug.Log("Arrastre ended: " + dragMulti);
+                clickUpLastScore = BeatManager._instance.evaluateClick(dragMulti);
+                dragMulti = 1;
                 //ela rrastre al momento de detectar el click desde que lo suelta
                 //float multiplier = 1;
                 //for (int i = 0; i < specialEvents.Count; i++)

@@ -10,7 +10,9 @@ public class SpecialEvent : MonoBehaviour
     private Animator animator;
 
     public float multiplier;
-    [SerializeField] bool drag;
+    public bool drag;
+
+    public int maxDragSpawns;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,7 +26,7 @@ public class SpecialEvent : MonoBehaviour
             animator.SetTrigger("Clicked");
             if(drag)
             {
-                LevelManager._instance.gameObject.GetComponent<EventRandomSpawn>().CreateEventNoRand();
+                InstanciateDrag();
             }
             return true;
         }
@@ -41,5 +43,12 @@ public class SpecialEvent : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(new Vector3(transform.position.x, 0, transform.position.z), radiusClick);
+    }
+
+    public void InstanciateDrag()
+    {
+        Debug.Log(maxDragSpawns);
+        if(maxDragSpawns > 0)
+            LevelManager._instance.gameObject.GetComponent<EventRandomSpawn>().CreateEventNoRand(maxDragSpawns-1);
     }
 }
