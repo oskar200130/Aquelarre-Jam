@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviour
         transform.SetPositionAndRotation(menuPos.position, menuPos.rotation);
         destiny = (transform.position, transform.rotation);
         actTime = 0;
-        Invoke(nameof(StartConcert), 2.5f);
+        StartConcert();
     }
 
     public void StartConcert()

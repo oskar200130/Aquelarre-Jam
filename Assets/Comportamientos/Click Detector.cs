@@ -191,20 +191,8 @@ public class ClickDetector : MonoBehaviour
             }
             if (arrastre)       //ARRASTE FIN
             {
-                Debug.Log("Arrastre ended: " + dragMulti);
                 clickUpLastScore = BeatManager._instance.evaluateClick(dragMulti);
                 dragMulti = 1;
-                //ela rrastre al momento de detectar el click desde que lo suelta
-                //float multiplier = 1;
-                //for (int i = 0; i < specialEvents.Count; i++)
-                //{
-                //    if (specialEvents[i].CheckClick())
-                //    {
-                //        multiplier = specialEvents[i].multiplier;
-                //        break;
-                //    }
-                //}
-                //clickUpLastScore = BeatManager._instance.evaluateClick(multiplier);
             }
             pogo = false;
             arrastre = false;
