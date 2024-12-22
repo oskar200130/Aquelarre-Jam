@@ -16,6 +16,8 @@ public class LevelManager : MonoBehaviour
     private Queue<SCORE> scores;
     public int puntuacion = 1;
     public Animator beatMarkerContainerAnimator;
+    public Animator goatsController;
+    public StudioEventEmitter thunder;
     public void AddScore(SCORE newScore)
     {
         if (scores.Count >= 10) scores.Dequeue();
@@ -37,7 +39,7 @@ public class LevelManager : MonoBehaviour
     public float percentageHeavy = 0.001f;
 
     [SerializeField] SpeakerParticle[] speakers;
-    private int counter_beats = 1; private int counter_measures = 0;
+    private int counter_beats = 0; private int counter_measures = 0;
     public TMP_Text pointsText;
 
     public STATES actualState = STATES.NORMAL;
@@ -69,7 +71,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            if(counter_measures >0) //para comprobar que ha empezado la cancion
+            if (counter_measures > 0) //para comprobar que ha empezado la cancion
                 beatMarkerContainerAnimator.speed = 1;
 
         }
@@ -77,13 +79,13 @@ public class LevelManager : MonoBehaviour
 
     void metronome()
     {
-        //text.text = $"Compás {counter_measures}, pulso {counter_beats}";
-        Debug.Log($"Compás {counter_measures+1}, pulso {counter_beats}");
 
-        checkSongStates();
         counter_beats = (counter_beats + 1) % 4; //hardcodeado a 4/4
-        if (counter_beats == 0) counter_measures+=1;
+        if (counter_beats == 0) counter_measures += 1;
+        checkSongStates();
 
+        //text.text = $"Compás {counter_measures}, pulso {counter_beats}";
+        //Debug.Log($"Compás {counter_measures+1}, pulso {counter_beats+1}");
 
         //añade de manera aleatoria a gente al escenario de forma constante
         if (Random.Range(0, 1.01f) < constantPeopleProbability)
@@ -92,40 +94,63 @@ public class LevelManager : MonoBehaviour
         }
 
     }
+    public bool gameStarted = false;
+    private void Update()
+    {
+        if (!gameStarted && Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("empezando juego");
+            BeatManager._instance.playSong();
+            gameStarted = true;
+        }
+        if (!BeatManager.isPlayingMusic && gameStarted)
+        {
+            //para volver a empezar
+            gameStarted = false;
+        }
+    }
 
     //checkpoints de la cancion donde cambia la intensidad de las cosas en pantalla
     //esto deberia hacerse con eventos de fmod PERO ME DA UNA PEREZA IMPRESIONANTE
     //EN PLAN
     //IMPRESIONANTE, SON LAS 2:17 NO ME PODRIA DAR MAS PEREZA EFE MOD
+    bool cabraRelajao = true;
     private void checkSongStates()
     {
         //cambia de estado de la cancion en compases especificos
-        switch (counter_measures +1)
+        switch (counter_measures + 1)
         {
-            case 0:
+            case 1:
             case 26:
             case 34:
-            case 95:
+            case 94:
+                if(counter_measures != 94) esconderCabra();
                 if (actualState == STATES.CHILL) return;
                 actualState = STATES.CHILL;
-                esconderCabra();
                 Debug.Log("cambio a estado chill, trankilitos");
                 break;
             case 10:
             case 30:
             case 38:
             case 54:
+                esconderCabra();
                 if (actualState == STATES.NORMAL) return;
                 actualState = STATES.NORMAL;
-                esconderCabra();
                 Debug.Log("cambio a estado Normal, se pone intensillo");
                 break;
+
+            //caso especial: para activar el goat justo antes de que empiece el compas heavy
+            case 45:
+            case 85:
+                if (counter_beats == 2)
+                    mostrarCabra();
+                break;
+
             case 46:
             case 86: //final
                 if (actualState == STATES.HEAVY) return;
                 actualState = STATES.HEAVY;
                 Debug.Log("cambio a estado HEAVY, WOOOOOOOOOOO");
-                mostrarCabra();
                 break;
             default:
                 break;
@@ -135,17 +160,23 @@ public class LevelManager : MonoBehaviour
 
     public void mostrarCabra()
     {
+        if (!cabraRelajao) return;
+        goatsController.SetTrigger("omg");
+        thunder.Play();
         Debug.Log("LA CABRAAAAAAAAAAA");
+        cabraRelajao = false;
     }
     public void esconderCabra()
     {
+        if (cabraRelajao) return;
+        goatsController.ResetTrigger("omg");
         Debug.Log("nos dejo el cabrito");
+        cabraRelajao = true;
     }
 
     private void Start()
     {
         actualState = STATES.CHILL;
-        BeatManager._instance.playSong();
     }
 
     public void addPointsByFloat(float percentage)
@@ -188,7 +219,7 @@ public class LevelManager : MonoBehaviour
                 break;
         }
 
-        pointsText.text = $"PEOPLE: {puntuacion}";
+        pointsText.text = $"WITCHES {puntuacion}";
 
         AddScore(s);
     }

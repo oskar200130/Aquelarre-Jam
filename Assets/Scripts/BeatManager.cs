@@ -255,6 +255,7 @@ public class BeatManager : MonoBehaviour
 
         if (musicPlayState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
         {
+            isPlayingMusic = false;
             return;
         }
 
@@ -450,33 +451,28 @@ public class BeatManager : MonoBehaviour
     }
 
 
-    public float terribleThreshold = 0.4f, coolThreshold = 0.75f, perfectThreshold = 0.9f;
+    private float terribleThreshold = 0.4f, coolThreshold = 0.75f, perfectThreshold = 0.9f;
+    //public float[] thresholds
+    public double earlyTolerancePercentage = 0.1;
     public SCORE evaluateClick()
     {
         /*
-         La evaluacion es la siguiente: como peor puedes hacerlo es a la mitad entre un beat y el siguiente.
-        Esto es porque cuanto mas cerca estes de un beat, mejor lo haces, ya sea pasandote o dandole muy pronto.
-        Por lo tanto, 
-     TIMELINE DE BEAT    lastBeat -1------------------------------------onMiddlebeat 0----------------------------------- nextBeat 1
-     TIEMPO CUANDO CLICK   HEAVY  PERFECT  COOL   COOL  COOL  TERRIBLE  TERRIBLE  TERRIBLE   COOL   COOL   COOL   PERFECT HEAVY
-        algo asi.
-        
+CAMBIOS esto estaba roto. xd. comprobara siempre con el primero y le añadimos un margen de tolerancia para comprobar un early.
            */
 
         SCORE res = SCORE.NONE;
-        double clickTime = GetCurrentTime(); double lastBeat = lastFixedBeatDSPTime; double nextBeat = lastBeat + beatInterval; double middleBeat = lastBeat + (beatInterval *0.5);
-        double evaluacion; 
-        if (clickTime < middleBeat)
+        double clickTime = GetCurrentTime(); double lastBeat = lastFixedBeatDSPTime; double nextBeat = lastBeat + beatInterval;
+
+        //comprobamos que no este pegadito por detras y que sea un early que deberia dar mas puntos
+        double beatToCheck = lastBeat;
+        if((nextBeat - clickTime)/beatInterval <= earlyTolerancePercentage)
         {
-            //comprueba con el beat anterior 
-            evaluacion = 1- ((clickTime - lastBeat) / (beatInterval * 0.5));
-        }
-        else
-        {
-            //comprueba con el beat posterior
-            evaluacion = 1- ((nextBeat - clickTime) / (beatInterval * 0.5));
+            beatToCheck = nextBeat;
         }
 
+        double evaluacion = 1- ((Math.Abs(clickTime - beatToCheck) )/ beatInterval );
+
+        if (evaluacion < 0) evaluacion = 0;
 
         if (evaluacion <= terribleThreshold) // mas cercano al centro, peor
         {
@@ -494,8 +490,8 @@ public class BeatManager : MonoBehaviour
         {
             res = SCORE.HEAVY;
         }
-        //UnityEngine.Debug.Log($"{res}, {evaluacion}");
-        //UnityEngine.Debug.Log($" click: {clickTime},  lastbeat = {lastBeat}, nextBeat = {nextBeat}, middleBeat = {middleBeat}");
+        UnityEngine.Debug.Log($"{res}, {evaluacion}. comparando con beat {beatToCheck}");
+        UnityEngine.Debug.Log($" click: {clickTime},  lastbeat = {lastBeat}, nextBeat = {nextBeat}");
 
         LevelManager._instance.addPointsByScore(res);
         return res;
