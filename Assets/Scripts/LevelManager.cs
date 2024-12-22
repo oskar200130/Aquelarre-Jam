@@ -72,6 +72,20 @@ public class LevelManager : MonoBehaviour
 
         BeatManager.onFixedBeat += metronome;
         BeatManager.onTempoChanged += tempoChanged;
+
+        Invoke(nameof(StartGame), 1.5f);
+    }
+
+    void StartGame()
+    {
+        if (!gameStarted)
+        {
+            Debug.Log("empezando juego");
+            BeatManager._instance.playSong();
+
+            gameStarted = true;
+            beatMarkerContainerAnimator.speed = 1;
+        }
     }
 
     void tempoChanged(float beatInterval)
@@ -108,16 +122,16 @@ public class LevelManager : MonoBehaviour
     public bool gameStarted = false;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)) puntuacion += 100;
-        if (!gameStarted && Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("empezando juego");
-            BeatManager._instance.playSong();
+        //if (Input.GetKeyDown(KeyCode.P)) puntuacion += 100;
+        //if (!gameStarted && Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    Debug.Log("empezando juego");
+        //    BeatManager._instance.playSong();
 
-            gameStarted = true;
-            beatMarkerContainerAnimator.speed = 1;
+        //    gameStarted = true;
+        //    beatMarkerContainerAnimator.speed = 1;
 
-        }
+        //}
         if (!BeatManager.isPlayingMusic && gameStarted)
         {
             //para volver a empezar
