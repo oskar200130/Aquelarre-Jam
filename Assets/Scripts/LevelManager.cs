@@ -1,11 +1,7 @@
 using FMODUnity;
-using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
-using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
@@ -41,6 +37,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] SpeakerParticle[] speakers;
     private int counter_beats = 0; private int counter_measures = 0;
     public TMP_Text pointsText;
+    public GameObject freestyleText;
 
     public STATES actualState = STATES.NORMAL;
     bool cabraLoca = false;
@@ -164,6 +161,7 @@ public class LevelManager : MonoBehaviour
                 //quitarEpilepsia();
                 break;
             case 26:
+                freestyleText.SetActive(true);
                 GetComponent<EventRandomSpawn>().freestyleMode = true;
                 if (actualState == STATES.CHILL) return;
                 actualState = STATES.CHILL;
@@ -171,6 +169,7 @@ public class LevelManager : MonoBehaviour
                 //quitarEpilepsia();
                 break;
             case 34:
+                freestyleText.SetActive(false);
                 GetComponent<EventRandomSpawn>().freestyleMode = false;
                 if (actualState == STATES.CHILL) return;
                 actualState = STATES.CHILL;

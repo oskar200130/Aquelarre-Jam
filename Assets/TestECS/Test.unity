@@ -2779,12 +2779,13 @@ MonoBehaviour:
   - {fileID: 181474349}
   - {fileID: 1393617518}
   pointsText: {fileID: 354622928}
+  freestyleText: {fileID: 499500261}
   actualState: 0
   nFreestyles: 3
   freestyleProbability: 0.35
   freestyleGO: {fileID: 499500261}
-  lightAnimator: {fileID: 1505075427}
-  trees: {fileID: 1257675514}
+  lightAnimator: {fileID: 0}
+  trees: {fileID: 0}
   milestonesPoints:
   - 250
   - 500
@@ -2824,6 +2825,7 @@ MonoBehaviour:
   - {fileID: 8745455329611077599, guid: 00fe9fd02f7235c44b4e747968123a0c, type: 3}
   minBeatsBetweenEvents: 4
   probabilitySpawnEffect: 100
+  freestyleMode: 0
 --- !u!1 &1161155906
 GameObject:
   m_ObjectHideFlags: 0
@@ -4081,11 +4083,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5055bc9665be83747903288d80e8bd53, type: 3}
---- !u!95 &1505075427 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5713591872952892879, guid: 65e478cfdbc23c04093fec96f41a844c, type: 3}
-  m_PrefabInstance: {fileID: 592198830}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1522010523
 PrefabInstance:
   m_ObjectHideFlags: 0
