@@ -11,6 +11,8 @@ public class SpecialEvent : MonoBehaviour
 
     public float multiplier;
     public bool drag;
+
+    public int maxDragSpawns;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,6 +47,8 @@ public class SpecialEvent : MonoBehaviour
 
     public void InstanciateDrag()
     {
-        LevelManager._instance.gameObject.GetComponent<EventRandomSpawn>().CreateEventNoRand();
+        Debug.Log(maxDragSpawns);
+        if(maxDragSpawns > 0)
+            LevelManager._instance.gameObject.GetComponent<EventRandomSpawn>().CreateEventNoRand(maxDragSpawns-1);
     }
 }

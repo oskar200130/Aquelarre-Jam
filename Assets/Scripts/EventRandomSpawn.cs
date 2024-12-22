@@ -35,16 +35,18 @@ public class EventRandomSpawn : MonoBehaviour
             lastSpawn--;
     }
 
-    public void CreateEventNoRand()
+    public void CreateEventNoRand(int spawns)
     {
-        SpawnEffect((Vector3)World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<RandomEntitySystem>().GetRandomEntityPos(), false);
+        SpawnEffect((Vector3)World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<RandomEntitySystem>().GetRandomEntityPos(), spawns, false);
     }
-    private void SpawnEffect(Vector3 spawnPos, bool rand = true)
+    private void SpawnEffect(Vector3 spawnPos, int spawns = 0, bool rand = true)
     {
         int id = 0;
         if (rand) id = Random.Range(0, eventEffect.Length);
         
         GameObject instance = Instantiate(eventEffect[id], spawnPos, Quaternion.identity);
+        if (!rand)
+            instance.GetComponentInChildren<SpecialEvent>().maxDragSpawns = spawns;
         ClickDetector.instance.specialEvents.Add(instance.GetComponentInChildren<SpecialEvent>());
         lastSpawn = minBeatsBetweenEvents;
     }

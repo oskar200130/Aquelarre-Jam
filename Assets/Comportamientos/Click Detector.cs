@@ -1,8 +1,5 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using Unity.Burst;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class ClickDetector : MonoBehaviour
 {
@@ -148,13 +145,15 @@ public class ClickDetector : MonoBehaviour
             }
             else if (arrastre)
             {
-
+                //Posicion para detectar los eventos especiales
+                RaycastHit hit;
+                if (planeSpecialDetector.Raycast(ray, out hit, 1000000000f))
+                    specialDetectorHitPoint = hit.point;
                 for (int i = 0; i < specialEvents.Count; i++)
                 {
                     if (specialEvents[i].CheckClick())
                     {
                         dragMulti += specialEvents[i].multiplier;
-                        specialEvents[i].InstanciateDrag();
                         specialEvents[i].DestroyMyself();
                         break;
                     }
