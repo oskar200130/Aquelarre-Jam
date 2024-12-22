@@ -13,8 +13,6 @@ public class SpecialEvent : MonoBehaviour
     public bool drag;
 
     public int maxDragSpawns;
-    [SerializeField]
-    ParticleSystem particles;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,7 +28,6 @@ public class SpecialEvent : MonoBehaviour
             {
                 InstanciateDrag();
             }
-            particles.Play();
             return true;
         }
         return false;
