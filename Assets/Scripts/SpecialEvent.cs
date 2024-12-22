@@ -10,6 +10,7 @@ public class SpecialEvent : MonoBehaviour
     private Animator animator;
 
     public float multiplier;
+    [SerializeField] bool drag;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,6 +22,10 @@ public class SpecialEvent : MonoBehaviour
         if ((ClickDetector.instance.specialDetectorHitPoint - new Vector3(transform.position.x, 0, transform.position.z)).magnitude < radiusClick)
         {
             animator.SetTrigger("Clicked");
+            if(drag)
+            {
+                LevelManager._instance.gameObject.GetComponent<EventRandomSpawn>().CreateEventNoRand();
+            }
             return true;
         }
         return false;
