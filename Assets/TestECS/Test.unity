@@ -2478,7 +2478,7 @@ PrefabInstance:
     - target: {fileID: 2318587400272111206, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
       propertyPath: menuPos
       value: 
-      objectReference: {fileID: 5437350665437192665}
+      objectReference: {fileID: 77597899}
     - target: {fileID: 2318587400272111206, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -2486,31 +2486,47 @@ PrefabInstance:
     - target: {fileID: 2318587400272111206, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
       propertyPath: initialPos
       value: 
-      objectReference: {fileID: 5437350665437192665}
+      objectReference: {fileID: 77597899}
     - target: {fileID: 2318587400272111206, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
       propertyPath: farStepsPositions.Array.size
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2318587400272111206, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
       propertyPath: 'farStepsPositions.Array.data[0]'
       value: 
-      objectReference: {fileID: 209656583}
+      objectReference: {fileID: 482340319}
     - target: {fileID: 2318587400272111206, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
       propertyPath: 'farStepsPositions.Array.data[1]'
       value: 
-      objectReference: {fileID: 77597899}
+      objectReference: {fileID: 1679287357}
     - target: {fileID: 2318587400272111206, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
       propertyPath: 'farStepsPositions.Array.data[2]'
       value: 
-      objectReference: {fileID: 482340319}
+      objectReference: {fileID: 77597899}
     - target: {fileID: 2318587400272111206, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
       propertyPath: 'farStepsPositions.Array.data[3]'
       value: 
-      objectReference: {fileID: 1679287357}
+      objectReference: {fileID: 209656583}
     - target: {fileID: 2318587400272111206, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
       propertyPath: 'farStepsPositions.Array.data[4]'
       value: 
       objectReference: {fileID: 5437350665437192665}
+    - target: {fileID: 2772087570557210257, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772087570557210257, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772087570557210257, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772087570557210257, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3120585683735094066, guid: ff6999a34956fa848a87e8e627603a11, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.769999
@@ -2750,15 +2766,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47cb7d57d7407f46a5e6f2afe372dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puntuacion: 30
+  puntuacion: 200
   beatMarkerContainerAnimator: {fileID: 1188774878}
   goatsController: {fileID: 8719917828556144306}
   thunder: {fileID: -1956182793875612465, guid: 03daa419324af334f939260558fcc12b, type: 3}
   constantPeopleProbability: 0.7
-  percentageConstant: 0.00001
-  percentageCool: 0.0001
-  percentagePerfect: 0.0005
-  percentageHeavy: 0.001
+  percentageConstant: 0.00005
+  percentageCool: 0.0005
+  percentagePerfect: 0.0025
+  percentageHeavy: 0.005
   speakers:
   - {fileID: 181474349}
   - {fileID: 1393617518}
@@ -2767,9 +2783,9 @@ MonoBehaviour:
   nFreestyles: 3
   freestyleProbability: 0.35
   freestyleGO: {fileID: 499500261}
+  lightAnimator: {fileID: 1505075427}
+  trees: {fileID: 1257675514}
   milestonesPoints:
-  - 40
-  - 100
   - 250
   - 500
   - 800
@@ -4065,6 +4081,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5055bc9665be83747903288d80e8bd53, type: 3}
+--- !u!95 &1505075427 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5713591872952892879, guid: 65e478cfdbc23c04093fec96f41a844c, type: 3}
+  m_PrefabInstance: {fileID: 592198830}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1522010523
 PrefabInstance:
   m_ObjectHideFlags: 0
