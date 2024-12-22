@@ -27983,7 +27983,7 @@ GameObject:
   - component: {fileID: 1880946201}
   - component: {fileID: 1880946202}
   - component: {fileID: 1880946204}
-  - component: {fileID: 1880946203}
+  - component: {fileID: 1880946205}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -28123,30 +28123,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1880946203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880946197}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 559361d2a2b2ff043886826f1eae5b8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _globalVolume: {fileID: 1709522917}
-  debugpingpong: 0
-  _bloomScatter: 1
-  scatterPingPong: {x: 0, y: 1}
-  _bloomItensity: 1.46
-  _bloomDirtIntensity: 4.1
-  depthOfFieldmode: 1
-  dofGaussianStart: 20.93
-  dofGaussianMaxRadius: 1.5
-  _filmGrainIntensity: 1
-  _chromaticAberrationIntensity: 0.195
-  _chromaticAberrationPingPong: {x: 0.195, y: 1}
 --- !u!114 &1880946204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28161,6 +28137,79 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nonRigidbodyVelocity: 0
   attenuationObject: {fileID: 0}
+--- !u!114 &1880946205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880946197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559361d2a2b2ff043886826f1eae5b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _globalVolume: {fileID: 1709522917}
+  useComplexLerp: 0
+  useBloom: 0
+  useLensDistortion: 1
+  useChromaticAberration: 1
+  useVignette: 1
+  useColorAdjustements: 1
+  scatter: 1
+  scatterInterpolation: {x: 0, y: 1}
+  useScatter: 1
+  scatterDoInterpolation: 0
+  bloomIntensity: 1.46
+  bloomIntensityInterpolation: {x: 0, y: 1}
+  useBloomIntensity: 1
+  bloomIntensityDoInterpolation: 0
+  bloomTint: {r: 1, g: 1, b: 1, a: 1}
+  bloomTintInterpolation:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  useBloomTint: 1
+  bloomTintDoInterpolation: 0
+  lensDistortionIntensity: 0
+  lensDistortionIntensityInterpolation: {x: 0, y: 1}
+  useLensDistortionIntensity: 1
+  lensDistortionIntensityDoInterpolation: 0
+  _chromaticAberrationIntensity: 0.195
+  _chromaticAberrationInterpolation: {x: 0.195, y: 1}
+  useChromaticAberrationIntensity: 1
+  chromaticAberrationIntensityDoInterpolation: 0
+  vignetteIntensity: 1.46
+  vignetteIntensityInterpolation: {x: 0, y: 1}
+  useVignetteIntensity: 1
+  vignetteIntensityDoInterpolation: 0
+  vignetteColor: {r: 1, g: 1, b: 1, a: 1}
+  vignetteColorInterpolation:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  useVignetteColor: 1
+  vignetteColorDoInterpolation: 0
+  postExposure: 0
+  postExposureInterpolation: {x: 0, y: 1}
+  usePostExposure: 1
+  postExposureDoInterpolation: 0
+  contrast: 0
+  contrastInterpolation: {x: 0, y: 1}
+  useContrast: 1
+  contrastDoInterpolation: 0
+  colorFilter: {r: 1, g: 1, b: 1, a: 1}
+  colorFilterInterpolation:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  useColorFilter: 1
+  colorFilterDoInterpolation: 0
+  hueShift: 0
+  hueShiftInterpolation: {x: 0, y: 1}
+  useHueShift: 1
+  hueShiftDoInterpolation: 0
+  saturation: 0
+  saturationInterpolation: {x: 0, y: 1}
+  useSaturation: 1
+  saturationDoInterpolation: 0
 --- !u!1 &1889046187
 GameObject:
   m_ObjectHideFlags: 0

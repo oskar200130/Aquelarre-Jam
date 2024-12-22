@@ -5,22 +5,7 @@ using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
 
 
-/*
- 
- PARAMETRIZAR:
-BLOOM ->
-    INTENSITY, SCATTER, TINT
-lens distortion
-    intensity
-chromatic aberration
-    intensity
-vignette
-    color, intensity
-Color adjustements
-    todo
 
- 
- */
 
 
 public class CameraControl : MonoBehaviour
@@ -40,84 +25,212 @@ public class CameraControl : MonoBehaviour
     private Tonemapping _tonemapping;
     private ColorAdjustments _coloradjustements;
 
+    public bool useComplexLerp = true;
+    public bool useBloom = true;
+    public bool useLensDistortion = true;
+    public bool useChromaticAberration = true;
+    public bool useVignette = true;
+    public bool useColorAdjustements = true;
+    [Space(10)]
 
-    public bool debugpingpong = false;
-
+    [Header("BLOOM")]
     [Range(0f, 1f)]
-    public float _bloomScatter = 1f;
-    //ESTE es el valor que habria que modificar segun las fases del juego.
-    //Es decir, si estamos en la fase normal, pues el minimo y el maximo del ping pong es X. Si va mas a tope por los combos,
-    //se cambia este minimo y maximo y entonces puede ser mas apoteosico.
-    //Ademas, la idea seria bloquear o no algunas de estas variables seg�n esa fase. En plan: solo queremos que el chromatic aberration exista en la fase de tener muchos combos, pues bloqueamos.
-    public Vector2 scatterPingPong = new(0f, 1f);
+    public float scatter = 1f;
+    public Vector2 scatterInterpolation = new(0f, 1f);
+    public bool useScatter = true; public bool scatterDoInterpolation = false;
+    [Space(5)]
 
     [Min(0f)]
-    public float _bloomItensity = 1.46f;
-    [Min(0f)]
-    public float _bloomDirtIntensity = 4.1f;
+    public float bloomIntensity = 1.46f;
+    public Vector2 bloomIntensityInterpolation = new(0f, 1f);
+    public bool useBloomIntensity = true; public bool bloomIntensityDoInterpolation = false;
+    [Space(5)]
 
-    //DEPTH OF FIELD
-    public DepthOfFieldMode depthOfFieldmode = DepthOfFieldMode.Gaussian;
-    [Min(0f)]
-    public float dofGaussianStart = 20.93f;
-    [Range(0.5f, 1.5f)]
-    public float dofGaussianMaxRadius = 1.5f;
+    public Color bloomTint = Color.white;
+    public Color[] bloomTintInterpolation = new Color[2];
+    public bool useBloomTint = true; public bool bloomTintDoInterpolation = false;
 
-    //FILM GRAIN
+    [Space(5)]
+
+    [Header("LENS DISTORTION")]
     [Range(0f, 1f)]
-    public float _filmGrainIntensity = 1f;
+    public float lensDistortionIntensity = 0.0f;
+    public Vector2 lensDistortionIntensityInterpolation = new(0f, 1f);
+    public bool useLensDistortionIntensity = true; public bool lensDistortionIntensityDoInterpolation = false;
+    [Space(10)]
 
-    //CHROMATIC ABERRATION
+    [Header("CHROMATIC ABERRATION")]
     [Range(0f, 1f)]
     public float _chromaticAberrationIntensity = 0.195f;
-    public Vector2 _chromaticAberrationPingPong = new(0.195f, 1f);
+    public Vector2 _chromaticAberrationInterpolation = new(0.195f, 1f);
+    public bool useChromaticAberrationIntensity = true; public bool chromaticAberrationIntensityDoInterpolation = false;
+    [Space(10)]
 
-    //etc, ahora me da pereza. en el onvalidate, a�adir cada uno de estos sets en caso de que se quiera toquetear en ejecucion.
-    //para cambiar los valores fuera de aqui, simplemente hay que acceder a las variables publicas de arriba (bloom, depth, etc) y hacer override en el valor que toque
+    [Header("VIGNETTE")]
+    [Min(0f)]
+    public float vignetteIntensity = 1.46f;
+    public Vector2 vignetteIntensityInterpolation = new(0f, 1f);
+    public bool useVignetteIntensity = true; public bool vignetteIntensityDoInterpolation = false;
+    [Space(5)]
+
+    public Color vignetteColor = Color.white;
+    public Color[] vignetteColorInterpolation = new Color[2];
+    public bool useVignetteColor = true; public bool vignetteColorDoInterpolation = false;
+    [Space(10)]
+
+    [Header("COLOR ADJUSTEMENTS")]
+
+    [Min(0f)]
+    public float postExposure = 0f;
+    public Vector2 postExposureInterpolation = new(0, 1f);
+    public bool usePostExposure = true; public bool postExposureDoInterpolation = false;
+    [Space(5)]
+
+    [Range(-100f, 100f)]
+    public float contrast = 0f;
+    public Vector2 contrastInterpolation = new(0, 1f);
+    public bool useContrast = true; public bool contrastDoInterpolation = false;
+    [Space(5)]
+
+    public Color colorFilter = Color.white;
+    public Color[] colorFilterInterpolation = new Color[2];
+    public bool useColorFilter = true; public bool colorFilterDoInterpolation = false;
+    [Space(5)]
+
+    [Range(-180f, 180f)]
+    public float hueShift = 0f;
+    public Vector2 hueShiftInterpolation = new(0, 1f);
+    public bool useHueShift = true; public bool hueShiftDoInterpolation = false;
+    [Space(5)]
+
+    [Range(-100f, 100f)]
+    public float saturation = 0f;
+    public Vector2 saturationInterpolation = new(0, 1f);
+    public bool useSaturation = true; public bool saturationDoInterpolation = false;
+
     private void OnValidate()
     {
         if (_bloom)
         {
-            _bloom.scatter.Override(_bloomScatter);
-            _bloom.intensity.Override(_bloomItensity);
-            _bloom.dirtIntensity.Override(_bloomDirtIntensity);
+            _bloom.active = useBloom;
+            _bloom.scatter.Override(scatter); _bloom.scatter.overrideState = useScatter;
+            _bloom.intensity.Override(bloomIntensity); _bloom.intensity.overrideState = useBloomIntensity;
+            _bloom.tint.Override(bloomTint); _bloom.tint.overrideState = useBloomTint;
         }
-        if (_depthOfField)
+        if (_lensDistorsion)
         {
-            _depthOfField.mode.Override(depthOfFieldmode);
-            _depthOfField.gaussianStart.Override(dofGaussianStart);
-            _depthOfField.gaussianMaxRadius.Override(dofGaussianMaxRadius);
-        }
-        if (_filmGrain)
-        {
-            _filmGrain.intensity.Override(_filmGrainIntensity);
+            _lensDistorsion.active = useLensDistortion;
+            _lensDistorsion.intensity.Override(lensDistortionIntensity); _lensDistorsion.intensity.overrideState = useLensDistortionIntensity;
         }
         if (_chromaticAberration)
         {
-            _chromaticAberration.intensity.Override(_chromaticAberrationIntensity);
+            _chromaticAberration.active = useChromaticAberration;
+            _chromaticAberration.intensity.Override(_chromaticAberrationIntensity); _chromaticAberration.intensity.overrideState = useChromaticAberrationIntensity;
+        }
+        if (_vignette)
+        {
+            _vignette.active = useVignette;
+            _vignette.intensity.Override(vignetteIntensity); _vignette.intensity.overrideState = useVignetteIntensity;
+            _vignette.color.Override(vignetteColor); _vignette.color.overrideState = useVignetteColor;
+        }
+        if (_coloradjustements)
+        {
+            _coloradjustements.active = useColorAdjustements;
+            _coloradjustements.hueShift.Override(hueShift); _coloradjustements.hueShift.overrideState = useColorAdjustements;
+            _coloradjustements.saturation.Override(saturation); _coloradjustements.saturation.overrideState = useSaturation;
+            _coloradjustements.colorFilter.Override(colorFilter); _coloradjustements.colorFilter.overrideState = useColorAdjustements;
+            _coloradjustements.postExposure.Override(postExposure); _coloradjustements.postExposure.overrideState = usePostExposure;
+            _coloradjustements.contrast.Override(contrast); _coloradjustements.contrast.overrideState = useContrast;
         }
     }
 
     void Update()
     {
-        if (debugpingpong)
+        float t = Mathf.PingPong(BeatManager.GetCurrentTime() / (BeatManager.GetBeatInterval()), 1f);
+        // curva exponencial de tiempo modificable 
+        float finalTime = useComplexLerp ? Mathf.Pow(t, 3) * (t < 0.1f ? 1f : -1f) + Mathf.Clamp01(t) : t;
+        float value; Color valueColor;
+        if (_bloom.active)
         {
-            // Calcula t en el rango [0, 1]
-            float t = Mathf.PingPong(BeatManager.GetCurrentTime() / (BeatManager.GetBeatInterval()), 1f);
+            if (useBloomIntensity &&  bloomIntensityDoInterpolation)
+            {
+                value = Mathf.Lerp(bloomIntensityInterpolation.x, bloomIntensityInterpolation.y, finalTime);
+                _bloom.intensity.Override(value);
+            }
+            if (useBloomTint && bloomTintDoInterpolation)
+            {
+                valueColor = Color.Lerp(bloomTintInterpolation[0], bloomTintInterpolation[1], finalTime);
+                _bloom.tint.Override(valueColor);
+            }
+            if(useScatter && scatterDoInterpolation)
+            {
+                value = Mathf.Lerp(scatterInterpolation.x, scatterInterpolation.y, finalTime);
+                _bloom.scatter.Override(value);
+            }
+        }
+        if (_lensDistorsion.active)
+        {
+            if (useLensDistortionIntensity && lensDistortionIntensityDoInterpolation)
+            {
+                value = Mathf.Lerp(lensDistortionIntensityInterpolation.x, lensDistortionIntensityInterpolation.y, finalTime);
+                _lensDistorsion.intensity.Override(value);
+            }
 
-            // Aplica una curva exponencial al tiempo t para que llegue r�pidamente a los l�mites
-            float curvedT = Mathf.Pow(t, 3) * (t < 0.1f ? 1f : -1f) + Mathf.Clamp01(t);
+        }
+        if (_vignette.active)
+        {
+            if (useVignetteIntensity && vignetteColorDoInterpolation)
+            {
+                valueColor = Color.Lerp(vignetteColorInterpolation[0], vignetteColorInterpolation[1], finalTime);
+                _vignette.color.Override(valueColor);
+            }
 
-            // Interpolaci�n exponencial para scatterPingPong
-            float value = Mathf.Lerp(scatterPingPong.x, scatterPingPong.y, curvedT);
-            _bloom.scatter.Override(value);
-
-            // Interpolaci�n exponencial para _chromaticAberrationPingPong
-            value = Mathf.Lerp(_chromaticAberrationPingPong.x, _chromaticAberrationPingPong.y, curvedT);
-            _chromaticAberration.intensity.Override(value);
+            if (useVignetteColor &&  vignetteIntensityDoInterpolation)
+            {
+                value = Mathf.Lerp(vignetteIntensityInterpolation.x, vignetteIntensityInterpolation.y, finalTime);
+                _vignette.intensity.Override(value);
+            }
+        }
+        if (_chromaticAberration.active)
+        {
+            if (useChromaticAberrationIntensity && chromaticAberrationIntensityDoInterpolation)
+            {
+                value = Mathf.Lerp(_chromaticAberrationInterpolation.x, _chromaticAberrationInterpolation.y, finalTime);
+                _chromaticAberration.intensity.Override(value);
+            }
+        }
+        if (_coloradjustements.active)
+        {
+            if (usePostExposure && postExposureDoInterpolation)
+            {
+                value = Mathf.Lerp(postExposureInterpolation.x, postExposureInterpolation.y, finalTime);
+                _coloradjustements.postExposure.Override(value);
+            }
+            if (useContrast && contrastDoInterpolation)
+            {
+                value = Mathf.Lerp(contrastInterpolation.x, contrastInterpolation.y, finalTime);
+                _coloradjustements.contrast.Override(value);
+            }
+            if (useHueShift && hueShiftDoInterpolation)
+            {
+                value = Mathf.Lerp(hueShiftInterpolation.x, hueShiftInterpolation.y, finalTime);
+                _coloradjustements.hueShift.Override(value);
+            }
+            if (useSaturation && saturationDoInterpolation)
+            {
+                value = Mathf.Lerp(saturationInterpolation.x, saturationInterpolation.y, finalTime);
+                _coloradjustements.saturation.Override(value);
+            }
+            if (useColorFilter && colorFilterDoInterpolation)
+            {
+                valueColor = Color.Lerp(colorFilterInterpolation[0], colorFilterInterpolation[1], finalTime);
+                _coloradjustements.colorFilter.Override(valueColor);
+            }
         }
 
     }
+
+
 
 
     private void Awake()
@@ -152,13 +265,13 @@ public class CameraControl : MonoBehaviour
             profile.TryGet(out _coloradjustements);
             if (!_coloradjustements) Debug.LogError("NO TIENE COLOR ADJUSTEMETS!!!");
 
-            //setea al parametro iniciar en caso de hacer pingpong
-            _bloom.scatter.Override(scatterPingPong.x);
-            _chromaticAberration.intensity.Override(_chromaticAberrationPingPong.x);
+            //setea al parametro iniciar en caso de hacer Interpolation
+            _bloom.scatter.Override(scatterInterpolation.x);
+            _chromaticAberration.intensity.Override(_chromaticAberrationInterpolation.x);
         }
         else
         {
-            Debug.LogError("pet� por el global volume amego");
+            Debug.LogError("peto por el global volume amego");
         }
     }
 
