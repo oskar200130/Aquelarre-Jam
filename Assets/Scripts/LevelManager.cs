@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     private int queueSize = 10;
     private Queue<SCORE> scores;
     public int puntuacion = 1;
+    public Animator beatMarkerContainerAnimator;
     public void AddScore(SCORE newScore)
     {
         if (scores.Count >= 10) scores.Dequeue();
@@ -53,9 +54,24 @@ public class LevelManager : MonoBehaviour
             return;
         }
         scores = new Queue<SCORE>(queueSize);
-     
+        
         
         BeatManager.onFixedBeat += metronome;
+        BeatManager.onTempoChanged += tempoChanged;
+    }
+
+    void tempoChanged(float beatInterval)
+    {
+        if (beatInterval < 0.6) //180 BPM
+        {
+            beatMarkerContainerAnimator.speed *= 2;
+        }
+        else
+        {
+            if(counter_measures >0) //para comprobar que ha empezado la cancion
+                beatMarkerContainerAnimator.speed /= 2;
+
+        }
     }
 
     void metronome()

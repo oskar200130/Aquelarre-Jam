@@ -2871,6 +2871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puntuacion: 2000
+  beatMarkerContainerAnimator: {fileID: 1188774878}
   constantPeopleProbability: 0.7
   percentageConstant: 0.00001
   percentageCool: 0.0001
