@@ -25530,6 +25530,10 @@ PrefabInstance:
       propertyPath: chromaticAberrationIntensityDoInterpolation
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3028213088062128495, guid: a302b2d128b88924ab04764376d75de0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.33
