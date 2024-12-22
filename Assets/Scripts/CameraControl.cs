@@ -146,9 +146,34 @@ public class CameraControl : MonoBehaviour
 
     void Update()
     {
-        float t = Mathf.PingPong(BeatManager.GetCurrentTime() / (BeatManager.GetBeatInterval()), 1f);
-        // curva exponencial de tiempo modificable 
-        float finalTime = useComplexLerp ? Mathf.Pow(t, 3) * (t < 0.1f ? 1f : -1f) + Mathf.Clamp01(t) : t;
+        // Modifica el intervalo entre beats para que tenga una curva exponencial
+        float modifier = useComplexLerp ? 1f : 0.5f;
+        float beatTime = BeatManager.GetCurrentTime() % BeatManager.GetBeatInterval();
+        float t = beatTime / (BeatManager.GetBeatInterval() * modifier);
+
+        // Asegúrate de que t esté en el rango [0, 1]
+        t = Mathf.Clamp01(t);
+
+        // Curva exponencial simétrica: va de mínimo a máximo y regresa al mínimo
+        float finalTime;
+        if (useComplexLerp)
+        {
+            // Ajustamos para que la interpolación sea simétrica y con comportamiento exponencial ida y vuelta
+            if (t < 0.5f)
+            {
+                finalTime = Mathf.Pow(t * 2f, 2); // Primera mitad (subida)
+            }
+            else
+            {
+                float invertedT = 1f - t; // Reflejar para la segunda mitad (bajada)
+                finalTime = Mathf.Pow(invertedT * 2f, 2); // Segunda mitad (bajada)
+            }
+        }
+        else
+        {
+            // Lerp simple
+            finalTime = t;
+        }
         float value; Color valueColor;
         if (_bloom.active)
         {

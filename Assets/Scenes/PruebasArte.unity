@@ -25566,9 +25566,57 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2443358871686089241, guid: a302b2d128b88924ab04764376d75de0, type: 3}
+      propertyPath: useBloom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443358871686089241, guid: a302b2d128b88924ab04764376d75de0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443358871686089241, guid: a302b2d128b88924ab04764376d75de0, type: 3}
+      propertyPath: useVignette
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443358871686089241, guid: a302b2d128b88924ab04764376d75de0, type: 3}
       propertyPath: _globalVolume
       value: 
       objectReference: {fileID: 1709522917}
+    - target: {fileID: 2443358871686089241, guid: a302b2d128b88924ab04764376d75de0, type: 3}
+      propertyPath: useLensDistortion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443358871686089241, guid: a302b2d128b88924ab04764376d75de0, type: 3}
+      propertyPath: useColorAdjustements
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443358871686089241, guid: a302b2d128b88924ab04764376d75de0, type: 3}
+      propertyPath: scatterDoInterpolation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443358871686089241, guid: a302b2d128b88924ab04764376d75de0, type: 3}
+      propertyPath: useChromaticAberration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443358871686089241, guid: a302b2d128b88924ab04764376d75de0, type: 3}
+      propertyPath: bloomIntensityDoInterpolation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443358871686089241, guid: a302b2d128b88924ab04764376d75de0, type: 3}
+      propertyPath: bloomIntensityInterpolation.x
+      value: 1.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443358871686089241, guid: a302b2d128b88924ab04764376d75de0, type: 3}
+      propertyPath: _chromaticAberrationInterpolation.x
+      value: 0.195
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443358871686089241, guid: a302b2d128b88924ab04764376d75de0, type: 3}
+      propertyPath: _chromaticAberrationInterpolation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443358871686089241, guid: a302b2d128b88924ab04764376d75de0, type: 3}
+      propertyPath: chromaticAberrationIntensityDoInterpolation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.33
