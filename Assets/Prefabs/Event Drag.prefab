@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 1627068402827794128}
   - component: {fileID: 4600734433139910444}
   - component: {fileID: 7710393627349434113}
+  - component: {fileID: 3197762131102743342}
   m_Layer: 0
   m_Name: ' Event Marker Container'
   m_TagString: Untagged
@@ -146,6 +147,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3197762131102743342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5796721483786493486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 151d44cd064bab148aeb7e304c93b652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radiusClick: 4.5
+  multiplier: 2
 --- !u!1 &6225376666671201900
 GameObject:
   m_ObjectHideFlags: 0

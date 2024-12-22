@@ -185,7 +185,7 @@ public class LevelManager : MonoBehaviour
         pointsText.text = $"PEOPLE: {puntuacion}";
 
     }
-    public void addPointsByScore(SCORE s)
+    public void addPointsByScore(SCORE s, float specialMultiplier)
     {
 
         foreach (SpeakerParticle speaker in speakers)
@@ -198,19 +198,19 @@ public class LevelManager : MonoBehaviour
                 {
 
                     //10000 : 1
-                    puntuacion += Mathf.CeilToInt(puntuacion * percentageCool);
+                    puntuacion += Mathf.CeilToInt(puntuacion * specialMultiplier * percentageCool);
                 }
                 break;
             case SCORE.PERFECT:
                 {
                     //10000 : 5
-                    puntuacion += Mathf.CeilToInt(puntuacion * percentagePerfect);
+                    puntuacion += Mathf.CeilToInt(puntuacion * specialMultiplier * percentagePerfect);
                 }
                 break;
             case SCORE.HEAVY:
                 {
                     //10000 : 10
-                    puntuacion += Mathf.CeilToInt(puntuacion * percentageHeavy);
+                    puntuacion += Mathf.CeilToInt(puntuacion * specialMultiplier * percentageHeavy);
                 }
                 break;
             default:

@@ -454,7 +454,7 @@ public class BeatManager : MonoBehaviour
     private float terribleThreshold = 0.4f, coolThreshold = 0.75f, perfectThreshold = 0.9f;
     //public float[] thresholds
     public double earlyTolerancePercentage = 0.1;
-    public SCORE evaluateClick()
+    public SCORE evaluateClick(float specialMult)
     {
         /*
 CAMBIOS esto estaba roto. xd. comprobara siempre con el primero y le añadimos un margen de tolerancia para comprobar un early.
@@ -490,10 +490,10 @@ CAMBIOS esto estaba roto. xd. comprobara siempre con el primero y le añadimos un
         {
             res = SCORE.HEAVY;
         }
-        UnityEngine.Debug.Log($"{res}, {evaluacion}. comparando con beat {beatToCheck}");
-        UnityEngine.Debug.Log($" click: {clickTime},  lastbeat = {lastBeat}, nextBeat = {nextBeat}");
+        //UnityEngine.Debug.Log($"{res}, {evaluacion}. comparando con beat {beatToCheck}");
+        //UnityEngine.Debug.Log($" click: {clickTime},  lastbeat = {lastBeat}, nextBeat = {nextBeat}");
 
-        LevelManager._instance.addPointsByScore(res);
+        LevelManager._instance.addPointsByScore(res, specialMult);
         return res;
     }
 }
