@@ -153,7 +153,10 @@ public class BeatManager : MonoBehaviour
 
         description.loadSampleData();
     }
-
+    public void playMetronome(bool b)
+    {
+        doDebugSounds = b;
+    }
     public static void PlayMusicTrack()
     {
         isPlayingMusic = true;
@@ -255,7 +258,7 @@ public class BeatManager : MonoBehaviour
 
         if (musicPlayState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
         {
-            isPlayingMusic = false;
+            //isPlayingMusic = false;
             return;
         }
 
@@ -465,12 +468,12 @@ CAMBIOS esto estaba roto. xd. comprobara siempre con el primero y le añadimos un
 
         //comprobamos que no este pegadito por detras y que sea un early que deberia dar mas puntos
         double beatToCheck = lastBeat;
-        if((nextBeat - clickTime)/beatInterval <= earlyTolerancePercentage)
+        if ((nextBeat - clickTime) / beatInterval <= earlyTolerancePercentage)
         {
             beatToCheck = nextBeat;
         }
 
-        double evaluacion = 1- ((Math.Abs(clickTime - beatToCheck) )/ beatInterval );
+        double evaluacion = 1 - ((Math.Abs(clickTime - beatToCheck)) / beatInterval);
 
         if (evaluacion < 0) evaluacion = 0;
 

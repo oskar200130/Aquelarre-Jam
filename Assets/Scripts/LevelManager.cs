@@ -43,6 +43,8 @@ public class LevelManager : MonoBehaviour
     public TMP_Text pointsText;
 
     public STATES actualState = STATES.NORMAL;
+    bool cabraLoca = false;
+
     private void Awake()
     {
         if (_instance == null)
@@ -56,7 +58,7 @@ public class LevelManager : MonoBehaviour
             return;
         }
         scores = new Queue<SCORE>(queueSize);
-        beatMarkerContainerAnimator.speed = 1;
+        beatMarkerContainerAnimator.speed = 0;
 
 
         BeatManager.onFixedBeat += metronome;
@@ -101,20 +103,28 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("empezando juego");
             BeatManager._instance.playSong();
+
             gameStarted = true;
+            beatMarkerContainerAnimator.speed = 1;
+
         }
         if (!BeatManager.isPlayingMusic && gameStarted)
         {
             //para volver a empezar
             gameStarted = false;
-        }
-    }
+            beatMarkerContainerAnimator.speed = 0;
+            BeatManager._instance.playMetronome(true);
 
+        }
+
+        if(gameStarted && counter_measures == 1)
+            BeatManager._instance.playMetronome(false);
+
+    }
     //checkpoints de la cancion donde cambia la intensidad de las cosas en pantalla
     //esto deberia hacerse con eventos de fmod PERO ME DA UNA PEREZA IMPRESIONANTE
     //EN PLAN
     //IMPRESIONANTE, SON LAS 2:17 NO ME PODRIA DAR MAS PEREZA EFE MOD
-    bool cabraRelajao = true;
     private void checkSongStates()
     {
         //cambia de estado de la cancion en compases especificos
@@ -124,7 +134,6 @@ public class LevelManager : MonoBehaviour
             case 26:
             case 34:
             case 94:
-                if(counter_measures != 94) esconderCabra();
                 if (actualState == STATES.CHILL) return;
                 actualState = STATES.CHILL;
                 Debug.Log("cambio a estado chill, trankilitos");
@@ -133,22 +142,15 @@ public class LevelManager : MonoBehaviour
             case 30:
             case 38:
             case 54:
-                esconderCabra();
                 if (actualState == STATES.NORMAL) return;
                 actualState = STATES.NORMAL;
                 Debug.Log("cambio a estado Normal, se pone intensillo");
                 break;
 
-            //caso especial: para activar el goat justo antes de que empiece el compas heavy
             case 45:
-            case 85:
-                if (counter_beats == 2)
-                    mostrarCabra();
-                break;
-
-            case 46:
             case 86: //final
                 if (actualState == STATES.HEAVY) return;
+                mostrarCabra();
                 actualState = STATES.HEAVY;
                 Debug.Log("cambio a estado HEAVY, WOOOOOOOOOOO");
                 break;
@@ -160,18 +162,11 @@ public class LevelManager : MonoBehaviour
 
     public void mostrarCabra()
     {
-        if (!cabraRelajao) return;
+        if (cabraLoca) return;
         goatsController.SetTrigger("omg");
         thunder.Play();
         Debug.Log("LA CABRAAAAAAAAAAA");
-        cabraRelajao = false;
-    }
-    public void esconderCabra()
-    {
-        if (cabraRelajao) return;
-        goatsController.ResetTrigger("omg");
-        Debug.Log("nos dejo el cabrito");
-        cabraRelajao = true;
+        cabraLoca = true;
     }
 
     private void Start()
@@ -244,7 +239,7 @@ public enum SCORE
 //estados por los que pasa la cancion
 public enum STATES
 {
-    NORMAL,
     CHILL,
+    NORMAL,
     HEAVY
 }
