@@ -4,8 +4,6 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
-using UnityEngine.UIElements;
 
 [BurstCompile]
 [CreateAfter(typeof(SpawnPublicSystem))]
@@ -24,6 +22,11 @@ public partial class RandomEntitySystem : SystemBase
     public float3 GetRandomEntityPos()
     {
         if (entities == null ||entities.Length == 0) return new float3(0, 0, 0);
+        Entity ent = entities[RandomGenerator.NextInt(entities.Length - 1)];
+        while(SystemAPI.GetComponent<EspectadorVariables>(ent).estado != EspectadorVariables.espectatorStates.IDLE)
+        {
+            ent = entities[RandomGenerator.NextInt(entities.Length - 1)];
+        }
         return SystemAPI.GetComponent<LocalTransform>(entities[RandomGenerator.NextInt(entities.Length - 1)]).Position;
     }
     [BurstCompile]

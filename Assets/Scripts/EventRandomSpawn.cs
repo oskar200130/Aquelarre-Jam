@@ -4,7 +4,7 @@ using UnityEngine;
 public class EventRandomSpawn : MonoBehaviour
 {
     [SerializeField]
-    GameObject eventEffect;
+    GameObject[] eventEffect;
     [SerializeField]
     int minBeatsBetweenEvents;
     [SerializeField]
@@ -35,7 +35,7 @@ public class EventRandomSpawn : MonoBehaviour
     }
     private void SpawnEffect(Vector3 spawnPos)
     {
-        Instantiate(eventEffect, spawnPos, Quaternion.identity);
+        Instantiate(eventEffect[Random.Range(0, eventEffect.Length)], spawnPos, Quaternion.identity);
         lastSpawn = minBeatsBetweenEvents;
     }
 }

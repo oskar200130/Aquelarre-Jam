@@ -37,16 +37,15 @@ public partial class SpawnPublicSystem : SystemBase
     {
         if (numberEntities != beatManageador.puntuacion)
         {
-
             EntityCommandBuffer ecb = new(Unity.Collections.Allocator.Temp);
-
 
             for (int i = numberEntities; i < beatManageador.puntuacion; i++, numberEntities++)
             {
 
                 //replantear las posiciones de spawn para que sean en un semi circulo desde el escenario (a saber como son esas mates)
                 Entity newEntity = ecb.Instantiate(spawner.prefab);
-                int rowPos = (int)spawner.spawnLengthNumber/2 + (i%2 == 0?-(i % (int)spawner.spawnLengthNumber) / 2:((i % (int)spawner.spawnLengthNumber) + 1)/2);
+                ecb.SetComponent(newEntity, new SortingData(0, 10));
+                int rowPos = (int)spawner.spawnLengthNumber / 2 + (i % 2 == 0 ? -(i % (int)spawner.spawnLengthNumber) / 2 : ((i % (int)spawner.spawnLengthNumber) + 1) / 2);
                 float x = rowPos * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
                 //lo he puesto en negativo, apra que el publico crezca hacia atras y no hacia el escenario jjjj
                 float z = -(i / (int)spawner.spawnLengthNumber) * spawner.spawnInitialSeparation + RandomGenerator.NextFloat(-spawner.spawnVariationPos, spawner.spawnVariationPos);
@@ -55,7 +54,7 @@ public partial class SpawnPublicSystem : SystemBase
 
                 float3 SpawnPoint = GetNearestOutsidePosition(new float3(x, 0, z));
 
-                if (RandomGenerator.NextBool())                    
+                if (RandomGenerator.NextBool())
                     ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(SpawnPoint, new quaternion(0, 1, 0, 0)));
                 else
                     ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(SpawnPoint, new quaternion(0, 0, 0, 1)));
@@ -91,7 +90,7 @@ public partial class SpawnPublicSystem : SystemBase
     float3 GetNearestOutsidePosition(float3 insidePos)
     {
         //direccion, centro camara mundo con el punto, y calcular luego distancia de centro mundo a esquina camara mundo
-        
+
 
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 

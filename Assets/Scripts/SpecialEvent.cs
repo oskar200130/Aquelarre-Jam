@@ -10,16 +10,14 @@ public class SpecialEvent : MonoBehaviour
     [SerializeField]
     float radiusClick;
 
-    public Material mat;    //Para debug
-
-    private UnityAction nextBeat;
+    //private UnityAction nextBeat;
     private Animator animator;
 
     private SpecialEventType type;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        nextBeat = NextBeat;
+        //nextBeat = NextBeat;
         BeatManager.onFixedBeat += NextBeat;
         animator = GetComponent<Animator>();
         type = (SpecialEventType)Random.Range(0, (int)SpecialEventType.POGO +1);   
@@ -28,15 +26,23 @@ public class SpecialEvent : MonoBehaviour
     private void OnApplicationQuit()
     {
        BeatManager.onFixedBeat -= NextBeat;
+    }
 
+    private void OnDestroy()
+    {
+       BeatManager.onFixedBeat -= NextBeat;        
+    }
+
+    public void SetType(SpecialEventType t)
+    {
+        type = t;
     }
 
     void NextBeat()
     {
         waitForBeats--;
         //animator.SetTrigger("NextAnim");
-        if (waitForBeats == 2) GetComponent<MeshRenderer>().material = mat;
-        else if (waitForBeats == 0)
+        if (waitForBeats == 0)
         {
             if ((ClickDetector.instance.worldMousePosWhenDown - new Vector3(transform.position.x, 0, transform.position.z)).magnitude < radiusClick)
                 Debug.Log("MIHOME " + type);
@@ -45,7 +51,7 @@ public class SpecialEvent : MonoBehaviour
         else if (waitForBeats < 0)
         {
             BeatManager.onFixedBeat -= NextBeat;
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 
