@@ -2806,7 +2806,7 @@ MonoBehaviour:
   - {fileID: 5034826773972506533, guid: 43d0e0cf53150a94bb5c2922d2e06f81, type: 3}
   - {fileID: 72482606908709719, guid: 2e79bab8af64eb84fa66ced1530c0efe, type: 3}
   - {fileID: 8745455329611077599, guid: 00fe9fd02f7235c44b4e747968123a0c, type: 3}
-  minBeatsBetweenEvents: 10
+  minBeatsBetweenEvents: 4
   probabilitySpawnEffect: 100
 --- !u!1 &1161155906
 GameObject:
