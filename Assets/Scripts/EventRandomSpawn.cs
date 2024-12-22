@@ -17,6 +17,12 @@ public class EventRandomSpawn : MonoBehaviour
         BeatManager.onFixedBeat += CreateEvent;
     }
 
+    private void OnApplicationQuit()
+    {
+        BeatManager.onFixedBeat -= CreateEvent;
+
+    }
+
     void CreateEvent()
     {
         if (lastSpawn <= 0){
