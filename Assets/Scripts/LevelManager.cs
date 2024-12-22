@@ -158,11 +158,24 @@ public class LevelManager : MonoBehaviour
         switch (counter_measures +1)
         {
             case 1:
+                if (actualState == STATES.CHILL) return;
+                actualState = STATES.CHILL;
+                Debug.Log("cambio a estado chill, trankilitos");
+                quitarEpilepsia();
+                break;
             case 26:
                 GetComponent<EventRandomSpawn>().freestyleMode = true;
+                if (actualState == STATES.CHILL) return;
+                actualState = STATES.CHILL;
+                Debug.Log("cambio a estado chill, trankilitos");
+                quitarEpilepsia();
                 break;
             case 34:
                 GetComponent<EventRandomSpawn>().freestyleMode = false;
+                if (actualState == STATES.CHILL) return;
+                actualState = STATES.CHILL;
+                Debug.Log("cambio a estado chill, trankilitos");
+                quitarEpilepsia();
                 break;
             case 94:
                 //if (counter_beats == 0)
