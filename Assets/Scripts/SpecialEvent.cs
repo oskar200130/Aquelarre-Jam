@@ -20,6 +20,7 @@ public class SpecialEvent : MonoBehaviour
     {
         if ((ClickDetector.instance.specialDetectorHitPoint - new Vector3(transform.position.x, 0, transform.position.z)).magnitude < radiusClick)
         {
+            animator.SetTrigger("Clicked");
             return true;
         }
         return false;
