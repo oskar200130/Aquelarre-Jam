@@ -194,7 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 6525301336776586959, guid: 00cdd995ed5607b42bb4ca46164cf651, type: 3}
   spawnNumber: 50000
-  spawnLenght: 50
+  spawnLenght: 40
   spawnSeparation: 1.12
   spawnVariationPos: 2
   pogoVariationPos: 3

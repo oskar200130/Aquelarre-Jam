@@ -24,131 +24,140 @@ public class CameraControl : MonoBehaviour
     private MotionBlur _motionblur;
     private Tonemapping _tonemapping;
     private ColorAdjustments _coloradjustements;
-    
 
-    public bool useComplexLerp = true;
-    public bool useBloom = true;
-    public bool useLensDistortion = true;
-    public bool useChromaticAberration = true;
-    public bool useVignette = true;
-    public bool useColorAdjustements = true;
-    [Space(10)]
+    [System.Serializable]
+    public class postproSettings
+    {
 
-    [Header("BLOOM")]
-    [Range(0f, 1f)]
-    public float scatter = 1f;
-    public Vector2 scatterInterpolation = new(0f, 1f);
-    public bool useScatter = true; public bool scatterDoInterpolation = false;
-    [Space(5)]
 
-    [Min(0f)]
-    public float bloomIntensity = 1.46f;
-    public Vector2 bloomIntensityInterpolation = new(0f, 1f);
-    public bool useBloomIntensity = true; public bool bloomIntensityDoInterpolation = false;
-    [Space(5)]
+        public bool useComplexLerp = true;
+        public bool useBloom = true;
+        public bool useLensDistortion = true;
+        public bool useChromaticAberration = true;
+        public bool useVignette = true;
+        public bool useColorAdjustements = true;
+        [Space(10)]
 
-    public Color bloomTint = Color.white;
-    public Color[] bloomTintInterpolation = new Color[2];
-    public bool useBloomTint = true; public bool bloomTintDoInterpolation = false;
+        [Header("BLOOM")]
+        [Range(0f, 1f)]
+        public float scatter = 1f;
+        public Vector2 scatterInterpolation = new(0f, 1f);
+        public bool useScatter = true; public bool scatterDoInterpolation = false;
+        [Space(5)]
 
-    [Space(5)]
+        [Min(0f)]
+        public float bloomIntensity = 1.46f;
+        public Vector2 bloomIntensityInterpolation = new(0f, 1f);
+        public bool useBloomIntensity = true; public bool bloomIntensityDoInterpolation = false;
+        [Space(5)]
 
-    [Header("LENS DISTORTION")]
-    [Range(0f, 1f)]
-    public float lensDistortionIntensity = 0.0f;
-    public Vector2 lensDistortionIntensityInterpolation = new(0f, 1f);
-    public bool useLensDistortionIntensity = true; public bool lensDistortionIntensityDoInterpolation = false;
-    [Space(10)]
+        public Color bloomTint = Color.white;
+        public Color[] bloomTintInterpolation = new Color[2];
+        public bool useBloomTint = true; public bool bloomTintDoInterpolation = false;
 
-    [Header("CHROMATIC ABERRATION")]
-    [Range(0f, 1f)]
-    public float _chromaticAberrationIntensity = 0.195f;
-    public Vector2 _chromaticAberrationInterpolation = new(0.195f, 1f);
-    public bool useChromaticAberrationIntensity = true; public bool chromaticAberrationIntensityDoInterpolation = false;
-    [Space(10)]
+        [Space(5)]
 
-    [Header("VIGNETTE")]
-    [Min(0f)]
-    public float vignetteIntensity = 1.46f;
-    public Vector2 vignetteIntensityInterpolation = new(0f, 1f);
-    public bool useVignetteIntensity = true; public bool vignetteIntensityDoInterpolation = false;
-    [Space(5)]
+        [Header("LENS DISTORTION")]
+        [Range(0f, 1f)]
+        public float lensDistortionIntensity = 0.0f;
+        public Vector2 lensDistortionIntensityInterpolation = new(0f, 1f);
+        public bool useLensDistortionIntensity = true; public bool lensDistortionIntensityDoInterpolation = false;
+        [Space(10)]
 
-    public Color vignetteColor = Color.white;
-    public Color[] vignetteColorInterpolation = new Color[2];
-    public bool useVignetteColor = true; public bool vignetteColorDoInterpolation = false;
-    [Space(10)]
+        [Header("CHROMATIC ABERRATION")]
+        [Range(0f, 1f)]
+        public float _chromaticAberrationIntensity = 0.195f;
+        public Vector2 _chromaticAberrationInterpolation = new(0.195f, 1f);
+        public bool useChromaticAberrationIntensity = true; public bool chromaticAberrationIntensityDoInterpolation = false;
+        [Space(10)]
 
-    [Header("COLOR ADJUSTEMENTS")]
+        [Header("VIGNETTE")]
+        [Min(0f)]
+        public float vignetteIntensity = 1.46f;
+        public Vector2 vignetteIntensityInterpolation = new(0f, 1f);
+        public bool useVignetteIntensity = true; public bool vignetteIntensityDoInterpolation = false;
+        [Space(5)]
 
-    [Min(0f)]
-    public float postExposure = 0f;
-    public Vector2 postExposureInterpolation = new(0, 1f);
-    public bool usePostExposure = true; public bool postExposureDoInterpolation = false;
-    [Space(5)]
+        public Color vignetteColor = Color.white;
+        public Color[] vignetteColorInterpolation = new Color[2];
+        public bool useVignetteColor = true; public bool vignetteColorDoInterpolation = false;
+        [Space(10)]
 
-    [Range(-100f, 100f)]
-    public float contrast = 0f;
-    public Vector2 contrastInterpolation = new(0, 1f);
-    public bool useContrast = true; public bool contrastDoInterpolation = false;
-    [Space(5)]
+        [Header("COLOR ADJUSTEMENTS")]
 
-    public Color colorFilter = Color.white;
-    public Color[] colorFilterInterpolation = new Color[2];
-    public bool useColorFilter = true; public bool colorFilterDoInterpolation = false;
-    [Space(5)]
+        [Min(0f)]
+        public float postExposure = 0f;
+        public Vector2 postExposureInterpolation = new(0, 1f);
+        public bool usePostExposure = true; public bool postExposureDoInterpolation = false;
+        [Space(5)]
 
-    [Range(-180f, 180f)]
-    public float hueShift = 0f;
-    public Vector2 hueShiftInterpolation = new(0, 1f);
-    public bool useHueShift = true; public bool hueShiftDoInterpolation = false;
-    [Space(5)]
+        [Range(-100f, 100f)]
+        public float contrast = 0f;
+        public Vector2 contrastInterpolation = new(0, 1f);
+        public bool useContrast = true; public bool contrastDoInterpolation = false;
+        [Space(5)]
 
-    [Range(-100f, 100f)]
-    public float saturation = 0f;
-    public Vector2 saturationInterpolation = new(0, 1f);
-    public bool useSaturation = true; public bool saturationDoInterpolation = false;
+        public Color colorFilter = Color.white;
+        public Color[] colorFilterInterpolation = new Color[2];
+        public bool useColorFilter = true; public bool colorFilterDoInterpolation = false;
+        [Space(5)]
 
+        [Range(-180f, 180f)]
+        public float hueShift = 0f;
+        public Vector2 hueShiftInterpolation = new(0, 1f);
+        public bool useHueShift = true; public bool hueShiftDoInterpolation = false;
+        [Space(5)]
+
+        [Range(-100f, 100f)]
+        public float saturation = 0f;
+        public Vector2 saturationInterpolation = new(0, 1f);
+        public bool useSaturation = true; public bool saturationDoInterpolation = false;
+    }
+
+    public int chill_normal_heavy = 0;
+    public postproSettings[] postproModes;
     private void OnValidate()
     {
         if (_bloom)
         {
-            _bloom.active = useBloom;
-            _bloom.scatter.Override(scatter); _bloom.scatter.overrideState = useScatter;
-            _bloom.intensity.Override(bloomIntensity); _bloom.intensity.overrideState = useBloomIntensity;
-            _bloom.tint.Override(bloomTint); _bloom.tint.overrideState = useBloomTint;
+            _bloom.active = postproModes[chill_normal_heavy].useBloom;
+            _bloom.scatter.Override(postproModes[chill_normal_heavy].scatter); _bloom.scatter.overrideState = postproModes[chill_normal_heavy].useScatter;
+            _bloom.intensity.Override(postproModes[chill_normal_heavy].bloomIntensity); _bloom.intensity.overrideState = postproModes[chill_normal_heavy].useBloomIntensity;
+            _bloom.tint.Override(postproModes[chill_normal_heavy].bloomTint); _bloom.tint.overrideState = postproModes[chill_normal_heavy].useBloomTint;
         }
         if (_lensDistorsion)
         {
-            _lensDistorsion.active = useLensDistortion;
-            _lensDistorsion.intensity.Override(lensDistortionIntensity); _lensDistorsion.intensity.overrideState = useLensDistortionIntensity;
+            _lensDistorsion.active = postproModes[chill_normal_heavy].useLensDistortion;
+            _lensDistorsion.intensity.Override(postproModes[chill_normal_heavy].lensDistortionIntensity); _lensDistorsion.intensity.overrideState = postproModes[chill_normal_heavy].useLensDistortionIntensity;
         }
         if (_chromaticAberration)
         {
-            _chromaticAberration.active = useChromaticAberration;
-            _chromaticAberration.intensity.Override(_chromaticAberrationIntensity); _chromaticAberration.intensity.overrideState = useChromaticAberrationIntensity;
+            _chromaticAberration.active = postproModes[chill_normal_heavy].useChromaticAberration;
+            _chromaticAberration.intensity.Override(postproModes[chill_normal_heavy]._chromaticAberrationIntensity); _chromaticAberration.intensity.overrideState = postproModes[chill_normal_heavy].useChromaticAberrationIntensity;
         }
         if (_vignette)
         {
-            _vignette.active = useVignette;
-            _vignette.intensity.Override(vignetteIntensity); _vignette.intensity.overrideState = useVignetteIntensity;
-            _vignette.color.Override(vignetteColor); _vignette.color.overrideState = useVignetteColor;
+            _vignette.active = postproModes[chill_normal_heavy].useVignette;
+            _vignette.intensity.Override(postproModes[chill_normal_heavy].vignetteIntensity); _vignette.intensity.overrideState = postproModes[chill_normal_heavy].useVignetteIntensity;
+            _vignette.color.Override(postproModes[chill_normal_heavy].vignetteColor); _vignette.color.overrideState = postproModes[chill_normal_heavy].useVignetteColor;
         }
         if (_coloradjustements)
         {
-            _coloradjustements.active = useColorAdjustements;
-            _coloradjustements.hueShift.Override(hueShift); _coloradjustements.hueShift.overrideState = useColorAdjustements;
-            _coloradjustements.saturation.Override(saturation); _coloradjustements.saturation.overrideState = useSaturation;
-            _coloradjustements.colorFilter.Override(colorFilter); _coloradjustements.colorFilter.overrideState = useColorAdjustements;
-            _coloradjustements.postExposure.Override(postExposure); _coloradjustements.postExposure.overrideState = usePostExposure;
-            _coloradjustements.contrast.Override(contrast); _coloradjustements.contrast.overrideState = useContrast;
+            _coloradjustements.active = postproModes[chill_normal_heavy].useColorAdjustements;
+            _coloradjustements.hueShift.Override(postproModes[chill_normal_heavy].hueShift); _coloradjustements.hueShift.overrideState = postproModes[chill_normal_heavy].useColorAdjustements;
+            _coloradjustements.saturation.Override(postproModes[chill_normal_heavy].saturation); _coloradjustements.saturation.overrideState = postproModes[chill_normal_heavy].useSaturation;
+            _coloradjustements.colorFilter.Override(postproModes[chill_normal_heavy].colorFilter); _coloradjustements.colorFilter.overrideState = postproModes[chill_normal_heavy].useColorAdjustements;
+            _coloradjustements.postExposure.Override(postproModes[chill_normal_heavy].postExposure); _coloradjustements.postExposure.overrideState = postproModes[chill_normal_heavy].usePostExposure;
+            _coloradjustements.contrast.Override(postproModes[chill_normal_heavy].contrast); _coloradjustements.contrast.overrideState = postproModes[chill_normal_heavy].useContrast;
         }
     }
 
     void Update()
     {
+        chill_normal_heavy = (int)LevelManager._instance.actualState;
+
         // Modifica el intervalo entre beats para que tenga una curva exponencial
-        float modifier = useComplexLerp ? 1f : 0.5f;
+        float modifier = postproModes[chill_normal_heavy].useComplexLerp ? 1f : 0.5f;
         float beatTime = BeatManager.GetCurrentTime() % BeatManager.GetBeatInterval();
         float t = beatTime / (BeatManager.GetBeatInterval() * modifier);
 
@@ -157,7 +166,7 @@ public class CameraControl : MonoBehaviour
 
         // Curva exponencial simétrica: va de mínimo a máximo y regresa al mínimo
         float finalTime;
-        if (useComplexLerp)
+        if (postproModes[chill_normal_heavy].useComplexLerp)
         {
             // Ajustamos para que la interpolación sea simétrica y con comportamiento exponencial ida y vuelta
             if (t < 0.5f)
@@ -178,85 +187,85 @@ public class CameraControl : MonoBehaviour
         float value; Color valueColor;
         if (_bloom.active)
         {
-            if (useBloomIntensity &&  bloomIntensityDoInterpolation)
+            if (postproModes[chill_normal_heavy].useBloomIntensity && postproModes[chill_normal_heavy].bloomIntensityDoInterpolation)
             {
-                value = Mathf.Lerp(bloomIntensityInterpolation.x, bloomIntensityInterpolation.y, finalTime);
+                value = Mathf.Lerp(postproModes[chill_normal_heavy].bloomIntensityInterpolation.x, postproModes[chill_normal_heavy].bloomIntensityInterpolation.y, finalTime);
                 _bloom.intensity.Override(value);
             }
-            if (useBloomTint && bloomTintDoInterpolation)
+            if (postproModes[chill_normal_heavy].useBloomTint && postproModes[chill_normal_heavy].bloomTintDoInterpolation)
             {
-                valueColor = Color.Lerp(bloomTintInterpolation[0], bloomTintInterpolation[1], finalTime);
+                valueColor = Color.Lerp(postproModes[chill_normal_heavy].bloomTintInterpolation[0], postproModes[chill_normal_heavy].bloomTintInterpolation[1], finalTime);
                 _bloom.tint.Override(valueColor);
             }
-            if(useScatter && scatterDoInterpolation)
+            if(postproModes[chill_normal_heavy].useScatter && postproModes[chill_normal_heavy].scatterDoInterpolation)
             {
-                value = Mathf.Lerp(scatterInterpolation.x, scatterInterpolation.y, finalTime);
+                value = Mathf.Lerp(postproModes[chill_normal_heavy].scatterInterpolation.x, postproModes[chill_normal_heavy].scatterInterpolation.y, finalTime);
                 _bloom.scatter.Override(value);
             }
         }
         if (_lensDistorsion.active)
         {
-            if (useLensDistortionIntensity && lensDistortionIntensityDoInterpolation)
+            if (postproModes[chill_normal_heavy].useLensDistortionIntensity && postproModes[chill_normal_heavy].lensDistortionIntensityDoInterpolation)
             {
-                value = Mathf.Lerp(lensDistortionIntensityInterpolation.x, lensDistortionIntensityInterpolation.y, finalTime);
+                value = Mathf.Lerp(postproModes[chill_normal_heavy].lensDistortionIntensityInterpolation.x, postproModes[chill_normal_heavy].lensDistortionIntensityInterpolation.y, finalTime);
                 _lensDistorsion.intensity.Override(value);
             }
 
         }
         if (_vignette.active)
         {
-            if (useVignetteIntensity && vignetteColorDoInterpolation)
+            if (postproModes[chill_normal_heavy].useVignetteIntensity && postproModes[chill_normal_heavy].vignetteColorDoInterpolation)
             {
-                valueColor = Color.Lerp(vignetteColorInterpolation[0], vignetteColorInterpolation[1], finalTime);
+                valueColor = Color.Lerp(postproModes[chill_normal_heavy].vignetteColorInterpolation[0], postproModes[chill_normal_heavy].vignetteColorInterpolation[1], finalTime);
                 _vignette.color.Override(valueColor);
             }
 
-            if (useVignetteColor &&  vignetteIntensityDoInterpolation)
+            if (postproModes[chill_normal_heavy].useVignetteColor && postproModes[chill_normal_heavy].vignetteIntensityDoInterpolation)
             {
-                value = Mathf.Lerp(vignetteIntensityInterpolation.x, vignetteIntensityInterpolation.y, finalTime);
+                value = Mathf.Lerp(postproModes[chill_normal_heavy].vignetteIntensityInterpolation.x, postproModes[chill_normal_heavy].vignetteIntensityInterpolation.y, finalTime);
                 _vignette.intensity.Override(value);
             }
         }
         if (_chromaticAberration.active)
         {
-            if (useChromaticAberrationIntensity && chromaticAberrationIntensityDoInterpolation)
+            if (postproModes[chill_normal_heavy].useChromaticAberrationIntensity && postproModes[chill_normal_heavy].chromaticAberrationIntensityDoInterpolation)
             {
-                value = Mathf.Lerp(_chromaticAberrationInterpolation.x, _chromaticAberrationInterpolation.y, finalTime);
+                value = Mathf.Lerp(postproModes[chill_normal_heavy]._chromaticAberrationInterpolation.x, postproModes[chill_normal_heavy]._chromaticAberrationInterpolation.y, finalTime);
                 _chromaticAberration.intensity.Override(value);
             }
         }
         if (_coloradjustements.active)
         {
-            if (usePostExposure && postExposureDoInterpolation)
+            if (postproModes[chill_normal_heavy].usePostExposure && postproModes[chill_normal_heavy].postExposureDoInterpolation)
             {
-                value = Mathf.Lerp(postExposureInterpolation.x, postExposureInterpolation.y, finalTime);
+                value = Mathf.Lerp(postproModes[chill_normal_heavy].postExposureInterpolation.x, postproModes[chill_normal_heavy].postExposureInterpolation.y, finalTime);
                 _coloradjustements.postExposure.Override(value);
             }
-            if (useContrast && contrastDoInterpolation)
+            if (postproModes[chill_normal_heavy].useContrast && postproModes[chill_normal_heavy].contrastDoInterpolation)
             {
-                value = Mathf.Lerp(contrastInterpolation.x, contrastInterpolation.y, finalTime);
+                value = Mathf.Lerp(postproModes[chill_normal_heavy].contrastInterpolation.x, postproModes[chill_normal_heavy].contrastInterpolation.y, finalTime);
                 _coloradjustements.contrast.Override(value);
             }
-            if (useHueShift && hueShiftDoInterpolation)
+            if (postproModes[chill_normal_heavy].useHueShift && postproModes[chill_normal_heavy].hueShiftDoInterpolation)
             {
-                value = Mathf.Lerp(hueShiftInterpolation.x, hueShiftInterpolation.y, finalTime);
+                value = Mathf.Lerp(postproModes[chill_normal_heavy].hueShiftInterpolation.x, postproModes[chill_normal_heavy].hueShiftInterpolation.y, finalTime);
                 _coloradjustements.hueShift.Override(value);
             }
-            if (useSaturation && saturationDoInterpolation)
+            if (postproModes[chill_normal_heavy].useSaturation && postproModes[chill_normal_heavy].saturationDoInterpolation)
             {
-                value = Mathf.Lerp(saturationInterpolation.x, saturationInterpolation.y, finalTime);
+                value = Mathf.Lerp(postproModes[chill_normal_heavy].saturationInterpolation.x, postproModes[chill_normal_heavy].saturationInterpolation.y, finalTime);
                 _coloradjustements.saturation.Override(value);
             }
-            if (useColorFilter && colorFilterDoInterpolation)
+            if (postproModes[chill_normal_heavy].useColorFilter && postproModes[chill_normal_heavy].colorFilterDoInterpolation)
             {
-                valueColor = Color.Lerp(colorFilterInterpolation[0], colorFilterInterpolation[1], finalTime);
+                valueColor = Color.Lerp(postproModes[chill_normal_heavy].colorFilterInterpolation[0], postproModes[chill_normal_heavy].colorFilterInterpolation[1], finalTime);
                 _coloradjustements.colorFilter.Override(valueColor);
             }
         }
 
     }
 
-
+    
 
 
     private void Awake()

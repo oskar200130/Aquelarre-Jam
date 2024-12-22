@@ -308,7 +308,7 @@ Transform:
   m_GameObject: {fileID: 64254726}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 21.769999, y: 0, z: 6.7899995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -354,9 +354,7 @@ MonoBehaviour:
   downBeatEvent: {fileID: -1956182793875612465, guid: d6bf9b0a512f8c943a77e79d0b5f5fdc, type: 3}
   upBeatEvent: {fileID: -1956182793875612465, guid: d6bf9b0a512f8c943a77e79d0b5f5fdc, type: 3}
   upBeatDivisor: 1
-  terribleThreshold: 0.4
-  coolThreshold: 0.75
-  perfectThreshold: 0.9
+  earlyTolerancePercentage: 0.25
 --- !u!4 &93203492
 Transform:
   m_ObjectHideFlags: 0
@@ -573,7 +571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.03
+      value: 29.799997
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -581,7 +579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.87
+      value: 11.92
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1028,7 +1026,7 @@ Transform:
   m_GameObject: {fileID: 307791265}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 21.3, z: -29.9}
+  m_LocalPosition: {x: 21.769999, y: 21.3, z: -13.110001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1042,72 +1040,176 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307791265}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 559361d2a2b2ff043886826f1eae5b8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _globalVolume: {fileID: 1779941395}
-  useComplexLerp: 0
-  useBloom: 1
-  useLensDistortion: 1
-  useChromaticAberration: 1
-  useVignette: 1
-  useColorAdjustements: 1
-  scatter: 1
-  scatterInterpolation: {x: 0, y: 1}
-  useScatter: 1
-  scatterDoInterpolation: 0
-  bloomIntensity: 1.46
-  bloomIntensityInterpolation: {x: 0, y: 1}
-  useBloomIntensity: 1
-  bloomIntensityDoInterpolation: 1
-  bloomTint: {r: 1, g: 1, b: 1, a: 1}
-  bloomTintInterpolation:
-  - {r: 1, g: 1, b: 1, a: 0}
-  - {r: 1, g: 0.44313726, b: 0, a: 0}
-  useBloomTint: 0
-  bloomTintDoInterpolation: 0
-  lensDistortionIntensity: 0
-  lensDistortionIntensityInterpolation: {x: 0, y: 1}
-  useLensDistortionIntensity: 1
-  lensDistortionIntensityDoInterpolation: 1
-  _chromaticAberrationIntensity: 0.195
-  _chromaticAberrationInterpolation: {x: 0.2, y: 0.7}
-  useChromaticAberrationIntensity: 1
-  chromaticAberrationIntensityDoInterpolation: 1
-  vignetteIntensity: 0.258
-  vignetteIntensityInterpolation: {x: 0.258, y: 0.32}
-  useVignetteIntensity: 1
-  vignetteIntensityDoInterpolation: 1
-  vignetteColor: {r: 1, g: 0.44313726, b: 0, a: 1}
-  vignetteColorInterpolation:
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  useVignetteColor: 1
-  vignetteColorDoInterpolation: 0
-  postExposure: 0
-  postExposureInterpolation: {x: 0, y: 1}
-  usePostExposure: 1
-  postExposureDoInterpolation: 0
-  contrast: 0
-  contrastInterpolation: {x: 0, y: 1}
-  useContrast: 1
-  contrastDoInterpolation: 0
-  colorFilter: {r: 1, g: 1, b: 1, a: 1}
-  colorFilterInterpolation:
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  useColorFilter: 1
-  colorFilterDoInterpolation: 0
-  hueShift: 0
-  hueShiftInterpolation: {x: 0, y: 1}
-  useHueShift: 1
-  hueShiftDoInterpolation: 0
-  saturation: 0
-  saturationInterpolation: {x: 0, y: 1}
-  useSaturation: 1
-  saturationDoInterpolation: 0
+  chill_normal_heavy: 0
+  postproModes:
+  - useComplexLerp: 0
+    useBloom: 0
+    useLensDistortion: 0
+    useChromaticAberration: 0
+    useVignette: 0
+    useColorAdjustements: 0
+    scatter: 0
+    scatterInterpolation: {x: 0, y: 0}
+    useScatter: 0
+    scatterDoInterpolation: 0
+    bloomIntensity: 0
+    bloomIntensityInterpolation: {x: 0, y: 0}
+    useBloomIntensity: 0
+    bloomIntensityDoInterpolation: 0
+    bloomTint: {r: 0, g: 0, b: 0, a: 0}
+    bloomTintInterpolation: []
+    useBloomTint: 0
+    bloomTintDoInterpolation: 0
+    lensDistortionIntensity: 0
+    lensDistortionIntensityInterpolation: {x: 0, y: 0}
+    useLensDistortionIntensity: 0
+    lensDistortionIntensityDoInterpolation: 0
+    _chromaticAberrationIntensity: 0
+    _chromaticAberrationInterpolation: {x: 0, y: 0}
+    useChromaticAberrationIntensity: 0
+    chromaticAberrationIntensityDoInterpolation: 0
+    vignetteIntensity: 0
+    vignetteIntensityInterpolation: {x: 0, y: 0}
+    useVignetteIntensity: 0
+    vignetteIntensityDoInterpolation: 0
+    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+    vignetteColorInterpolation: []
+    useVignetteColor: 0
+    vignetteColorDoInterpolation: 0
+    postExposure: 0
+    postExposureInterpolation: {x: 0, y: 0}
+    usePostExposure: 0
+    postExposureDoInterpolation: 0
+    contrast: 0
+    contrastInterpolation: {x: 0, y: 0}
+    useContrast: 0
+    contrastDoInterpolation: 0
+    colorFilter: {r: 0, g: 0, b: 0, a: 0}
+    colorFilterInterpolation: []
+    useColorFilter: 0
+    colorFilterDoInterpolation: 0
+    hueShift: 0
+    hueShiftInterpolation: {x: 0, y: 0}
+    useHueShift: 0
+    hueShiftDoInterpolation: 0
+    saturation: 0
+    saturationInterpolation: {x: 0, y: 0}
+    useSaturation: 0
+    saturationDoInterpolation: 0
+  - useComplexLerp: 0
+    useBloom: 0
+    useLensDistortion: 0
+    useChromaticAberration: 0
+    useVignette: 0
+    useColorAdjustements: 0
+    scatter: 0
+    scatterInterpolation: {x: 0, y: 0}
+    useScatter: 0
+    scatterDoInterpolation: 0
+    bloomIntensity: 0
+    bloomIntensityInterpolation: {x: 0, y: 0}
+    useBloomIntensity: 0
+    bloomIntensityDoInterpolation: 0
+    bloomTint: {r: 0, g: 0, b: 0, a: 0}
+    bloomTintInterpolation: []
+    useBloomTint: 0
+    bloomTintDoInterpolation: 0
+    lensDistortionIntensity: 0
+    lensDistortionIntensityInterpolation: {x: 0, y: 0}
+    useLensDistortionIntensity: 0
+    lensDistortionIntensityDoInterpolation: 0
+    _chromaticAberrationIntensity: 0
+    _chromaticAberrationInterpolation: {x: 0, y: 0}
+    useChromaticAberrationIntensity: 0
+    chromaticAberrationIntensityDoInterpolation: 0
+    vignetteIntensity: 0
+    vignetteIntensityInterpolation: {x: 0, y: 0}
+    useVignetteIntensity: 0
+    vignetteIntensityDoInterpolation: 0
+    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+    vignetteColorInterpolation: []
+    useVignetteColor: 0
+    vignetteColorDoInterpolation: 0
+    postExposure: 0
+    postExposureInterpolation: {x: 0, y: 0}
+    usePostExposure: 0
+    postExposureDoInterpolation: 0
+    contrast: 0
+    contrastInterpolation: {x: 0, y: 0}
+    useContrast: 0
+    contrastDoInterpolation: 0
+    colorFilter: {r: 0, g: 0, b: 0, a: 0}
+    colorFilterInterpolation: []
+    useColorFilter: 0
+    colorFilterDoInterpolation: 0
+    hueShift: 0
+    hueShiftInterpolation: {x: 0, y: 0}
+    useHueShift: 0
+    hueShiftDoInterpolation: 0
+    saturation: 0
+    saturationInterpolation: {x: 0, y: 0}
+    useSaturation: 0
+    saturationDoInterpolation: 0
+  - useComplexLerp: 0
+    useBloom: 0
+    useLensDistortion: 0
+    useChromaticAberration: 0
+    useVignette: 0
+    useColorAdjustements: 0
+    scatter: 0
+    scatterInterpolation: {x: 0, y: 0}
+    useScatter: 0
+    scatterDoInterpolation: 0
+    bloomIntensity: 0
+    bloomIntensityInterpolation: {x: 0, y: 0}
+    useBloomIntensity: 0
+    bloomIntensityDoInterpolation: 0
+    bloomTint: {r: 0, g: 0, b: 0, a: 0}
+    bloomTintInterpolation: []
+    useBloomTint: 0
+    bloomTintDoInterpolation: 0
+    lensDistortionIntensity: 0
+    lensDistortionIntensityInterpolation: {x: 0, y: 0}
+    useLensDistortionIntensity: 0
+    lensDistortionIntensityDoInterpolation: 0
+    _chromaticAberrationIntensity: 0
+    _chromaticAberrationInterpolation: {x: 0, y: 0}
+    useChromaticAberrationIntensity: 0
+    chromaticAberrationIntensityDoInterpolation: 0
+    vignetteIntensity: 0
+    vignetteIntensityInterpolation: {x: 0, y: 0}
+    useVignetteIntensity: 0
+    vignetteIntensityDoInterpolation: 0
+    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+    vignetteColorInterpolation: []
+    useVignetteColor: 0
+    vignetteColorDoInterpolation: 0
+    postExposure: 0
+    postExposureInterpolation: {x: 0, y: 0}
+    usePostExposure: 0
+    postExposureDoInterpolation: 0
+    contrast: 0
+    contrastInterpolation: {x: 0, y: 0}
+    useContrast: 0
+    contrastDoInterpolation: 0
+    colorFilter: {r: 0, g: 0, b: 0, a: 0}
+    colorFilterInterpolation: []
+    useColorFilter: 0
+    colorFilterDoInterpolation: 0
+    hueShift: 0
+    hueShiftInterpolation: {x: 0, y: 0}
+    useHueShift: 0
+    hueShiftDoInterpolation: 0
+    saturation: 0
+    saturationInterpolation: {x: 0, y: 0}
+    useSaturation: 0
+    saturationDoInterpolation: 0
 --- !u!114 &307791268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1503,7 +1605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.62
+      value: 8.15
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1511,7 +1613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.16
+      value: 5.6299996
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1749,7 +1851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1449802870518804077, guid: 65e478cfdbc23c04093fec96f41a844c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 21.769999
       objectReference: {fileID: 0}
     - target: {fileID: 1449802870518804077, guid: 65e478cfdbc23c04093fec96f41a844c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1757,7 +1859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1449802870518804077, guid: 65e478cfdbc23c04093fec96f41a844c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 16.789999
       objectReference: {fileID: 0}
     - target: {fileID: 1449802870518804077, guid: 65e478cfdbc23c04093fec96f41a844c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1980,7 +2082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.61
+      value: 36.379997
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1988,7 +2090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.56
+      value: 6.229999
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2309,66 +2411,170 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _globalVolume: {fileID: 1779941395}
-  useComplexLerp: 1
-  useBloom: 1
-  useLensDistortion: 0
-  useChromaticAberration: 1
-  useVignette: 0
-  useColorAdjustements: 0
-  scatter: 1
-  scatterInterpolation: {x: 0, y: 1}
-  useScatter: 1
-  scatterDoInterpolation: 0
-  bloomIntensity: 1.46
-  bloomIntensityInterpolation: {x: 1.46, y: 1}
-  useBloomIntensity: 1
-  bloomIntensityDoInterpolation: 1
-  bloomTint: {r: 1, g: 1, b: 1, a: 1}
-  bloomTintInterpolation:
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  useBloomTint: 1
-  bloomTintDoInterpolation: 0
-  lensDistortionIntensity: 0
-  lensDistortionIntensityInterpolation: {x: 0, y: 0}
-  useLensDistortionIntensity: 1
-  lensDistortionIntensityDoInterpolation: 0
-  _chromaticAberrationIntensity: 0.195
-  _chromaticAberrationInterpolation: {x: 0.195, y: 1}
-  useChromaticAberrationIntensity: 1
-  chromaticAberrationIntensityDoInterpolation: 1
-  vignetteIntensity: 1.46
-  vignetteIntensityInterpolation: {x: 0, y: 1}
-  useVignetteIntensity: 1
-  vignetteIntensityDoInterpolation: 0
-  vignetteColor: {r: 1, g: 1, b: 1, a: 1}
-  vignetteColorInterpolation:
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  useVignetteColor: 1
-  vignetteColorDoInterpolation: 0
-  postExposure: 0
-  postExposureInterpolation: {x: 0, y: 1}
-  usePostExposure: 1
-  postExposureDoInterpolation: 0
-  contrast: 0
-  contrastInterpolation: {x: 0, y: 1}
-  useContrast: 1
-  contrastDoInterpolation: 0
-  colorFilter: {r: 1, g: 1, b: 1, a: 1}
-  colorFilterInterpolation:
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  useColorFilter: 1
-  colorFilterDoInterpolation: 0
-  hueShift: 0
-  hueShiftInterpolation: {x: 0, y: 1}
-  useHueShift: 1
-  hueShiftDoInterpolation: 0
-  saturation: 0
-  saturationInterpolation: {x: 0, y: 1}
-  useSaturation: 1
-  saturationDoInterpolation: 0
+  chill_normal_heavy: 0
+  postproModes:
+  - useComplexLerp: 0
+    useBloom: 0
+    useLensDistortion: 0
+    useChromaticAberration: 0
+    useVignette: 0
+    useColorAdjustements: 0
+    scatter: 0
+    scatterInterpolation: {x: 0, y: 0}
+    useScatter: 0
+    scatterDoInterpolation: 0
+    bloomIntensity: 0
+    bloomIntensityInterpolation: {x: 0, y: 0}
+    useBloomIntensity: 0
+    bloomIntensityDoInterpolation: 0
+    bloomTint: {r: 0, g: 0, b: 0, a: 0}
+    bloomTintInterpolation: []
+    useBloomTint: 0
+    bloomTintDoInterpolation: 0
+    lensDistortionIntensity: 0
+    lensDistortionIntensityInterpolation: {x: 0, y: 0}
+    useLensDistortionIntensity: 0
+    lensDistortionIntensityDoInterpolation: 0
+    _chromaticAberrationIntensity: 0
+    _chromaticAberrationInterpolation: {x: 0, y: 0}
+    useChromaticAberrationIntensity: 0
+    chromaticAberrationIntensityDoInterpolation: 0
+    vignetteIntensity: 0
+    vignetteIntensityInterpolation: {x: 0, y: 0}
+    useVignetteIntensity: 0
+    vignetteIntensityDoInterpolation: 0
+    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+    vignetteColorInterpolation: []
+    useVignetteColor: 0
+    vignetteColorDoInterpolation: 0
+    postExposure: 0
+    postExposureInterpolation: {x: 0, y: 0}
+    usePostExposure: 0
+    postExposureDoInterpolation: 0
+    contrast: 0
+    contrastInterpolation: {x: 0, y: 0}
+    useContrast: 0
+    contrastDoInterpolation: 0
+    colorFilter: {r: 0, g: 0, b: 0, a: 0}
+    colorFilterInterpolation: []
+    useColorFilter: 0
+    colorFilterDoInterpolation: 0
+    hueShift: 0
+    hueShiftInterpolation: {x: 0, y: 0}
+    useHueShift: 0
+    hueShiftDoInterpolation: 0
+    saturation: 0
+    saturationInterpolation: {x: 0, y: 0}
+    useSaturation: 0
+    saturationDoInterpolation: 0
+  - useComplexLerp: 0
+    useBloom: 0
+    useLensDistortion: 0
+    useChromaticAberration: 0
+    useVignette: 0
+    useColorAdjustements: 0
+    scatter: 0
+    scatterInterpolation: {x: 0, y: 0}
+    useScatter: 0
+    scatterDoInterpolation: 0
+    bloomIntensity: 0
+    bloomIntensityInterpolation: {x: 0, y: 0}
+    useBloomIntensity: 0
+    bloomIntensityDoInterpolation: 0
+    bloomTint: {r: 0, g: 0, b: 0, a: 0}
+    bloomTintInterpolation: []
+    useBloomTint: 0
+    bloomTintDoInterpolation: 0
+    lensDistortionIntensity: 0
+    lensDistortionIntensityInterpolation: {x: 0, y: 0}
+    useLensDistortionIntensity: 0
+    lensDistortionIntensityDoInterpolation: 0
+    _chromaticAberrationIntensity: 0
+    _chromaticAberrationInterpolation: {x: 0, y: 0}
+    useChromaticAberrationIntensity: 0
+    chromaticAberrationIntensityDoInterpolation: 0
+    vignetteIntensity: 0
+    vignetteIntensityInterpolation: {x: 0, y: 0}
+    useVignetteIntensity: 0
+    vignetteIntensityDoInterpolation: 0
+    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+    vignetteColorInterpolation: []
+    useVignetteColor: 0
+    vignetteColorDoInterpolation: 0
+    postExposure: 0
+    postExposureInterpolation: {x: 0, y: 0}
+    usePostExposure: 0
+    postExposureDoInterpolation: 0
+    contrast: 0
+    contrastInterpolation: {x: 0, y: 0}
+    useContrast: 0
+    contrastDoInterpolation: 0
+    colorFilter: {r: 0, g: 0, b: 0, a: 0}
+    colorFilterInterpolation: []
+    useColorFilter: 0
+    colorFilterDoInterpolation: 0
+    hueShift: 0
+    hueShiftInterpolation: {x: 0, y: 0}
+    useHueShift: 0
+    hueShiftDoInterpolation: 0
+    saturation: 0
+    saturationInterpolation: {x: 0, y: 0}
+    useSaturation: 0
+    saturationDoInterpolation: 0
+  - useComplexLerp: 0
+    useBloom: 0
+    useLensDistortion: 0
+    useChromaticAberration: 0
+    useVignette: 0
+    useColorAdjustements: 0
+    scatter: 0
+    scatterInterpolation: {x: 0, y: 0}
+    useScatter: 0
+    scatterDoInterpolation: 0
+    bloomIntensity: 0
+    bloomIntensityInterpolation: {x: 0, y: 0}
+    useBloomIntensity: 0
+    bloomIntensityDoInterpolation: 0
+    bloomTint: {r: 0, g: 0, b: 0, a: 0}
+    bloomTintInterpolation: []
+    useBloomTint: 0
+    bloomTintDoInterpolation: 0
+    lensDistortionIntensity: 0
+    lensDistortionIntensityInterpolation: {x: 0, y: 0}
+    useLensDistortionIntensity: 0
+    lensDistortionIntensityDoInterpolation: 0
+    _chromaticAberrationIntensity: 0
+    _chromaticAberrationInterpolation: {x: 0, y: 0}
+    useChromaticAberrationIntensity: 0
+    chromaticAberrationIntensityDoInterpolation: 0
+    vignetteIntensity: 0
+    vignetteIntensityInterpolation: {x: 0, y: 0}
+    useVignetteIntensity: 0
+    vignetteIntensityDoInterpolation: 0
+    vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+    vignetteColorInterpolation: []
+    useVignetteColor: 0
+    vignetteColorDoInterpolation: 0
+    postExposure: 0
+    postExposureInterpolation: {x: 0, y: 0}
+    usePostExposure: 0
+    postExposureDoInterpolation: 0
+    contrast: 0
+    contrastInterpolation: {x: 0, y: 0}
+    useContrast: 0
+    contrastDoInterpolation: 0
+    colorFilter: {r: 0, g: 0, b: 0, a: 0}
+    colorFilterInterpolation: []
+    useColorFilter: 0
+    colorFilterDoInterpolation: 0
+    hueShift: 0
+    hueShiftInterpolation: {x: 0, y: 0}
+    useHueShift: 0
+    hueShiftDoInterpolation: 0
+    saturation: 0
+    saturationInterpolation: {x: 0, y: 0}
+    useSaturation: 0
+    saturationDoInterpolation: 0
 --- !u!114 &891132342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2734,7 +2940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3206403105467488624, guid: 77da7ccdba1384a4dae92f07178cd82d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.277105
+      value: 9.492893
       objectReference: {fileID: 0}
     - target: {fileID: 3206403105467488624, guid: 77da7ccdba1384a4dae92f07178cd82d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2742,7 +2948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3206403105467488624, guid: 77da7ccdba1384a4dae92f07178cd82d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.7422943
+      value: 20.532293
       objectReference: {fileID: 0}
     - target: {fileID: 3206403105467488624, guid: 77da7ccdba1384a4dae92f07178cd82d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2948,8 +3154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47cb7d57d7407f46a5e6f2afe372dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puntuacion: 2000
+  puntuacion: 1000
   beatMarkerContainerAnimator: {fileID: 1188774878}
+  goatsController: {fileID: 0}
+  thunder: {fileID: 0}
   constantPeopleProbability: 0.7
   percentageConstant: 0.00001
   percentageCool: 0.0001
@@ -2960,6 +3168,7 @@ MonoBehaviour:
   - {fileID: 1393617518}
   pointsText: {fileID: 354622928}
   actualState: 0
+  gameStarted: 0
 --- !u!4 &1147868052
 Transform:
   m_ObjectHideFlags: 0
@@ -3464,7 +3673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.25
+      value: 13.519999
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3472,7 +3681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.94
+      value: 11.849999
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3594,7 +3803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3206403105467488624, guid: 77da7ccdba1384a4dae92f07178cd82d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.36
+      value: 37.129997
       objectReference: {fileID: 0}
     - target: {fileID: 3206403105467488624, guid: 77da7ccdba1384a4dae92f07178cd82d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3602,7 +3811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3206403105467488624, guid: 77da7ccdba1384a4dae92f07178cd82d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.48
+      value: 12.309999
       objectReference: {fileID: 0}
     - target: {fileID: 3206403105467488624, guid: 77da7ccdba1384a4dae92f07178cd82d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3663,7 +3872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.25
+      value: 13.519999
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3671,7 +3880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.89
+      value: 10.9
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3932,7 +4141,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 899186011095617213, guid: 32246d28beacabd469827f462d7c2e5d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.22316885
+      value: 21.546831
       objectReference: {fileID: 0}
     - target: {fileID: 899186011095617213, guid: 32246d28beacabd469827f462d7c2e5d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3940,7 +4149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 899186011095617213, guid: 32246d28beacabd469827f462d7c2e5d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.92704
+      value: 11.862959
       objectReference: {fileID: 0}
     - target: {fileID: 899186011095617213, guid: 32246d28beacabd469827f462d7c2e5d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4290,7 +4499,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3199407512198819041, guid: 54ad9ed631bfd494eb6a968ff4fa2a15, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 21.769999
       objectReference: {fileID: 0}
     - target: {fileID: 3199407512198819041, guid: 54ad9ed631bfd494eb6a968ff4fa2a15, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4298,7 +4507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3199407512198819041, guid: 54ad9ed631bfd494eb6a968ff4fa2a15, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 16.789999
       objectReference: {fileID: 0}
     - target: {fileID: 3199407512198819041, guid: 54ad9ed631bfd494eb6a968ff4fa2a15, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4457,7 +4666,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.2707977
+      value: 23.040796
       objectReference: {fileID: 0}
     - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4465,7 +4674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.686905
+      value: 58.476906
       objectReference: {fileID: 0}
     - target: {fileID: 7318105786826690401, guid: a302b2d128b88924ab04764376d75de0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4527,7 +4736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3427892995978333652, guid: f9e64c1da977a93439ba42f0490ab8bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.12
+      value: 19.65
       objectReference: {fileID: 0}
     - target: {fileID: 3427892995978333652, guid: f9e64c1da977a93439ba42f0490ab8bc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4535,7 +4744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3427892995978333652, guid: f9e64c1da977a93439ba42f0490ab8bc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.79
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3427892995978333652, guid: f9e64c1da977a93439ba42f0490ab8bc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14891,7 +15100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5587130771729536351, guid: c2eeb470dc67dd04589ef25172ca24c2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.26
+      value: 24.029997
       objectReference: {fileID: 0}
     - target: {fileID: 5587130771729536351, guid: c2eeb470dc67dd04589ef25172ca24c2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14899,7 +15108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5587130771729536351, guid: c2eeb470dc67dd04589ef25172ca24c2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.45
+      value: 13.339999
       objectReference: {fileID: 0}
     - target: {fileID: 5587130771729536351, guid: c2eeb470dc67dd04589ef25172ca24c2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15032,7 +15241,7 @@ Transform:
   m_GameObject: {fileID: 1841817954}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07, y: -1, z: 7.1}
+  m_LocalPosition: {x: 21.839998, y: -1, z: 23.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15094,7 +15303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.33
+      value: 30.1
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15102,7 +15311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.89
+      value: 10.9
       objectReference: {fileID: 0}
     - target: {fileID: 1589248107471532373, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15162,7 +15371,7 @@ Transform:
   m_GameObject: {fileID: 1869927231}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 21.769999, y: 0, z: 16.789999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15345,7 +15554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7049237058624683673, guid: b76f3d545e67a8941a37901813101ed3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.2993703
+      value: 21.470629
       objectReference: {fileID: 0}
     - target: {fileID: 7049237058624683673, guid: b76f3d545e67a8941a37901813101ed3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15353,7 +15562,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7049237058624683673, guid: b76f3d545e67a8941a37901813101ed3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.65
+      value: 16.14
       objectReference: {fileID: 0}
     - target: {fileID: 7049237058624683673, guid: b76f3d545e67a8941a37901813101ed3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16619,7 +16828,7 @@ Transform:
   m_GameObject: {fileID: 8719917828556144305}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.058078885, y: 0.02, z: -5.5204964}
+  m_LocalPosition: {x: 21.828077, y: 0.02, z: 11.269503}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
