@@ -118,6 +118,10 @@ public class CameraControl : MonoBehaviour
     public postproSettings[] postproModes;
     private void OnValidate()
     {
+        setValues();
+    }
+    private void setValues()
+    {
         if (_bloom)
         {
             _bloom.active = postproModes[chill_normal_heavy].useBloom;
@@ -151,10 +155,10 @@ public class CameraControl : MonoBehaviour
             _coloradjustements.contrast.Override(postproModes[chill_normal_heavy].contrast); _coloradjustements.contrast.overrideState = postproModes[chill_normal_heavy].useContrast;
         }
     }
-
     void Update()
     {
         chill_normal_heavy = (int)LevelManager._instance.actualState;
+        setValues();
 
         // Modifica el intervalo entre beats para que tenga una curva exponencial
         float modifier = postproModes[chill_normal_heavy].useComplexLerp ? 1f : 0.5f;
@@ -197,7 +201,7 @@ public class CameraControl : MonoBehaviour
                 valueColor = Color.Lerp(postproModes[chill_normal_heavy].bloomTintInterpolation[0], postproModes[chill_normal_heavy].bloomTintInterpolation[1], finalTime);
                 _bloom.tint.Override(valueColor);
             }
-            if(postproModes[chill_normal_heavy].useScatter && postproModes[chill_normal_heavy].scatterDoInterpolation)
+            if (postproModes[chill_normal_heavy].useScatter && postproModes[chill_normal_heavy].scatterDoInterpolation)
             {
                 value = Mathf.Lerp(postproModes[chill_normal_heavy].scatterInterpolation.x, postproModes[chill_normal_heavy].scatterInterpolation.y, finalTime);
                 _bloom.scatter.Override(value);
@@ -265,9 +269,12 @@ public class CameraControl : MonoBehaviour
 
     }
 
-    
 
 
+    private void Start()
+    {
+        setValues();
+    }
     private void Awake()
     {
         if (_globalVolume != null && _globalVolume.profile != null)
