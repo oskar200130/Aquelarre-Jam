@@ -78,7 +78,7 @@ public class LevelManager : MonoBehaviour
     void metronome()
     {
         //text.text = $"Compás {counter_measures}, pulso {counter_beats}";
-        //Debug.Log($"Compás {counter_measures+1}, pulso {counter_beats}");
+        Debug.Log($"Compás {counter_measures+1}, pulso {counter_beats}");
 
         checkSongStates();
         counter_beats = (counter_beats + 1) % 4; //hardcodeado a 4/4
@@ -100,7 +100,7 @@ public class LevelManager : MonoBehaviour
     private void checkSongStates()
     {
         //cambia de estado de la cancion en compases especificos
-        switch (counter_measures + 60)
+        switch (counter_measures +1)
         {
             case 0:
             case 26:
@@ -185,7 +185,7 @@ public class LevelManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         BeatManager.onFixedBeat -= metronome;
-
+        BeatManager.onTempoChanged -= tempoChanged;
     }
 
 }
