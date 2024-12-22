@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
@@ -37,6 +38,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] SpeakerParticle[] speakers;
     private int counter_beats = 1; private int counter_measures = 0;
     public TMP_Text pointsText;
+
+    public STATES actualState = STATES.NORMAL;
     private void Awake()
     {
         if (_instance == null)
@@ -50,26 +53,71 @@ public class LevelManager : MonoBehaviour
             return;
         }
         scores = new Queue<SCORE>(queueSize);
+     
+        
         BeatManager.onFixedBeat += metronome;
     }
 
     void metronome()
     {
         //text.text = $"Compás {counter_measures}, pulso {counter_beats}";
-        //Debug.Log($"Compás {counter_measures}, pulso {counter_beats}");
+        Debug.Log($"Compás {counter_measures+1}, pulso {counter_beats}");
+
+        checkSongStates();
         counter_beats = (counter_beats + 1) % 4; //hardcodeado a 4/4
-        if (counter_beats == 0) counter_measures++;
+        if (counter_beats == 0) counter_measures+=1;
 
 
         //añade de manera aleatoria a gente al escenario de forma constante
-        if(Random.Range(0,1.01f) < constantPeopleProbability)
+        if (Random.Range(0, 1.01f) < constantPeopleProbability)
         {
-          //  addPointsByFloat(percentageConstant);
+            //  addPointsByFloat(percentageConstant);
+        }
+
+    }
+
+    //checkpoints de la cancion donde cambia la intensidad de las cosas en pantalla
+    //esto deberia hacerse con eventos de fmod PERO ME DA UNA PEREZA IMPRESIONANTE
+    //EN PLAN
+    //IMPRESIONANTE, SON LAS 2:17 NO ME PODRIA DAR MAS PEREZA EFE MOD
+    private void checkSongStates()
+    {
+        //cambia de estado de la cancion en compases especificos
+        switch (counter_measures + 60)
+        {
+            case 0:
+            case 18:
+            case 26:
+                if (actualState == STATES.CHILL) return;
+                actualState = STATES.CHILL;
+                Debug.Log("cambio a estado chill, trankilitos");
+                break;
+            case 62: //final de la cancion, es un caso especial porque se pone suave en el pulso 3 del compas, no en el inicio
+                if (counter_beats >= 2) actualState = STATES.CHILL;
+                break;
+            case 10:
+            case 22:
+            case 30:
+            case 38:
+                if (actualState == STATES.NORMAL) return;
+                actualState = STATES.NORMAL;
+                Debug.Log("cambio a estado Normal, se pone intensillo");
+                break;
+            case 34:
+            case 58: //final
+                if (actualState == STATES.HEAVY) return;
+                actualState = STATES.HEAVY;
+                Debug.Log("cambio a estado HEAVY, WOOOOOOOOOOO");
+                break;
+            default:
+                break;
+
         }
     }
 
     private void Start()
     {
+        actualState = STATES.CHILL;
         BeatManager._instance.playSong();
     }
 
@@ -118,6 +166,13 @@ public class LevelManager : MonoBehaviour
         AddScore(s);
     }
 
+
+    private void OnApplicationQuit()
+    {
+        BeatManager.onFixedBeat -= metronome;
+
+    }
+
 }
 public enum SCORE
 {
@@ -126,4 +181,12 @@ public enum SCORE
     COOL, //<61-85%
     PERFECT, //<86-90%
     HEAVY //95-100%
+}
+
+//estados por los que pasa la cancion
+public enum STATES
+{
+    NORMAL,
+    CHILL,
+    HEAVY
 }

@@ -25,6 +25,12 @@ public class SpecialEvent : MonoBehaviour
         type = (SpecialEventType)Random.Range(0, (int)SpecialEventType.POGO +1);   
     }
 
+    private void OnApplicationQuit()
+    {
+       BeatManager.onFixedBeat -= NextBeat;
+
+    }
+
     void NextBeat()
     {
         waitForBeats--;

@@ -24,6 +24,7 @@ public class CameraControl : MonoBehaviour
     private MotionBlur _motionblur;
     private Tonemapping _tonemapping;
     private ColorAdjustments _coloradjustements;
+    
 
     public bool useComplexLerp = true;
     public bool useBloom = true;
