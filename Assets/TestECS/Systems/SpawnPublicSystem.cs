@@ -54,10 +54,14 @@ public partial class SpawnPublicSystem : SystemBase
 
                 float3 SpawnPoint = GetNearestOutsidePosition(new float3(x, 0, z));
 
-                if (RandomGenerator.NextBool())
-                    ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(SpawnPoint, new quaternion(0, 1, 0, 0)));
+                quaternion rotation;
+                if (RandomGenerator.NextBool()) 
+                    rotation = new quaternion(0.32556805f, 0f, 0f, 0.945518613f);
                 else
-                    ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(SpawnPoint, new quaternion(0, 0, 0, 1)));
+                    rotation = new quaternion(0f, -0.32556805f, 0.945518613f, 0f);
+                
+                ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(SpawnPoint, rotation));
+
                 ecb.AddComponent(newEntity, new ChangeAnimTag { nextAnim = Animator.StringToHash("Idle" + color) });
                 ecb.AddComponent(newEntity, new EspectadorVariables
                 {
