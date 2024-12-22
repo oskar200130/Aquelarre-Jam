@@ -54,8 +54,9 @@ public class LevelManager : MonoBehaviour
             return;
         }
         scores = new Queue<SCORE>(queueSize);
-        
-        
+        beatMarkerContainerAnimator.speed = 1;
+
+
         BeatManager.onFixedBeat += metronome;
         BeatManager.onTempoChanged += tempoChanged;
     }
@@ -64,12 +65,12 @@ public class LevelManager : MonoBehaviour
     {
         if (beatInterval < 0.6) //180 BPM
         {
-            beatMarkerContainerAnimator.speed *= 2;
+            beatMarkerContainerAnimator.speed = 2;
         }
         else
         {
             if(counter_measures >0) //para comprobar que ha empezado la cancion
-                beatMarkerContainerAnimator.speed /= 2;
+                beatMarkerContainerAnimator.speed = 1;
 
         }
     }
