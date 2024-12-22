@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{83b2000a-38da-44a9-ab2f-5abeca9b568d}">
+		<property name="assetPath">
+			<value>Thunder 3.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>4.2631972789115649</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{63e44a5c-73bc-4c93-a161-f617c6fb8e5d}</destination>
+		</relationship>
+	</object>
+</objects>
