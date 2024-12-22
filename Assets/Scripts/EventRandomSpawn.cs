@@ -28,14 +28,15 @@ public class EventRandomSpawn : MonoBehaviour
         if (lastSpawn <= 0){
             if (Random.Range(0f, 100f) >= probabilitySpawnEffect) return;           
 
-            SpawnEffect((Vector3)World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<RandomEntitySystem>().GetRandomEntityPos() + new Vector3(0, 2, 0));
+            SpawnEffect((Vector3)World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<RandomEntitySystem>().GetRandomEntityPos());
         }
         else
             lastSpawn--;
     }
     private void SpawnEffect(Vector3 spawnPos)
     {
-        Instantiate(eventEffect[Random.Range(0, eventEffect.Length)], spawnPos, Quaternion.identity);
+        GameObject instance = Instantiate(eventEffect[Random.Range(0, eventEffect.Length)], spawnPos, Quaternion.identity);
+        ClickDetector.instance.specialEvents.Add(instance.GetComponentInChildren<SpecialEvent>());
         lastSpawn = minBeatsBetweenEvents;
     }
 }

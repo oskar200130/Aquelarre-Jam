@@ -3,56 +3,33 @@ using UnityEngine.Events;
 
 public class SpecialEvent : MonoBehaviour
 {
-    public enum SpecialEventType { JUMP, HOLD, POGO}    //Si se añaden nuevos eventos, hacerlo antes de pogo o modificar el valor que inicializa type de forma random
-    [SerializeField]
-    int waitForBeats;
-
     [SerializeField]
     float radiusClick;
 
     //private UnityAction nextBeat;
     private Animator animator;
 
-    private SpecialEventType type;
+    public float multiplier;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //nextBeat = NextBeat;
-        BeatManager.onFixedBeat += NextBeat;
         animator = GetComponent<Animator>();
-        type = (SpecialEventType)Random.Range(0, (int)SpecialEventType.POGO +1);   
     }
 
-    private void OnApplicationQuit()
+    public bool CheckClick()
     {
-       BeatManager.onFixedBeat -= NextBeat;
-    }
-
-    private void OnDestroy()
-    {
-       BeatManager.onFixedBeat -= NextBeat;        
-    }
-
-    public void SetType(SpecialEventType t)
-    {
-        type = t;
-    }
-
-    void NextBeat()
-    {
-        waitForBeats--;
-        //animator.SetTrigger("NextAnim");
-        if (waitForBeats == 0)
+        if ((ClickDetector.instance.specialDetectorHitPoint - new Vector3(transform.position.x, 0, transform.position.z)).magnitude < radiusClick)
         {
-            if ((ClickDetector.instance.worldMousePosWhenDown - new Vector3(transform.position.x, 0, transform.position.z)).magnitude < radiusClick)
-                Debug.Log("MIHOME " + type);
-                //TODO: multiplicador para el sistema de puntos y tipo de evento
+            animator.SetTrigger("Clicked");
+            return true;
         }
-        else if (waitForBeats < 0)
-        {
-            BeatManager.onFixedBeat -= NextBeat;
-            Destroy(transform.parent.gameObject);
-        }
+        return false;
+    }
+
+    public void DestroyMyself()
+    {
+        ClickDetector.instance.specialEvents.Remove(this);
+        Destroy(transform.parent.gameObject);
     }
 
     private void OnDrawGizmos()
