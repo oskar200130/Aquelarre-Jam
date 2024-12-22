@@ -158,6 +158,7 @@ public class LevelManager : MonoBehaviour
         switch (counter_measures +1)
         {
             case 1:
+                break;
             case 26:
                 GetComponent<EventRandomSpawn>().freestyleMode = true;
                 break;
