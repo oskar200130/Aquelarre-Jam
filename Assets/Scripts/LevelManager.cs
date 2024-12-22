@@ -48,7 +48,9 @@ public class LevelManager : MonoBehaviour
     public int nFreestyles = 3; public float freestyleProbability = 0.35f;  private int doneFreestyles = 0; bool canFreestyle = true;
     public GameObject freestyleGO;
     private int freestyleStartMeasure = 0;
-
+    [SerializeField]
+    float[] milestonesPoints;
+    private int idMilestone = 0;
     private void Awake()
     {
         if (_instance == null)
@@ -103,6 +105,7 @@ public class LevelManager : MonoBehaviour
     public bool gameStarted = false;
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P)) puntuacion += 100;
         if (!gameStarted && Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("empezando juego");
@@ -269,7 +272,11 @@ public class LevelManager : MonoBehaviour
         }
 
         pointsText.text = $"WITCHES {puntuacion}";
-
+        if (milestonesPoints[idMilestone] < puntuacion)
+        {
+            Camera.main.GetComponent<CameraMovement>().StartMoving(1f);
+            idMilestone++;
+        }
         AddScore(s);
     }
 

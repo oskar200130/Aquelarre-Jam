@@ -47,7 +47,6 @@ public class SpecialEvent : MonoBehaviour
 
     public void InstanciateDrag()
     {
-        Debug.Log(maxDragSpawns);
         if(maxDragSpawns > 0)
             LevelManager._instance.gameObject.GetComponent<EventRandomSpawn>().CreateEventNoRand(maxDragSpawns-1);
     }

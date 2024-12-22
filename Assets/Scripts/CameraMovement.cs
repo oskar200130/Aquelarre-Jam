@@ -30,9 +30,9 @@ public class CameraMovement : MonoBehaviour
         StartMoving(2);
     }
 
-    public void StartMoving(float speed)
+    public void StartMoving(float timeTransit)
     {
-        timeTransition = speed;
+        timeTransition = timeTransit;
 
         if (index == -1)
             destiny = (initialPos.position, initialPos.rotation);
