@@ -188,7 +188,7 @@ public class LevelManager : MonoBehaviour
                 break;
         }
 
-        pointsText.text = $"PEOPLE: {puntuacion}";
+        pointsText.text = $"WITCHES {puntuacion}";
 
         AddScore(s);
     }
