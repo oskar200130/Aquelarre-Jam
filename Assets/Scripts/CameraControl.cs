@@ -264,10 +264,6 @@ public class CameraControl : MonoBehaviour
             if (!_tonemapping) Debug.LogError("NO TIENE TONE MAPPING!!!");
             profile.TryGet(out _coloradjustements);
             if (!_coloradjustements) Debug.LogError("NO TIENE COLOR ADJUSTEMETS!!!");
-
-            //setea al parametro iniciar en caso de hacer Interpolation
-            _bloom.scatter.Override(scatterInterpolation.x);
-            _chromaticAberration.intensity.Override(_chromaticAberrationInterpolation.x);
         }
         else
         {
