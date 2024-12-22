@@ -192,6 +192,8 @@ public class LevelManager : MonoBehaviour
                 if (actualState == STATES.CHILL) return;
                 actualState = STATES.CHILL;
                 Debug.Log("cambio a estado chill, trankilitos");
+                freestyleText.SetActive(true);
+                GetComponent<EventRandomSpawn>().freestyleMode = true;
                 //quitarEpilepsia();
                 break;
             case 10:
