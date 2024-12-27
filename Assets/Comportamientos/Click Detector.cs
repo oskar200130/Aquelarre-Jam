@@ -49,6 +49,7 @@ public class ClickDetector : MonoBehaviour
         }
     }
     // Update once per frame
+    double clickTime;
     void Update()
     {
         float t;
@@ -71,6 +72,7 @@ public class ClickDetector : MonoBehaviour
             down = Input.GetMouseButtonDown(0);
             if (down)
             {
+                clickTime = BeatManager.GetCurrentTime();
                 pogoEnd = false;
                 screenMousePosWhenDown = Input.mousePosition;
                 timeClickedDown = BeatManager.GetCurrentTime();
@@ -100,7 +102,11 @@ public class ClickDetector : MonoBehaviour
                     }
                 }
 
-                clickUpLastScore = BeatManager._instance.evaluateClick(multiplier);
+                if (LevelManager._instance.nHitsClickDown < LevelManager._instance.nHitsPerBeat)
+                {
+                    clickUpLastScore = BeatManager._instance.evaluateClick(clickTime, multiplier);
+                    LevelManager._instance.nHitsClickDown++;
+                }
             }
         }
 
@@ -108,6 +114,7 @@ public class ClickDetector : MonoBehaviour
         if (up)
         {
             timeClickedDown = 0.0f;
+            clickTime = BeatManager.GetCurrentTime();
         }
 
         //actualizar la posicióna actual del raton, World y screen
@@ -185,13 +192,21 @@ public class ClickDetector : MonoBehaviour
                         break;
                     }
                 }
-                clickUpLastScore = BeatManager._instance.evaluateClick(multiplier);
+                if (LevelManager._instance.nHitsClickUp < LevelManager._instance.nHitsPerBeat)
+                {
+                    clickUpLastScore = BeatManager._instance.evaluateClick(clickTime, multiplier);
+                    LevelManager._instance.nHitsClickUp++;
+                }
 
                 TimeEndedPogo = BeatManager.GetCurrentTime();
             }
             if (arrastre)       //ARRASTE FIN
             {
-                clickUpLastScore = BeatManager._instance.evaluateClick(dragMulti);
+                if (LevelManager._instance.nHitsClickUp < LevelManager._instance.nHitsPerBeat)
+                {
+                    clickUpLastScore = BeatManager._instance.evaluateClick(clickTime, dragMulti);
+                    LevelManager._instance.nHitsClickUp++;
+                }
                 dragMulti = 1;
             }
             pogo = false;

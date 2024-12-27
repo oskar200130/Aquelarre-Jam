@@ -28,7 +28,7 @@ public class EventRandomSpawn : MonoBehaviour
     void CreateEvent()
     {
         if (freestyleMode) return;
-        Debug.Log("HOLO");
+        //Debug.Log("HOLO");
         if (lastSpawn <= 0)
         {
             if (Random.Range(0f, 100f) >= probabilitySpawnEffect) return;

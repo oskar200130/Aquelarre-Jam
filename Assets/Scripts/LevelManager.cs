@@ -42,10 +42,6 @@ public class LevelManager : MonoBehaviour
     public STATES actualState = STATES.NORMAL;
     bool cabraLoca = false;
 
-    public int nFreestyles = 3; public float freestyleProbability = 0.35f;  private int doneFreestyles = 0; bool canFreestyle = true;
-    public GameObject freestyleGO;
-    private int freestyleStartMeasure = 0;
-
     [SerializeField]
     Animator lightAnimator;
     [SerializeField]
@@ -54,6 +50,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     float[] milestonesPoints;
     private int idMilestone = 0;
+    public bool gameStarted = false;
+
+    [SerializeField]
+    public int nHitsClickDown = 0, nHitsClickUp = 0;
+    public int nHitsPerBeat = 1;
+
     private void Awake()
     {
         if (_instance == null)
@@ -105,8 +107,12 @@ public class LevelManager : MonoBehaviour
     void metronome()
     {
 
+        nHitsClickDown = 0; nHitsClickUp = 0;
         counter_beats = (counter_beats + 1) % 4; //hardcodeado a 4/4
-        if (counter_beats == 0) counter_measures += 1;
+        if (counter_beats == 0)
+        {
+            counter_measures += 1;
+        }
         checkSongStates();
 
         //text.text = $"Compás {counter_measures}, pulso {counter_beats}";
@@ -119,43 +125,12 @@ public class LevelManager : MonoBehaviour
         }
 
     }
-    public bool gameStarted = false;
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.P)) puntuacion += 100;
-        //if (!gameStarted && Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    Debug.Log("empezando juego");
-        //    BeatManager._instance.playSong();
 
-        //    gameStarted = true;
-        //    beatMarkerContainerAnimator.speed = 1;
-
-        //}
-        if (!BeatManager.isPlayingMusic && gameStarted)
-        {
-            //para volver a empezar
-            gameStarted = false;
-            beatMarkerContainerAnimator.speed = 0;
-            BeatManager._instance.playMetronome(true);
-            doneFreestyles = 0;
-            freestyleGO.SetActive(false);
-            freestyleStartMeasure = 0; 
-
-        }
-
-        if(gameStarted && counter_measures == 1)
+        if (gameStarted && counter_measures == 1)
             BeatManager._instance.playMetronome(false);
 
-        ////si esta el texto en pantalla
-        //if (!canFreestyle)
-        //{
-        //    if (counter_measures >= freestyleStartMeasure)
-        //    {
-        //        canFreestyle = true;
-        //        freestyleGO.SetActive(false);
-        //    }
-        //}
 
     }
     //checkpoints de la cancion donde cambia la intensidad de las cosas en pantalla
@@ -164,9 +139,8 @@ public class LevelManager : MonoBehaviour
     //IMPRESIONANTE, SON LAS 2:17 NO ME PODRIA DAR MAS PEREZA EFE MOD
     private void checkSongStates()
     {
-        float freeprob;
         //cambia de estado de la cancion en compases especificos
-        switch (counter_measures +1)
+        switch (counter_measures + 1)
         {
             case 1:
                 if (actualState == STATES.CHILL) return;
@@ -191,18 +165,7 @@ public class LevelManager : MonoBehaviour
                 //quitarEpilepsia();
                 break;
             case 94:
-                //if (counter_beats == 0)
-                //{
-                //    freeprob = Random.Range(0f, 1f);
-                //    Debug.Log($"{canFreestyle && doneFreestyles < nFreestyles && freeprob < freestyleProbability}, {freeprob}");
-                //    if (canFreestyle && doneFreestyles < nFreestyles && freeprob < freestyleProbability)
-                //    {
-                //        freestyleGO.SetActive(true);
-                //        freestyleStartMeasure = counter_measures;
-                //        canFreestyle = false;
-                //        doneFreestyles++;
-                //    }
-                //}
+
                 if (actualState == STATES.CHILL) return;
                 actualState = STATES.CHILL;
                 Debug.Log("cambio a estado chill, trankilitos");
@@ -214,18 +177,7 @@ public class LevelManager : MonoBehaviour
             case 30:
             case 38:
             case 54:
-                //if (counter_beats == 0)
-                //{
-                //    freeprob = Random.Range(0f, 1f);
-                //    Debug.Log($"{canFreestyle && doneFreestyles < nFreestyles && freeprob < freestyleProbability}, {freeprob}");
-                //    if (canFreestyle && doneFreestyles < nFreestyles && freeprob < freestyleProbability)
-                //    {
-                //        freestyleGO.SetActive(true);
-                //        freestyleStartMeasure = counter_measures;
-                //        canFreestyle = false;
-                //        doneFreestyles++;
-                //    }
-                //}
+
                 if (actualState == STATES.NORMAL) return;
                 actualState = STATES.NORMAL;
                 Debug.Log("cambio a estado Normal, se pone intensillo");
@@ -234,18 +186,7 @@ public class LevelManager : MonoBehaviour
 
             case 45:
             case 86: //final
-                //if (counter_beats == 0)
-                //{
-                //    freeprob = Random.Range(0f, 1f);
-                //    Debug.Log($"{canFreestyle && doneFreestyles < nFreestyles && freeprob < freestyleProbability}, {freeprob}");
-                //    if (canFreestyle && doneFreestyles < nFreestyles && freeprob < freestyleProbability)
-                //    {
-                //        freestyleGO.SetActive(true);
-                //        freestyleStartMeasure = counter_measures;
-                //        canFreestyle = false;
-                //        doneFreestyles++;
-                //    }
-                //}
+
                 if (actualState == STATES.HEAVY) return;
                 mostrarCabra();
                 actualState = STATES.HEAVY;
@@ -274,7 +215,7 @@ public class LevelManager : MonoBehaviour
 
         foreach (Animator animator in childAnimators)
         {
-            animator.enabled = true; 
+            animator.enabled = true;
         }
     }
     public void quitarEpilepsia()

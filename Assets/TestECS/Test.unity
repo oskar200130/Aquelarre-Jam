@@ -385,7 +385,7 @@ MonoBehaviour:
   downBeatEvent: {fileID: -1956182793875612465, guid: d6bf9b0a512f8c943a77e79d0b5f5fdc, type: 3}
   upBeatEvent: {fileID: -1956182793875612465, guid: d6bf9b0a512f8c943a77e79d0b5f5fdc, type: 3}
   upBeatDivisor: 1
-  earlyTolerancePercentage: 0.25
+  easyMultiplier: 0.5
 --- !u!4 &93203492
 Transform:
   m_ObjectHideFlags: 0
@@ -951,6 +951,11 @@ CanvasRenderer:
 Transform:
   m_CorrespondingSourceObject: {fileID: 209474199626159415, guid: 8aa08301885cf404d85e34ad29bec6bf, type: 3}
   m_PrefabInstance: {fileID: 1193059499}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &308479518 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5713591872952892879, guid: 65e478cfdbc23c04093fec96f41a844c, type: 3}
+  m_PrefabInstance: {fileID: 592198830}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &341589735
 PrefabInstance:
@@ -2781,17 +2786,17 @@ MonoBehaviour:
   pointsText: {fileID: 354622928}
   freestyleText: {fileID: 499500261}
   actualState: 0
-  nFreestyles: 3
-  freestyleProbability: 0.35
-  freestyleGO: {fileID: 499500261}
-  lightAnimator: {fileID: 0}
-  trees: {fileID: 0}
+  lightAnimator: {fileID: 308479518}
+  trees: {fileID: 1841817954}
   milestonesPoints:
   - 250
   - 500
   - 800
   - 2000
   gameStarted: 0
+  nHitsClickDown: 0
+  nHitsClickUp: 0
+  nHitsPerBeat: 1
 --- !u!4 &1147868052
 Transform:
   m_ObjectHideFlags: 0
@@ -2822,8 +2827,8 @@ MonoBehaviour:
   eventEffect:
   - {fileID: 72482606908709719, guid: 2e79bab8af64eb84fa66ced1530c0efe, type: 3}
   - {fileID: 8745455329611077599, guid: 00fe9fd02f7235c44b4e747968123a0c, type: 3}
-  minBeatsBetweenEvents: 2
-  probabilitySpawnEffect: 100
+  minBeatsBetweenEvents: 3
+  probabilitySpawnEffect: 200
   freestyleMode: 0
 --- !u!1 &1161155906
 GameObject:

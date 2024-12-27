@@ -456,19 +456,21 @@ public class BeatManager : MonoBehaviour
 
     private float terribleThreshold = 0.4f, coolThreshold = 0.75f, perfectThreshold = 0.9f;
     //public float[] thresholds
-    public double earlyTolerancePercentage = 0.1;
-    public SCORE evaluateClick(float specialMult)
+    public double easyMultiplier = 0.1;
+    public SCORE evaluateClick(double clickTime, float specialMult)
     {
         /*
 CAMBIOS esto estaba roto. xd. comprobara siempre con el primero y le añadimos un margen de tolerancia para comprobar un early.
            */
 
         SCORE res = SCORE.NONE;
-        double clickTime = GetCurrentTime(); double lastBeat = lastFixedBeatDSPTime; double nextBeat = lastBeat + beatInterval;
+        double lastBeat = lastFixedBeatDSPTime; double nextBeat = lastBeat + beatInterval;
+
+
 
         //comprobamos que no este pegadito por detras y que sea un early que deberia dar mas puntos
         double beatToCheck = lastBeat;
-        if ((nextBeat - clickTime) / beatInterval <= earlyTolerancePercentage)
+        if ((nextBeat - clickTime) / beatInterval <= 0.1)
         {
             beatToCheck = nextBeat;
         }
@@ -476,6 +478,7 @@ CAMBIOS esto estaba roto. xd. comprobara siempre con el primero y le añadimos un
         double evaluacion = 1 - ((Math.Abs(clickTime - beatToCheck)) / beatInterval);
 
         if (evaluacion < 0) evaluacion = 0;
+        double easyMode = 1 + easyMultiplier * (1 - evaluacion);
 
         if (evaluacion <= terribleThreshold) // mas cercano al centro, peor
         {
@@ -493,8 +496,8 @@ CAMBIOS esto estaba roto. xd. comprobara siempre con el primero y le añadimos un
         {
             res = SCORE.HEAVY;
         }
-        //UnityEngine.Debug.Log($"{res}, {evaluacion}. comparando con beat {beatToCheck}");
-        //UnityEngine.Debug.Log($" click: {clickTime},  lastbeat = {lastBeat}, nextBeat = {nextBeat}");
+        UnityEngine.Debug.Log($"{res}, {easyMode},  {evaluacion}. comparando con beat {beatToCheck}");
+        UnityEngine.Debug.Log($" click: {clickTime},  lastbeat = {lastBeat}, nextBeat = {nextBeat}");
 
         LevelManager._instance.addPointsByScore(res, specialMult);
         return res;
