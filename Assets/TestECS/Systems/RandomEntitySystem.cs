@@ -23,9 +23,11 @@ public partial class RandomEntitySystem : SystemBase
     {
         if (entities == null ||entities.Length == 0) return new float3(0, 0, 0);
         Entity ent = entities[RandomGenerator.NextInt(entities.Length - 1)];
-        while(SystemAPI.GetComponent<EspectadorVariables>(ent).estado != EspectadorVariables.espectatorStates.IDLE)
+        int i = 0;
+        while(SystemAPI.GetComponent<EspectadorVariables>(ent).estado != EspectadorVariables.espectatorStates.IDLE && i<100)
         {
             ent = entities[RandomGenerator.NextInt(entities.Length - 1)];
+            i++;
         }
         return SystemAPI.GetComponent<LocalTransform>(entities[RandomGenerator.NextInt(entities.Length - 1)]).Position;
     }

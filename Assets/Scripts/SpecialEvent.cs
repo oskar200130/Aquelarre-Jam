@@ -50,4 +50,10 @@ public class SpecialEvent : MonoBehaviour
         if(maxDragSpawns > 0)
             LevelManager._instance.gameObject.GetComponent<EventRandomSpawn>().CreateEventNoRand(maxDragSpawns-1);
     }
+
+    //Llamado por animacion
+    public void AddBeatsForHold()
+    {
+        LevelManager._instance.gameObject.GetComponent<EventRandomSpawn>().waitBeats = 4;
+    }
 }

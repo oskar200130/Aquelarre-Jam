@@ -11,7 +11,7 @@ public class EventRandomSpawn : MonoBehaviour
     float probabilitySpawnEffect;
 
     private int lastSpawn = 0;
-
+    public int waitBeats = 0;
     public bool freestyleMode = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,7 +36,12 @@ public class EventRandomSpawn : MonoBehaviour
             SpawnEffect((Vector3)World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<RandomEntitySystem>().GetRandomEntityPos());
         }
         else
-            lastSpawn--;
+        {
+            if(waitBeats <= 0)
+                lastSpawn--;
+            else
+                waitBeats--;
+        }
     }
 
     public void CreateEventNoRand(int spawns)
@@ -47,8 +52,14 @@ public class EventRandomSpawn : MonoBehaviour
     {
         int id = 0;
         if (rand) id = Random.Range(0, eventEffect.Length);
-        
-        GameObject instance = Instantiate(eventEffect[id], spawnPos, Quaternion.identity);
+
+        Vector3 camPos = Camera.main.transform.position;
+        Vector3 dir = (camPos - spawnPos).normalized;
+        Vector3 posSpawn = spawnPos + dir * 3.5f;
+        posSpawn.y = spawnPos.y;
+
+        GameObject instance = Instantiate(eventEffect[id], posSpawn, Quaternion.identity);
+        //GameObject instance = Instantiate(eventEffect[id], spawnPos, Quaternion.identity);
         if (!rand)
             instance.GetComponentInChildren<SpecialEvent>().maxDragSpawns = spawns;
         ClickDetector.instance.specialEvents.Add(instance.GetComponentInChildren<SpecialEvent>());
