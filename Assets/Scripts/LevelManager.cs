@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
     public float percentageHeavy = 0.001f;
 
     [SerializeField] SpeakerParticle[] speakers;
-    private int counter_beats = 0; private int counter_measures = 0;
+    private int counter_beats = 0; private int counter_measures = -1;
     public TMP_Text pointsText;
     public GameObject freestyleText;
 
@@ -71,11 +71,10 @@ public class LevelManager : MonoBehaviour
         scores = new Queue<SCORE>(queueSize);
         beatMarkerContainerAnimator.speed = 0;
 
-
         BeatManager.onFixedBeat += metronome;
         BeatManager.onTempoChanged += tempoChanged;
 
-        Invoke(nameof(StartGame), 1.5f);
+        //Invoke(nameof(StartGame), 1.5f);
     }
 
     void StartGame()
@@ -86,7 +85,9 @@ public class LevelManager : MonoBehaviour
             BeatManager._instance.playSong();
 
             gameStarted = true;
-            beatMarkerContainerAnimator.speed = 1;
+            counter_measures++;
+            beatMarkerContainerAnimator.speed = 1f;
+            //beatMarkerContainerAnimator.SetTrigger("Start");
         }
     }
 
@@ -109,6 +110,7 @@ public class LevelManager : MonoBehaviour
 
         nHitsClickDown = 0; nHitsClickUp = 0;
         counter_beats = (counter_beats + 1) % 4; //hardcodeado a 4/4
+
         if (counter_beats == 0)
         {
             counter_measures += 1;
@@ -130,8 +132,9 @@ public class LevelManager : MonoBehaviour
 
         if (gameStarted && counter_measures == 1)
             BeatManager._instance.playMetronome(false);
-
-
+        else if (counter_measures < 0)
+            if (Input.GetMouseButtonDown(0))
+                StartGame();
     }
     //checkpoints de la cancion donde cambia la intensidad de las cosas en pantalla
     //esto deberia hacerse con eventos de fmod PERO ME DA UNA PEREZA IMPRESIONANTE

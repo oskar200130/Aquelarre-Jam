@@ -9,6 +9,7 @@ using FMOD;
 public class BeatManager : MonoBehaviour
 {
     public EventReference eventToPlay;
+    public EventReference eventTutorialToPlay;
 
     public enum BeatType { FixedBeat, UpBeat };
 
@@ -241,6 +242,11 @@ public class BeatManager : MonoBehaviour
     public void playSong()
     {
         SetMusicTrack(eventToPlay);
+        PlayMusicTrack();
+    }
+    public void playTutorialSong()
+    {
+        SetMusicTrack(eventTutorialToPlay);
         PlayMusicTrack();
     }
 
