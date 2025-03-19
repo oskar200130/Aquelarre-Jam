@@ -87,10 +87,13 @@ public class EventRandomSpawn : MonoBehaviour
                     }                    
                     return;
                 case 3:
-                    LevelManager._instance.puntuacion += 100;
                     BeatManager.currentMusicTrack.setParameterByName("TutorialSteps", 1);
                     tutorialText.GetComponent<TextMeshProUGUI>().text = "";
-                    if (timeToNextFase == -1) timeToNextFase = 2.5f;
+                    if (timeToNextFase == -1)
+                    {
+                        timeToNextFase = 2.5f;
+                        LevelManager._instance.puntuacion += 100;
+                    }
                     return;
                 case 4:
                     tutorialText.GetComponent<TextMeshProUGUI>().text = "Click over the blue circle.\n Keep it pressed to load a pogo and then lift";
@@ -106,9 +109,12 @@ public class EventRandomSpawn : MonoBehaviour
                     }
                     return;
                 case 6:
-                    LevelManager._instance.puntuacion += 50;
                     tutorialText.GetComponent<TextMeshProUGUI>().text = "";
-                    if (timeToNextFase == -1) timeToNextFase = 2.5f;
+                    if (timeToNextFase == -1) 
+                    { 
+                        LevelManager._instance.puntuacion += 50;
+                        timeToNextFase = 2.5f; 
+                    }
                     return;
                 case 7:
                     LevelManager._instance.freestyleText.SetActive(true);
@@ -119,7 +125,9 @@ public class EventRandomSpawn : MonoBehaviour
                     LevelManager._instance.puntuacion += 50;
                     BeatManager.currentMusicTrack.setParameterByName("TutorialSteps", 2);
                     tutorialText.GetComponent<TextMeshProUGUI>().text = "";
-                    tutorialFase++;
+                    LevelManager._instance.freestyleText.SetActive(false);
+                    if (timeToNextFase == -1)
+                        timeToNextFase = .5f;
                     return;
                 case 9:
                     BeatManager._instance.playSong();
