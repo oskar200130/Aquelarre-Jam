@@ -71,7 +71,7 @@ public class LevelManager : MonoBehaviour
         scores = new Queue<SCORE>(queueSize);
         beatMarkerContainerAnimator.speed = 0;
 
-        BeatManager.onFixedBeat += metronome;
+        //BeatManager.onFixedBeat += metronome;
         BeatManager.onTempoChanged += tempoChanged;
 
         //Invoke(nameof(StartGame), 1.5f);
@@ -82,7 +82,9 @@ public class LevelManager : MonoBehaviour
         if (!gameStarted)
         {
             Debug.Log("empezando juego");
-            BeatManager._instance.playSong();
+            BeatManager.onFixedBeat += metronome;
+            BeatManager._instance.playTutorialSong();
+            //BeatManager._instance.playSong();
 
             gameStarted = true;
             counter_measures++;

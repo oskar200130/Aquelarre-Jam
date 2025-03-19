@@ -13,6 +13,7 @@ public class SpecialEvent : MonoBehaviour
     public bool drag;
 
     public int maxDragSpawns;
+    public int beatsToWaitInHold = 4;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -54,6 +55,6 @@ public class SpecialEvent : MonoBehaviour
     //Llamado por animacion
     public void AddBeatsForHold()
     {
-        LevelManager._instance.gameObject.GetComponent<EventRandomSpawn>().waitBeats = 4;
+        LevelManager._instance.gameObject.GetComponent<EventRandomSpawn>().waitBeats = beatsToWaitInHold;
     }
 }
