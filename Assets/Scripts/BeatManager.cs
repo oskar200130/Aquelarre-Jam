@@ -87,7 +87,7 @@ public class BeatManager : MonoBehaviour
     private FMOD.Studio.EVENT_CALLBACK beatCallback;
     private FMOD.Studio.EventDescription descriptionCallback;
 
-    private static FMOD.Studio.EventInstance currentMusicTrack;
+    public static FMOD.Studio.EventInstance currentMusicTrack;
 
 
     private void Awake()
@@ -502,8 +502,8 @@ CAMBIOS esto estaba roto. xd. comprobara siempre con el primero y le añadimos un
         {
             res = SCORE.HEAVY;
         }
-        UnityEngine.Debug.Log($"{res}, {easyMode},  {evaluacion}. comparando con beat {beatToCheck}");
-        UnityEngine.Debug.Log($" click: {clickTime},  lastbeat = {lastBeat}, nextBeat = {nextBeat}");
+        //UnityEngine.Debug.Log($"{res}, {easyMode},  {evaluacion}. comparando con beat {beatToCheck}");
+        //UnityEngine.Debug.Log($" click: {clickTime},  lastbeat = {lastBeat}, nextBeat = {nextBeat}");
 
         LevelManager._instance.addPointsByScore(res, specialMult);
         return res;
