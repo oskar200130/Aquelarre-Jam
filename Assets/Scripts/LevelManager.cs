@@ -221,16 +221,30 @@ public class LevelManager : MonoBehaviour
             case 10:
             case 30:
             case 38:
-            case 54:
-
                 if (actualState == STATES.NORMAL) return;
                 actualState = STATES.NORMAL;
                 Debug.Log("cambio a estado Normal, se pone intensillo");
                 //quitarEpilepsia();
                 break;
+            case 54:
+                freestyleText.SetActive(true);
+                GetComponent<EventRandomSpawn>().freestyleMode = true;
+                if (actualState == STATES.NORMAL) return;
+                actualState = STATES.NORMAL;
+                Debug.Log("cambio a estado Normal, se pone intensillo");
+                //quitarEpilepsia();
+                break;
+            case 61: // 60
+                freestyleText.SetActive(false);
+                GetComponent<EventRandomSpawn>().freestyleMode = false;
+                if (actualState == STATES.CHILL) return;
+                actualState = STATES.CHILL;
+                Debug.Log("cambio a estado chill, trankilitos");
+                //quitarEpilepsia();
+                break;
 
             case 45:
-            case 86:
+            case 85: //86
 
                 if (actualState == STATES.HEAVY) return;
                 mostrarCabra();
