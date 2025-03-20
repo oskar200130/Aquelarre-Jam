@@ -30,7 +30,7 @@ public class BeatManager : MonoBehaviour
     private ulong dspClock;
     private ulong parentDSP;
 
-    private static double beatInterval = 0f;
+    public static double beatInterval = 0f;
 
     private static double dspDeltaTime = 0f;
     private static double lastDSPTime = 0f;
@@ -47,8 +47,8 @@ public class BeatManager : MonoBehaviour
     public delegate void BeatEventDelegate();
     public static event BeatEventDelegate onFixedBeat;
 
-    private static double lastFixedBeatTime = -2;
-    private static double lastFixedBeatDSPTime = -2;
+    public static double lastFixedBeatTime = -2;
+    public static double lastFixedBeatDSPTime = -2;
 
     public static event BeatEventDelegate onUpBeat;
 
@@ -470,7 +470,8 @@ CAMBIOS esto estaba roto. xd. comprobara siempre con el primero y le añadimos un
            */
 
         SCORE res = SCORE.NONE;
-        double lastBeat = lastFixedBeatDSPTime; double nextBeat = lastBeat + beatInterval;
+        double lastBeat = lastFixedBeatDSPTime;
+        double nextBeat = lastBeat + beatInterval;
 
 
 

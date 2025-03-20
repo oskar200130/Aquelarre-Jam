@@ -132,11 +132,35 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
 
+
         if (gameStarted && counter_measures == 1)
+        {
+
             BeatManager._instance.playMetronome(false);
+             
+
+            if (beatMarkerContainerAnimator.GetCurrentAnimatorStateInfo(0).length <
+                beatMarkerContainerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime)
+            {
+                double beatPortion = Time.timeAsDouble - BeatManager.lastFixedBeatDSPTime;
+                
+                double percentage = beatPortion / BeatManager.beatInterval;
+                //no esta playeando la animación
+                //la forzamos a empezar dea cuerdo a unas normas
+                beatMarkerContainerAnimator.Play("Beat Marker", -1, (float)percentage);
+
+            }
+
+        }
         else if (counter_measures < 0)
+        {
             if (Input.GetMouseButtonDown(0))
+            {
                 StartGame();
+            }
+        }
+      
+       
     }
     //checkpoints de la cancion donde cambia la intensidad de las cosas en pantalla
     //esto deberia hacerse con eventos de fmod PERO ME DA UNA PEREZA IMPRESIONANTE

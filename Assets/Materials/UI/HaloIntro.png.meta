@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      HaloIntro_0: 2560902198488002370
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
