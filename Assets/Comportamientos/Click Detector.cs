@@ -108,6 +108,8 @@ public class ClickDetector : MonoBehaviour
                 {
                     clickUpLastScore = BeatManager._instance.evaluateClick(clickTime, multiplier);
                     LevelManager._instance.nHitsClickDown++;
+                    if (multiplier != 1)
+                        LevelManager._instance.GetComponent<EventRandomSpawn>().AddEventClicked();
                 }
             }
         }
@@ -163,6 +165,7 @@ public class ClickDetector : MonoBehaviour
                     if (specialEvents[i].CheckClick())
                     {
                         dragMulti += specialEvents[i].multiplier;
+                        specialEvents[i].SetNotFailedClick();
                         specialEvents[i].DestroyMyself();
                         break;
                     }

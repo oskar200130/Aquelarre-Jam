@@ -24,6 +24,8 @@ public class EventRandomSpawn : MonoBehaviour
     GameObject tutorialText;
     [SerializeField]
     Vector3 eventSpawn;
+
+    private int eventsClicked = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,6 +40,15 @@ public class EventRandomSpawn : MonoBehaviour
     public void Stop()
     {
         BeatManager.onFixedBeat -= CreateEvent;
+    }
+
+    public void AddEventClicked()
+    {
+        eventsClicked++;
+    }
+    public void FailedClicked()
+    {
+        eventsClicked = 0;
     }
 
     private void Update()
@@ -92,12 +103,15 @@ public class EventRandomSpawn : MonoBehaviour
                     Debug.Log("NOW TUTO STARTS");
                     return;
                 case 2:
-                    checkSpace = true;
+                    //checkSpace = true;
                     if (waitBeats == 0)
                     {
                         SpawnEffect(eventSpawn, 0, false, 0);
                         waitBeats = 2;
                     }
+                    Debug.Log(eventsClicked);
+                    if (eventsClicked == 3)
+                        tutorialFase++;
                     return;
                 case 3:
                     BeatManager.currentMusicTrack.setParameterByName("TutorialSteps", 1);
@@ -105,34 +119,41 @@ public class EventRandomSpawn : MonoBehaviour
                     if (timeToNextFase == -1)
                     {
                         timeToNextFase = 2.5f;
-                        LevelManager._instance.puntuacion += 100;
+                        LevelManager._instance.addPoints(100);
                     }
                     return;
                 case 4:
                     tutorialText.GetComponent<TextMeshProUGUI>().text = "Click over the blue circle.\n Keep it pressed to load a pogo and then lift";
+                    LevelManager._instance.GetComponent<EventRandomSpawn>().FailedClicked();
                     tutorialFase++;
                     Debug.Log("NOW SECOND FASE STARTS");
                     return;
                 case 5:
-                    checkSpace = true;
+                    //checkSpace = true;
                     if (waitBeats == 0)
                     {
                         SpawnEffect(eventSpawn, 0, false, 1);
                         waitBeats = 4;
                     }
+                    if (eventsClicked == 3)
+                        tutorialFase++;
                     return;
                 case 6:
                     tutorialText.GetComponent<TextMeshProUGUI>().text = "";
                     if (timeToNextFase == -1)
                     {
                         timeToNextFase = 2.5f;
-                        LevelManager._instance.puntuacion += 50;
+                        LevelManager._instance.addPoints(50);
                     }
                     return;
                 case 7:
                     LevelManager._instance.freestyleText.SetActive(true);
                     tutorialText.GetComponent<TextMeshProUGUI>().text = "When the freestyle sign appears, you should do actions over the witches keeping the rithm to call more witches.";
-                    checkSpace = true;
+                    //checkSpace = true;
+                    if (timeToNextFase == -1)
+                    {
+                        timeToNextFase = 10f;
+                    }
                     return;
                 case 8:
                     BeatManager.currentMusicTrack.setParameterByName("TutorialSteps", 2);
@@ -140,7 +161,7 @@ public class EventRandomSpawn : MonoBehaviour
                     LevelManager._instance.freestyleText.SetActive(false);
                     if (timeToNextFase == -1)
                     {
-                        LevelManager._instance.puntuacion += 50;
+                        LevelManager._instance.addPoints(50);
                         timeToNextFase = 6.5f;
                     }
                     return;

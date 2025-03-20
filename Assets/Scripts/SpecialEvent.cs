@@ -14,9 +14,12 @@ public class SpecialEvent : MonoBehaviour
 
     public int maxDragSpawns;
     public int beatsToWaitInHold = 4;
+
+    private bool failedClick;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        failedClick = true;
         animator = GetComponent<Animator>();
     }
 
@@ -25,6 +28,7 @@ public class SpecialEvent : MonoBehaviour
         if ((ClickDetector.instance.specialDetectorHitPoint - new Vector3(transform.position.x, 0, transform.position.z)).magnitude < radiusClick)
         {
             animator.SetTrigger("Clicked");
+            failedClick = false;
             if(drag)
             {
                 InstanciateDrag();
@@ -34,8 +38,14 @@ public class SpecialEvent : MonoBehaviour
         return false;
     }
 
+    public void SetNotFailedClick()
+    {
+        failedClick = false;
+    }
     public void DestroyMyself()
     {
+        if (failedClick)
+            LevelManager._instance.GetComponent<EventRandomSpawn>().FailedClicked();
         ClickDetector.instance.specialEvents.Remove(this);
         Destroy(transform.parent.gameObject);
     }

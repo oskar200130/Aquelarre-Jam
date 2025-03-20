@@ -238,9 +238,6 @@ public class LevelManager : MonoBehaviour
                 epilepsia();
                 Debug.Log("cambio a estado HEAVY, WOOOOOOOOOOO");
                 break;
-            case 100:
-                SceneManager.LoadScene("Reset");
-                break;
             default:
                 break;
 
@@ -287,7 +284,12 @@ public class LevelManager : MonoBehaviour
     {
         puntuacion += Mathf.CeilToInt(puntuacion * percentage);
         pointsText.text = $"PEOPLE: {puntuacion}";
+    }
 
+    public void addPoints(int points)
+    {
+        puntuacion += points;
+        pointsText.text = $"PEOPLE: {puntuacion}";
     }
     public void addPointsByScore(SCORE s, float specialMultiplier)
     {
