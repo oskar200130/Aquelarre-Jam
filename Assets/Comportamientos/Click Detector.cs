@@ -108,8 +108,13 @@ public class ClickDetector : MonoBehaviour
                 {
                     clickUpLastScore = BeatManager._instance.evaluateClick(clickTime, multiplier);
                     LevelManager._instance.nHitsClickDown++;
-                    if (multiplier != 1)
-                        LevelManager._instance.GetComponent<EventRandomSpawn>().AddEventClicked();
+                    if (LevelManager._instance.tutorial)
+                    {
+                        if (multiplier != 1 && clickUpLastScore != SCORE.NONE && clickUpLastScore != SCORE.TERRIBLE)
+                            LevelManager._instance.GetComponent<EventRandomSpawn>().AddEventClicked();
+                        else if (clickUpLastScore == SCORE.NONE || clickUpLastScore == SCORE.TERRIBLE)
+                            LevelManager._instance.GetComponent<EventRandomSpawn>().FailedClicked();
+                    }
                 }
             }
         }

@@ -1,6 +1,8 @@
+using FMODUnity;
 using TMPro;
 using Unity.Entities;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class EventRandomSpawn : MonoBehaviour
 {
@@ -26,6 +28,7 @@ public class EventRandomSpawn : MonoBehaviour
     Vector3 eventSpawn;
 
     private int eventsClicked = 0;
+    private bool sound = false, sound2 = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -107,11 +110,26 @@ public class EventRandomSpawn : MonoBehaviour
                     if (waitBeats == 0)
                     {
                         SpawnEffect(eventSpawn, 0, false, 0);
+                        sound = false;
                         waitBeats = 2;
                     }
-                    Debug.Log(eventsClicked);
-                    if (eventsClicked == 3)
+
+                    if (!sound && eventsClicked == 1)
+                    {
+                        RuntimeManager.PlayOneShot("event:/Tutorial/Click 1");
+                        sound = true;
+                    }
+                    else if (!sound && eventsClicked == 2)
+                    {
+                        RuntimeManager.PlayOneShot("event:/Tutorial/Click 2");
+                        sound = true;
+                    }
+                    else if (!sound && eventsClicked == 3)
+                    {
+                        RuntimeManager.PlayOneShot("event:/Tutorial/Click 3");
+                        sound = true;
                         tutorialFase++;
+                    }
                     return;
                 case 3:
                     BeatManager.currentMusicTrack.setParameterByName("TutorialSteps", 1);
@@ -134,9 +152,27 @@ public class EventRandomSpawn : MonoBehaviour
                     {
                         SpawnEffect(eventSpawn, 0, false, 1);
                         waitBeats = 4;
+                        sound = false;
                     }
-                    if (eventsClicked == 3)
+                    if (!sound && eventsClicked == 1)
+                    {
+                        RuntimeManager.PlayOneShot("event:/Tutorial/ClickLoop 1");
+                        Debug.Log("AAAAAAAAAAAAA");
+                        sound = true;
+                    }
+                    else if (!sound && eventsClicked == 2)
+                    {
+                        RuntimeManager.PlayOneShot("event:/Tutorial/ClickLoop 2");
+                        Debug.Log("BBBBBBBBBBBBBBBB");
+                        sound = true;
+                    }
+                    else if (!sound && eventsClicked == 3)
+                    {
+                        RuntimeManager.PlayOneShot("event:/Tutorial/ClickLoop 3");
+                        Debug.Log("CCCCCCCCCCCCCCC");
+                        sound = true;
                         tutorialFase++;
+                    }
                     return;
                 case 6:
                     tutorialText.GetComponent<TextMeshProUGUI>().text = "";
