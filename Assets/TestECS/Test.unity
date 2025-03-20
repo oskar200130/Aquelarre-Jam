@@ -3070,6 +3070,7 @@ MonoBehaviour:
   nHitsClickUp: 0
   nHitsPerBeat: 1
   HaloIntro: {fileID: 481765482}
+  tutorial: 0
 --- !u!4 &1147868052
 Transform:
   m_ObjectHideFlags: 0
@@ -3100,7 +3101,7 @@ MonoBehaviour:
   eventEffect:
   - {fileID: 72482606908709719, guid: 2e79bab8af64eb84fa66ced1530c0efe, type: 3}
   - {fileID: 8745455329611077599, guid: 00fe9fd02f7235c44b4e747968123a0c, type: 3}
-  minBeatsBetweenEvents: 3
+  minBeatsBetweenEvents: 1
   probabilitySpawnEffect: 200
   waitBeats: 0
   freestyleMode: 0

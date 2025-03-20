@@ -474,7 +474,7 @@ MonoBehaviour:
   multiplier: 5
   drag: 0
   maxDragSpawns: 0
-  particles: {fileID: 0}
+  beatsToWaitInHold: 4
 --- !u!1 &6995363461617160032
 GameObject:
   m_ObjectHideFlags: 0
