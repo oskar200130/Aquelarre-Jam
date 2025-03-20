@@ -32,8 +32,12 @@ public class EventRandomSpawn : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        BeatManager.onFixedBeat -= CreateEvent;
+        Stop();
+    }
 
+    public void Stop()
+    {
+        BeatManager.onFixedBeat -= CreateEvent;
     }
 
     private void Update()
@@ -121,8 +125,8 @@ public class EventRandomSpawn : MonoBehaviour
                     tutorialText.GetComponent<TextMeshProUGUI>().text = "";
                     if (timeToNextFase == -1)
                     {
-                        LevelManager._instance.puntuacion += 50;
                         timeToNextFase = 2.5f;
+                        LevelManager._instance.puntuacion += 50;
                     }
                     return;
                 case 7:
@@ -131,12 +135,14 @@ public class EventRandomSpawn : MonoBehaviour
                     checkSpace = true;
                     return;
                 case 8:
-                    LevelManager._instance.puntuacion += 50;
                     BeatManager.currentMusicTrack.setParameterByName("TutorialSteps", 2);
                     tutorialText.GetComponent<TextMeshProUGUI>().text = "";
                     LevelManager._instance.freestyleText.SetActive(false);
                     if (timeToNextFase == -1)
+                    {
+                        LevelManager._instance.puntuacion += 50;
                         timeToNextFase = 6.5f;
+                    }
                     return;
             }
         }

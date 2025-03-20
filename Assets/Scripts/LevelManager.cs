@@ -2,6 +2,7 @@ using FMODUnity;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -80,7 +81,6 @@ public class LevelManager : MonoBehaviour
         BeatManager.onTempoChanged += tempoChanged;
         tutorial = true;
     }
-
     void StartGame()
     {
         if (!gameStarted)
@@ -209,13 +209,13 @@ public class LevelManager : MonoBehaviour
                 Debug.Log("cambio a estado chill, trankilitos");
                 //quitarEpilepsia();
                 break;
-            case 94:
+            case 94: //final
 
                 if (actualState == STATES.CHILL) return;
                 actualState = STATES.CHILL;
                 Debug.Log("cambio a estado chill, trankilitos");
-                freestyleText.SetActive(true);
-                GetComponent<EventRandomSpawn>().freestyleMode = true;
+                _instance.gameStarted = false;
+                GetComponent<EventRandomSpawn>().Stop();
                 //quitarEpilepsia();
                 break;
             case 10:
@@ -230,7 +230,7 @@ public class LevelManager : MonoBehaviour
                 break;
 
             case 45:
-            case 86: //final
+            case 86:
 
                 if (actualState == STATES.HEAVY) return;
                 mostrarCabra();
@@ -238,10 +238,14 @@ public class LevelManager : MonoBehaviour
                 epilepsia();
                 Debug.Log("cambio a estado HEAVY, WOOOOOOOOOOO");
                 break;
+            case 100:
+                SceneManager.LoadScene("Reset");
+                break;
             default:
                 break;
 
         }
+        Debug.Log(counter_measures);
     }
 
     public void mostrarCabra()
