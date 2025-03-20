@@ -58,6 +58,9 @@ public class LevelManager : MonoBehaviour
     public int nHitsClickDown = 0, nHitsClickUp = 0;
     public int nHitsPerBeat = 1;
 
+    [SerializeField]
+    Animator HaloIntro;
+
     private void Awake()
     {
         if (_instance == null)
@@ -84,6 +87,7 @@ public class LevelManager : MonoBehaviour
         if (!gameStarted)
         {
             Debug.Log("empezando juego");
+            HaloIntro.SetTrigger("end");
             BeatManager.onFixedBeat += metronome;
             BeatManager._instance.playTutorialSong();
             //BeatManager._instance.playSong();
