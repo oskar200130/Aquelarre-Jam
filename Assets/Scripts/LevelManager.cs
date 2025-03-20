@@ -88,7 +88,6 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("empezando juego");
             HaloIntro.SetTrigger("end");
-            BeatManager.onFixedBeat += metronome;
             BeatManager._instance.playTutorialSong();
             //BeatManager._instance.playSong();
 
@@ -97,6 +96,11 @@ public class LevelManager : MonoBehaviour
             beatMarkerContainerAnimator.speed = 1f;
             //beatMarkerContainerAnimator.SetTrigger("Start");
         }
+    }
+
+    public void StartSong()
+    {
+        BeatManager.onFixedBeat += metronome;
     }
 
     void tempoChanged(float beatInterval)
@@ -151,7 +155,7 @@ public class LevelManager : MonoBehaviour
                 //no esta playeando la animación
                 //la forzamos a empezar de acuerdo a unas normas
 
-                Debug.Log("toca dar el beat con porcentage: " + percentage);
+                //Debug.Log("toca dar el beat con porcentage: " + percentage);
                 tree_animator.Play("Tree Beat", -1, (float)percentage);
                 beatMarkerContainerAnimator.Play("Beat Marker", -1, (float)percentage);
                 foreach (Animator a in speakers_animators)

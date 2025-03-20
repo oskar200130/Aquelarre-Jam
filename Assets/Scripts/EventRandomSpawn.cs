@@ -14,7 +14,7 @@ public class EventRandomSpawn : MonoBehaviour
     private int lastSpawn = 0;
     public int waitBeats = 0;
     public bool freestyleMode = false;
-    private  bool tutorialMode = true;
+    private bool tutorialMode = true;
     private int tutorialFase = 0;
 
     private bool checkClick = false, checkSpace = false;
@@ -38,7 +38,7 @@ public class EventRandomSpawn : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if((checkClick && Input.GetMouseButtonDown(0)) || (checkSpace && Input.GetKeyDown(KeyCode.Space)))
+        if ((checkClick && Input.GetMouseButtonDown(0)) || (checkSpace && Input.GetKeyDown(KeyCode.Space)))
         {
             Debug.Log("CLICK TO PASS");
             tutorialFase++;
@@ -46,14 +46,20 @@ public class EventRandomSpawn : MonoBehaviour
             timeToNextFase = -1;
         }
 
-        if(timeToNextFase > 0)
+        if (timeToNextFase > 0)
             timeToNextFase -= Time.deltaTime;
-        else if(timeToNextFase > -1)
+        else if (timeToNextFase > -1)
         {
             Debug.Log("TIME TO PASS");
             checkClick = false;
             timeToNextFase = -1f;
             tutorialFase++;
+            if (tutorialFase > 8)
+            {
+                BeatManager._instance.playSong();
+                LevelManager._instance.StartSong();
+                tutorialMode = false;
+            }
         }
     }
 
@@ -70,7 +76,7 @@ public class EventRandomSpawn : MonoBehaviour
                 case 0:
                     tutorialText.SetActive(true);
                     checkClick = true;
-                    if(timeToNextFase == -1) timeToNextFase = 6f;
+                    if (timeToNextFase == -1) timeToNextFase = 6f;
                     return;
                 case 1:
                     //tutorialText.SetActive(false);
@@ -80,11 +86,11 @@ public class EventRandomSpawn : MonoBehaviour
                     return;
                 case 2:
                     checkSpace = true;
-                    if(waitBeats == 0)
+                    if (waitBeats == 0)
                     {
                         SpawnEffect(eventSpawn, 0, false, 0);
                         waitBeats = 2;
-                    }                    
+                    }
                     return;
                 case 3:
                     BeatManager.currentMusicTrack.setParameterByName("TutorialSteps", 1);
@@ -110,10 +116,10 @@ public class EventRandomSpawn : MonoBehaviour
                     return;
                 case 6:
                     tutorialText.GetComponent<TextMeshProUGUI>().text = "";
-                    if (timeToNextFase == -1) 
-                    { 
+                    if (timeToNextFase == -1)
+                    {
                         LevelManager._instance.puntuacion += 50;
-                        timeToNextFase = 2.5f; 
+                        timeToNextFase = 2.5f;
                     }
                     return;
                 case 7:
@@ -127,14 +133,9 @@ public class EventRandomSpawn : MonoBehaviour
                     tutorialText.GetComponent<TextMeshProUGUI>().text = "";
                     LevelManager._instance.freestyleText.SetActive(false);
                     if (timeToNextFase == -1)
-                        timeToNextFase = .5f;
+                        timeToNextFase = 4.5f;
                     return;
-                case 9:
-                    BeatManager._instance.playSong();
-                    break;
             }
-
-            tutorialMode = false;
         }
         //Debug.Log("HOLO");
         if (lastSpawn <= 0)
@@ -145,7 +146,7 @@ public class EventRandomSpawn : MonoBehaviour
         }
         else
         {
-            if(waitBeats <= 0)
+            if (waitBeats <= 0)
                 lastSpawn--;
             else
                 waitBeats--;
@@ -162,7 +163,7 @@ public class EventRandomSpawn : MonoBehaviour
         if (rand) id = Random.Range(0, eventEffect.Length);
         else id = eventToSpawn;
 
-            Vector3 camPos = Camera.main.transform.position;
+        Vector3 camPos = Camera.main.transform.position;
         Vector3 dir = (camPos - spawnPos).normalized;
         Vector3 posSpawn = spawnPos + dir * 3.5f;
         posSpawn.y = spawnPos.y;
