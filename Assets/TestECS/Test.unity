@@ -1284,6 +1284,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3779521090016419966, guid: cdcfafa3627fba04aaaa9e37e6fdcbdf, type: 3}
   m_PrefabInstance: {fileID: 1906986836}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &481765482 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5800385573581494485, guid: cdcfafa3627fba04aaaa9e37e6fdcbdf, type: 3}
+  m_PrefabInstance: {fileID: 1906986836}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &482340318
 GameObject:
   m_ObjectHideFlags: 0
@@ -3064,7 +3069,7 @@ MonoBehaviour:
   nHitsClickDown: 0
   nHitsClickUp: 0
   nHitsPerBeat: 1
-  HaloIntro: {fileID: 0}
+  HaloIntro: {fileID: 481765482}
 --- !u!4 &1147868052
 Transform:
   m_ObjectHideFlags: 0
