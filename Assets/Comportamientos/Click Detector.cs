@@ -56,7 +56,7 @@ public class ClickDetector : MonoBehaviour
 
         if (TimeEndedPogo != 0.0f)
         {
-            if (TimeEndedPogo + 2.5f <= BeatManager.GetCurrentTime() )
+            if (TimeEndedPogo + 2.5f <= BeatManager.GetCurrentTime())
             {
                 rePogo = true;
                 TimeEndedPogo = 0.0f;
@@ -67,6 +67,8 @@ public class ClickDetector : MonoBehaviour
             rePogo = false;
         }
 
+        if (!LevelManager._instance.gameStarted)
+            return;
         if (timeClickedDown == 0.0f)
         {
             down = Input.GetMouseButtonDown(0);
@@ -85,8 +87,8 @@ public class ClickDetector : MonoBehaviour
                 worldMousePosWhenDown = ray2.origin + ray2.direction * t;
 
                 //Posicion para detectar los eventos especiales
-                RaycastHit hit;                
-                if(planeSpecialDetector.Raycast(ray2, out hit, 1000000000f))
+                RaycastHit hit;
+                if (planeSpecialDetector.Raycast(ray2, out hit, 1000000000f))
                     specialDetectorHitPoint = hit.point;
 
                 float multiplier = 1;       //Puntos para todos los eventos al click
@@ -102,7 +104,7 @@ public class ClickDetector : MonoBehaviour
                     }
                 }
 
-                if (LevelManager._instance.nHitsClickDown < LevelManager._instance.nHitsPerBeat)
+                if (LevelManager._instance.tutorial || (LevelManager._instance.nHitsClickDown < LevelManager._instance.nHitsPerBeat))
                 {
                     clickUpLastScore = BeatManager._instance.evaluateClick(clickTime, multiplier);
                     LevelManager._instance.nHitsClickDown++;
@@ -192,7 +194,7 @@ public class ClickDetector : MonoBehaviour
                         break;
                     }
                 }
-                if (LevelManager._instance.nHitsClickUp < LevelManager._instance.nHitsPerBeat)
+                if (LevelManager._instance.tutorial || (LevelManager._instance.nHitsClickDown < LevelManager._instance.nHitsPerBeat))
                 {
                     clickUpLastScore = BeatManager._instance.evaluateClick(clickTime, multiplier);
                     LevelManager._instance.nHitsClickUp++;
@@ -202,7 +204,7 @@ public class ClickDetector : MonoBehaviour
             }
             if (arrastre)       //ARRASTE FIN
             {
-                if (LevelManager._instance.nHitsClickUp < LevelManager._instance.nHitsPerBeat)
+                if (LevelManager._instance.tutorial || (LevelManager._instance.nHitsClickDown < LevelManager._instance.nHitsPerBeat))
                 {
                     clickUpLastScore = BeatManager._instance.evaluateClick(clickTime, dragMulti);
                     LevelManager._instance.nHitsClickUp++;

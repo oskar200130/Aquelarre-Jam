@@ -61,6 +61,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     Animator HaloIntro;
 
+    public bool tutorial;
     private void Awake()
     {
         if (_instance == null)
@@ -76,10 +77,8 @@ public class LevelManager : MonoBehaviour
         scores = new Queue<SCORE>(queueSize);
         beatMarkerContainerAnimator.speed = 0;
 
-        //BeatManager.onFixedBeat += metronome;
         BeatManager.onTempoChanged += tempoChanged;
-
-        //Invoke(nameof(StartGame), 1.5f);
+        tutorial = true;
     }
 
     void StartGame()
@@ -100,6 +99,7 @@ public class LevelManager : MonoBehaviour
 
     public void StartSong()
     {
+        tutorial = false;
         BeatManager.onFixedBeat += metronome;
     }
 
@@ -141,8 +141,6 @@ public class LevelManager : MonoBehaviour
     }
     private void Update()
     {
-
-
         if (gameStarted)
         {
             if (beatMarkerContainerAnimator.GetCurrentAnimatorStateInfo(0).length <

@@ -36,7 +36,7 @@ public class EventRandomSpawn : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if ((checkClick && Input.GetMouseButtonDown(0)) || (checkSpace && Input.GetKeyDown(KeyCode.Space)))
         {
@@ -45,7 +45,10 @@ public class EventRandomSpawn : MonoBehaviour
             checkClick = checkSpace = false;
             timeToNextFase = -1;
         }
+    }
 
+    private void FixedUpdate()
+    {      
         if (timeToNextFase > 0)
             timeToNextFase -= Time.deltaTime;
         else if (timeToNextFase > -1)
@@ -133,7 +136,7 @@ public class EventRandomSpawn : MonoBehaviour
                     tutorialText.GetComponent<TextMeshProUGUI>().text = "";
                     LevelManager._instance.freestyleText.SetActive(false);
                     if (timeToNextFase == -1)
-                        timeToNextFase = 4.5f;
+                        timeToNextFase = 6.5f;
                     return;
             }
         }
