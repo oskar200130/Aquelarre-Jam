@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
     private Queue<SCORE> scores;
     public int puntuacion = 1;
     public Animator beatMarkerContainerAnimator;
+    public Animator [] speakers_animators;
+    public Animator tree_animator;
     public Animator goatsController;
     public StudioEventEmitter thunder;
     public void AddScore(SCORE newScore)
@@ -133,24 +135,32 @@ public class LevelManager : MonoBehaviour
     {
 
 
-        if (gameStarted && counter_measures == 1)
+        if (gameStarted)
         {
-
-            BeatManager._instance.playMetronome(false);
-             
-
             if (beatMarkerContainerAnimator.GetCurrentAnimatorStateInfo(0).length <
                 beatMarkerContainerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime)
             {
-                double beatPortion = Time.timeAsDouble - BeatManager.lastFixedBeatDSPTime;
-                
+
+                double beatPortion = BeatManager.GetCurrentTime() - BeatManager.lastFixedBeatDSPTime;
+
                 double percentage = beatPortion / BeatManager.beatInterval;
                 //no esta playeando la animación
-                //la forzamos a empezar dea cuerdo a unas normas
+                //la forzamos a empezar de acuerdo a unas normas
+
+                Debug.Log("toca dar el beat con porcentage: " + percentage);
+                tree_animator.Play("Tree Beat", -1, (float)percentage);
                 beatMarkerContainerAnimator.Play("Beat Marker", -1, (float)percentage);
+                foreach (Animator a in speakers_animators)
+                {
+                    a.Play("Speaker Beat 1", -1, (float)percentage);
+                }
 
             }
+            if (counter_measures == 1)
+            {
+                BeatManager._instance.playMetronome(false);
 
+            }
         }
         else if (counter_measures < 0)
         {

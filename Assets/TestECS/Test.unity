@@ -408,6 +408,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &109723822 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3328921779878979388, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
+  m_PrefabInstance: {fileID: 1281635356}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &112477789
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,10 +964,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 209474199626159415, guid: 8aa08301885cf404d85e34ad29bec6bf, type: 3}
   m_PrefabInstance: {fileID: 1193059499}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &290218555 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3328921779878979388, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
+  m_PrefabInstance: {fileID: 790142767}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &308479518 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5713591872952892879, guid: 65e478cfdbc23c04093fec96f41a844c, type: 3}
   m_PrefabInstance: {fileID: 592198830}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &322599251 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3328921779878979388, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
+  m_PrefabInstance: {fileID: 1868954773}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &341589735
 PrefabInstance:
@@ -1258,6 +1273,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 209474199626159415, guid: 1fadb3db4363c084db886ca5dd37eeb0, type: 3}
   m_PrefabInstance: {fileID: 341589735}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &477436629 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3328921779878979388, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
+  m_PrefabInstance: {fileID: 523020413}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &481765481 stripped
 RectTransform:
@@ -3012,6 +3032,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puntuacion: 0
   beatMarkerContainerAnimator: {fileID: 1188774878}
+  speakers_animators:
+  - {fileID: 322599251}
+  - {fileID: 1839860145}
+  - {fileID: 109723822}
+  - {fileID: 1408473146}
+  - {fileID: 477436629}
+  - {fileID: 290218555}
+  tree_animator: {fileID: 1841817956}
   goatsController: {fileID: 8719917828556144306}
   thunder: {fileID: -1956182793875612465, guid: 03daa419324af334f939260558fcc12b, type: 3}
   constantPeopleProbability: 0.7
@@ -4164,6 +4192,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32246d28beacabd469827f462d7c2e5d, type: 3}
+--- !u!95 &1408473146 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3328921779878979388, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
+  m_PrefabInstance: {fileID: 127215752}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1415358265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15117,6 +15150,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5055bc9665be83747903288d80e8bd53, type: 3}
+--- !u!95 &1839860145 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3328921779878979388, guid: e1d5c2c728db0fb469a6f54e91f1bac5, type: 3}
+  m_PrefabInstance: {fileID: 1319513097}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1841817954
 GameObject:
   m_ObjectHideFlags: 0
