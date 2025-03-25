@@ -35,7 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TestECS/Test.unity
     guid: 73bbf09e1acef1f4eb7706ffeebb70e3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Reset.unity
     guid: 856f45da6146aae47bffb05df3412083
   m_configObjects: {}
